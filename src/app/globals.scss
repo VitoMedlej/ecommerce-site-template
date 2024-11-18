@@ -1,10 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 body {
+    font-family: "Montserrat", sans-serif !important;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
 
-$color : rgb(81, 33, 255);
+*, h1, h2, p, button {
+    font-family: "Montserrat", sans-serif !important;
+
+}
+
+$color : rgb(209, 209, 209);
 
 
 
@@ -17,27 +24,63 @@ $color : rgb(81, 33, 255);
 .h100 {
     height: 100%;
 }
+.decor-none {
+    text-decoration: none !important;
+}
+.dark {
+    color: rgb(20, 20, 20) !important;
+}
+.justify-center {
+    justify-content: center;
+}
+.hover-link .MuiBox-root {
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  
+  .hover-link:hover .MuiBox-root {
+    width: 100%;
+  }
+.row {
+    flex-direction: row;
+} 
+.col {
+    flex-direction: column;
+}
+.justify-between {
+    justify-content: space-between;
+}
+.wrap {
+    flex-wrap: wrap;
+}
 .w100 {
     width: 100%;
 }
 .bg-white {
-    background: white;
+    background: white !important;
 }
 .text-center {
     text-align: center;
 }
 
 .white {
-    color: white !important;
+    color: white ;
 }
 .clr {
-    color: $color !important;
+    color: $color ;
+}
+.invert {
+    filter: invert(1);
 }
 .black {
-    color: black !important;
+    color: black !important ;
 }
 .center {
     align-items: center;
+}
+.centered {
+    align-items: center;
+    justify-content: center;
 }
 .flex {
     display: flex;
@@ -54,7 +97,7 @@ $color : rgb(81, 33, 255);
     object-fit: contain;
 }
 .bg-black {
-    background: black !important;
+    background: black ;
 }
 .absolute {
     position: absolute;
@@ -65,16 +108,33 @@ $color : rgb(81, 33, 255);
 .gap2 {
     gap:.5em;
 }
+.gap3 {
+    gap: .75em;
+}
 .gray{
-    color: rgb(95, 95, 95);
+    color: rgb(95, 95, 95) !important;
+}
+.dark-bg {
+    background: #ebebeb ;
+}
+.dark-bg2 {
+    background: #cccccc !important  ;
+}
+.bg-transparent {
+    background: transparent !important;
+}
+.end {
+    justify-content: flex-end;
 }
 .fs05 {font-size: .5em !important;}
 .fs075 {font-size: .75em !important;}
+.fs08 {font-size: .8em !important;}
 .fs1 { font-size: 1em !important; }
 .fs2 { font-size: 1.2em !important; }
 .fs3 { font-size: 1.5em!important; }
 .fs4 { font-size: 2em !important; }
 .fs5 { font-size: 2.5em !important; }
+.fs6 { font-size: 3em !important; }
 .fs6 { font-size: 3em !important; }
 
 .fw100 { font-weight: 100 !important; }

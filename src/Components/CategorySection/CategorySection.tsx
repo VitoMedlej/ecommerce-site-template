@@ -1,77 +1,52 @@
-// Import Swiper React components
 "use client"
-import {Swiper, SwiperSlide} from 'swiper/react';
+import {Grid2, Typography} from '@mui/material'
+import React, {useRef} from 'react'
+import Btn from '../Btn/Btn'
+import CategorySwiper from './CategorySwiper/CategorySwiper'
+import SwiperButton from '../ProductSection/ProductSwiper/SwiperButton'
 
-// Import Swiper styles
-import 'swiper/css';
-import {Box, Button, Typography} from '@mui/material';
-import Btn from '@/Components/Btn/Btn';
-import ProductCard from '@/Components/ProductCard/ProductCard';
-import CategoryCard from '../CategoryCard/CategoryCard';
+const ProductSection = () => {
+    const swiperRef : any = useRef(null);
 
-const Slides = [
-    {
-        mainTitle: 'Main Title 1',
-        subtitle: 'Subtitle 1',
-        smallText: 'Small descriptive text for slide 1.',
-        imageXs: 'https://new-ella-demo.myshopify.com/cdn/shop/files/h14f2-spotlight-3_570x.jpg?v=' +
-                '1642058989',
-        imageMd: 'https://new-ella-demo.myshopify.com/cdn/shop/files/h14f2-spotlight-4_570x.jpg?v=' +
-                '1642058989'
-    }, {
-        mainTitle: 'Main Title 2',
-        subtitle: 'Subtitle 2',
-        smallText: 'Small descriptive text for slide 2.',
-        imageXs: 'https://example.com/image-xs-2.jpg',
-        imageMd: 'https://example.com/image-md-2.jpg'
-    }, {
-        mainTitle: 'Main Title 2',
-        subtitle: 'Subtitle 2',
-        smallText: 'Small descriptive text for slide 2.',
-        imageXs: 'https://example.com/image-xs-2.jpg',
-        imageMd: 'https://example.com/image-md-2.jpg'
-    }, {
-        mainTitle: 'Main Title 2',
-        subtitle: 'Subtitle 2',
-        smallText: 'Small descriptive text for slide 2.',
-        imageXs: 'https://example.com/image-xs-2.jpg',
-        imageMd: 'https://example.com/image-md-2.jpg'
-    }, {
-        mainTitle: 'Main Title 2',
-        subtitle: 'Subtitle 2',
-        smallText: 'Small descriptive text for slide 2.',
-        imageXs: 'https://example.com/image-xs-2.jpg',
-        imageMd: 'https://example.com/image-md-2.jpg'
-    }
-];
-export default({swiperRef} : any) => {
-
+    const handlePrev = () => swiperRef
+        .current
+        .swiper
+        .slidePrev();
+    const handleNext = () => swiperRef
+        .current
+        .swiper
+        .slideNext();
     return (
-        <Swiper
-            spaceBetween={10}
-            ref={swiperRef}
-            breakpoints={{
-            320: {
-                slidesPerView: 1.2
-            },
-            640: {
-                slidesPerView: 2.1
-            },
-            900: {
-                slidesPerView: 2.2
-            },
-            1200: {
-                slidesPerView: 3.2
-            },
-            1536: {
-                slidesPerView: 3.2
-            }
-        }}>
-            {Slides.map((slide, index) => (
-                <SwiperSlide key={index}>
-                    <CategoryCard/>
-                </SwiperSlide>
-            ))}
-        </Swiper>
-    );
-};
+        <main>
+            <Grid2
+                maxWidth={'xl'}
+                container
+                className='center auto '
+                sx={{
+                py: 8,
+                px: {xs:2,md:4}
+            }}>
+                <Grid2>
+                    <Typography className='fw600 fs2'>{`JOGGERS & PULLOVERS`}</Typography>
+                </Grid2>
+               
+                <Grid2
+                    className='flex gap1'
+                    sx={{
+                    flex: {xs:1},
+                    justifyContent: 'flex-end'
+                }}>
+                    <SwiperButton direction="left" onClick={handlePrev}/>
+                    <SwiperButton direction="right" onClick={handleNext}/>
+                </Grid2>
+                <Grid2 sx={{
+                    width: '100%',pt:2
+                }}>
+                    <CategorySwiper swiperRef={swiperRef}/>
+                </Grid2>
+            </Grid2>
+        </main>
+    )
+}
+
+export default ProductSection

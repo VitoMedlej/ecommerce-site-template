@@ -76,6 +76,4 @@ export default({swiperRef} : any) => {
     );
 };
 
-function useRef(arg0 : null) {
-    throw new Error('Function not implemented.');
-}
+
