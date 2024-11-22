@@ -72,7 +72,7 @@ body {
 }
 
 .white {
-  color: white;
+  color: white !important;
 }
 
 .clr {
@@ -135,16 +135,64 @@ body {
   gap: 0.75em;
 }
 
+.relative {
+  position: relative;
+}
+
+.rounded {
+  border-radius: 50%;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .gray {
-  color: rgb(95, 95, 95) !important;
+  color: #53565a !important;
 }
 
 .dark-bg {
   background: #ebebeb;
 }
 
+.wfit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.wmax {
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
 .dark-bg2 {
   background: #cccccc !important;
+}
+
+.dark-bg3 {
+  background: #bdbdbd !important;
+}
+
+.dark-bg4 {
+  background: rgba(231, 231, 231, 0.5058823529) !important;
+}
+
+.start {
+  justify-content: flex-start;
 }
 
 .bg-transparent {

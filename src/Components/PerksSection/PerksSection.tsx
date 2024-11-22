@@ -8,7 +8,7 @@ const PerksSection = () => {
         className='auto'
         sx={{
             maxWidth: 'xl',
-            px: 2, py:2
+            px: 2, py:16
         }}>
             <Typography className='fs3 fw700' sx={{
                 pb: 2

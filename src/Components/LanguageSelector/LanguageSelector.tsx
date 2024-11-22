@@ -37,8 +37,8 @@ export default function LanguagePicker() {
           onChange={handleChange}
         >
           {languages.map((language) => (
-            <MenuItem key={language.code} value={language.code}>
-              <Typography>{language.name}</Typography>
+            <MenuItem  key={language.code} value={language.code}>
+              <Typography >{language.name}</Typography>
             </MenuItem>
           ))}
         </Select>

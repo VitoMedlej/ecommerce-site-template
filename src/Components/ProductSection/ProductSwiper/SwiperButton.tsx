@@ -12,7 +12,7 @@ const SwiperButton = ({direction, onClick} : {
         <Button
             className='white  bg-black'
             sx={{
-            backgroundColor: 'rgba(0,0,0,0.5)',
+            backgroundColor: 'rgba(0,0,0,0.9)',
             color: 'white',
             minWidth: '30px',
             width: '30px !important',
@@ -25,8 +25,8 @@ const SwiperButton = ({direction, onClick} : {
         }}
             onClick={onClick}>
             {direction === 'left'
-                ? <IoIosArrowRoundBack fontSize='1em' size={24}/>
-                : <IoIosArrowRoundForward fontSize='1em' size={24}/>}
+                ? <IoIosArrowRoundBack fontSize='1.2em' size={34}/>
+                : <IoIosArrowRoundForward fontSize='1.2em' size={34}/>}
         </Button>
     );
 };

@@ -1,6 +1,6 @@
 // Import Swiper React components
 "use client"
-import {Swiper, SwiperSlide} from 'swiper/react';
+import {Swiper, SwiperRef, SwiperSlide} from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -8,6 +8,7 @@ import {Box, Button, Typography} from '@mui/material';
 import Btn from '@/Components/Btn/Btn';
 import ProductCard from '@/Components/ProductCard/ProductCard';
 import CategoryCard from '@/Components/CategoryCard/CategoryCard';
+import { LegacyRef } from 'react';
 
 const Slides = [
     {
@@ -44,7 +45,7 @@ const Slides = [
         imageMd: 'https://example.com/image-md-2.jpg'
     }
 ];
-export default({swiperRef} : any) => {
+export default({swiperRef}  : {swiperRef:  LegacyRef<SwiperRef> | undefined}) => {
 
     return (
         <Swiper

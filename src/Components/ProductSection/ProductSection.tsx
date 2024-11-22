@@ -27,7 +27,7 @@ const ProductSection = () => {
                 px: {xs:2,md:4}
             }}>
                 <Grid2>
-                    <Typography className='fw600 fs2'>{`JOGGERS & PULLOVERS`}</Typography>
+                    <Typography className='fw600 fs2'>{`Categories`}</Typography>
                 </Grid2>
             
                 <Grid2
@@ -47,7 +47,7 @@ const ProductSection = () => {
                 </Grid2>
             </Grid2>
                 <Box  className='w100 auto flex centered'>
-                    <Btn small className='fs075 fw400'>
+                    <Btn sx={{py:1}} small className='fs075 bg-dark fw400'>
                         View All
                     </Btn>
                 </Box>

@@ -3,6 +3,10 @@ from "next";
 import "./globals.css";
 import Footer from "@/Components/Footer/Footer";
 import Navbar from "@/Components/Navbar/Navbar";
+import SideBar from "@/Components/SideBar/SideBar";
+import ContextWrapper from "./Utils/Context/Contexts";
+import QuickCart from "@/Components/QuickCart/QuickCart";
+import PerksSection from "@/Components/PerksSection/PerksSection";
 
 export const metadata : Metadata = {
     title: "Create Next App",
@@ -15,8 +19,15 @@ export default function RootLayout({children} : Readonly < {
     return (
         <html lang="en">
             <body>
-                <Navbar/> {children}
+            <ContextWrapper>
+
+                <Navbar/>
+                <SideBar/>
+                <QuickCart/>
+                 {children}
+                <PerksSection/>
                 <Footer/>
+            </ContextWrapper>
             </body>
         </html>
     );
