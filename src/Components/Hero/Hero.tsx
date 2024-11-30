@@ -1,53 +1,42 @@
-"use client"
-import {Grid2} from '@mui/material';
-import React, {useEffect, useState} from 'react';
-import SwiperCarousel from './SwiperCarousel/SwiperCarousel';
+"use client";
 
-export default function HomePage() {
-    const [slides,
-        setSlides] = useState < any[] > ([]);
-    const [loading,
-        setLoading] = useState(true);
-    const [error,
-        setError] = useState < string | null > (null);
+import { Grid2 } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import SwiperCarousel from "./SwiperCarousel/SwiperCarousel";
+import { HeroSlide } from "@/app/Utils/Types";
 
-    useEffect(() => {
-        const fetchData = async() => {
-            try {
-                setLoading(true);
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/test`, {
-                    next: {
-                        revalidate: 1200
-                    }
-                });
+export default function HomePage({ slides: staticSlides }: { slides: HeroSlide[] | null }) {
+  const [slides, setSlides] = useState<HeroSlide[]>(staticSlides || []);
+  const [error, setError] = useState<string | null>(null);
 
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch data: ${response.statusText}`);
-                }
+  useEffect(() => {
+    if (staticSlides === null) {
+      const fetchSlidesFromSanity = async () => {
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sanity-slides`, {
+            next: { revalidate: 1200 },
+          });
 
-                const result = await response.json();
-                setSlides(result); // Set data once fetched
-            } catch (error : any) {
-                setError(error.message); // Handle any fetch errors
-            } finally {
-                setLoading(false); // Stop loading
-            }
-        };
+          if (!response.ok) {
+            throw new Error(`Failed to fetch slides: ${response.statusText}`);
+          }
 
-        fetchData(); // Call the function on component mount
-    }, []);
+          const result: HeroSlide[] = await response.json();
+          setSlides(result);
+        } catch (error: any) {
+          console.error("Error fetching slides from Sanity:", error);
+          setError(error.message);
+        }
+      };
 
-    if (loading) {
-        return <p>Loading...</p>;
+      fetchSlidesFromSanity();
     }
+  }, [staticSlides]);
 
-    if (error) {
-        // return <p>Error: {error}</p>;
-    }
-
-    return (
-        <Grid2>
-            <SwiperCarousel/>
-        </Grid2>
-    );
+  return (
+    <Grid2>
+      {error && <p style={{ color: "red" }}>Error: {error}</p>}
+      <SwiperCarousel slides={slides} />
+    </Grid2>
+  );
 }

@@ -6,37 +6,21 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Box, Button, Typography } from '@mui/material';
 import Btn from '@/Components/Btn/Btn';
+import { HeroSlide } from '@/app/Utils/Types';
+import { urlFor } from '@/functions/sanityClient';
 
-
-const Slides = [
-  {
-    mainTitle: 'Main Title 1',
-    subtitle: 'Subtitle 1',
-    smallText: 'Small descriptive text for slide 1.',
-    imageXs: 'https://new-ella-demo.myshopify.com/cdn/shop/files/h14f2-spotlight-3_570x.jpg?v=1642058989',
-    imageMd: 'https://new-ella-demo.myshopify.com/cdn/shop/files/h14f2-spotlight-4_570x.jpg?v=1642058989',
-  },
-  {
-    mainTitle: 'Main Title 2',
-    subtitle: 'Subtitle 2',
-    smallText: 'Small descriptive text for slide 2.',
-    imageXs: 'https://example.com/image-xs-2.jpg',
-    imageMd: 'https://example.com/image-md-2.jpg',
-  },
-  // Add more slide objects as needed
-];
-export default () => {
+export default ({slides: Slides} : {slides : HeroSlide[] | null }) => {
   return (
     <Swiper spaceBetween={50} slidesPerView={1}>
-      {Slides.map((slide, index) => (
+      {Slides && Slides?.map((slide, index) => (
         <SwiperSlide key={index}>
           <Box
             sx={{
               width: '100%',
               height: '100vh',
               backgroundImage: {
-                xs: `url(${slide.imageXs})`,
-                md: `url(${slide.imageMd})`,
+                xs: `url(${urlFor(slide?.image).url()})`,
+                md: `url(${urlFor(slide?.image).url()})`,
               },
               backgroundSize: 'cover',
               backgroundPosition: 'center',
@@ -77,7 +61,7 @@ export default () => {
               >
                 {/* Main Title */}
                 <Typography sx={{ pb: 1, fontSize: '2rem', fontWeight: 'bold' }} component="h1">
-                  {slide.mainTitle}
+                  {slide.title}
                 </Typography>
 
                 {/* Subtitle */}
@@ -86,12 +70,12 @@ export default () => {
                 </Typography>
 
                 {/* Small Descriptive Text */}
-                <Typography sx={{ mb: 2, fontSize: '1rem', fontWeight: 'light' }} component="p">
+                {/* <Typography sx={{ mb: 2, fontSize: '1rem', fontWeight: 'light' }} component="p">
                   {slide.smallText}
-                </Typography>
+                </Typography> */}
 
                 <Btn v2={true} sx={{ mt: 1 }}>
-                  Hello world
+                 {slide.cta}
                 </Btn>
               </Box>
             </Box>

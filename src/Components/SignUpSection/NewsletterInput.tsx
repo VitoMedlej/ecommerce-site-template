@@ -16,7 +16,6 @@ const NewsletterSignup = () => {
     }),
     onSubmit: async (values) => {
       // Handle form submission here
-      console.log(values);
     },
   });
 

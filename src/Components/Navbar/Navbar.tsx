@@ -17,7 +17,8 @@ import Announcements from './Announcements/Announcements'
 
 
 
-const Navbar = () => {
+const Navbar = ({ SanityAnnouncements }: { SanityAnnouncements: { message: string }[] }) => {
+    console.log('SanityAnnouncements: ', SanityAnnouncements);
     const isSmallScreen = window && window.innerWidth <= 900;
     const { sidebarOpen, setSidebarOpen } = useSidebarContext();
     const {isCartOpen, setIsCartOpen} = useCartContext();
@@ -220,7 +221,7 @@ const Navbar = () => {
 
             </Toolbar>
 
-            <Announcements/>
+            <Announcements SanityAnnouncements={SanityAnnouncements}/>
         </Box>
     )
 }

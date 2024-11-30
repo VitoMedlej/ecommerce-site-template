@@ -2,36 +2,31 @@
 
 import {Auth0Provider} from "@auth0/auth0-react";
 import {createContext, useContext, useEffect, useState} from "react";
-// import { Getcategories } from "@/Utils/Getcategories";
-
 export const SidebarContext = createContext < any > ({});
 export const CartContext = createContext < any > ({});
 export const CategoriesContext = createContext < any > ([]);
-export const DialogContext = createContext<any>({});
+export const DialogContext = createContext < any > ({});
 
-const ContextWrapper = ({children} : {
-    children: React.ReactNode
+const ContextWrapper = ({children, SanityCategories} : {
+    children: React.ReactNode,
+    SanityCategories: any
 }) => {
     const [sidebarOpen,
         setSidebarOpen] = useState(false);
     const [isCartOpen,
         setIsCartOpen] = useState(false);
     const [categories,
-        setCategories] = useState < any[] > ([]);
-        const [isDialogOpen, setIsDialogOpen] = useState(false);
-    // useEffect(() => {     const fetchCategories = async () => {         if
-    // (categories.length === 0) {             const categoriesData = await
-    // Getcategories();             if (categoriesData?.success) {
-    // const fetchedCategories = categoriesData?.Categories[0]?.cateArray || [];
-    //             setCategories(fetchedCategories);             }         }     };
-    //    fetchCategories(); }, [categories]);
+        setCategories] = useState < any[] > (SanityCategories || []);
+    const [isDialogOpen,
+        setIsDialogOpen] = useState(false);
 
     return (
         <Auth0Provider
             domain="https://dev-5-mm94s5.us.auth0.com"
             clientId="jFUqF9XypNPMTUtKnIxxVd4sCRMthVyg"
             authorizationParams={{
-            redirect_uri: window.location.origin
+            redirect_uri: 'localhost:3000/'
+            // redirect_uri: window?.location.origin
         }}>
 
             <SidebarContext.Provider
@@ -49,15 +44,14 @@ const ContextWrapper = ({children} : {
                         isCartOpen,
                         setIsCartOpen
                     }}>
-                       <DialogContext.Provider
-            value={{
-                isDialogOpen,
-                setIsDialogOpen,
-            }}
-        >
+                        <DialogContext.Provider
+                            value={{
+                            isDialogOpen,
+                            setIsDialogOpen
+                        }}>
 
-                        {children}
-        </DialogContext.Provider>
+                            {children}
+                        </DialogContext.Provider>
                     </CartContext.Provider>
                 </CategoriesContext.Provider>
             </SidebarContext.Provider>

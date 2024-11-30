@@ -13,7 +13,6 @@ export default function ProductSortFilter() {
 
     const handleSortChange = (event : React.ChangeEvent < HTMLInputElement >) => {
         setSortValue(event.target.value);
-        console.log(event.target.value); // Use this value for sorting logic
     };
 
     return (
