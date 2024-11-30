@@ -50,7 +50,7 @@ const EcommerceDialog = () => {
           </Btn>
         </Box>
         <Box sx={{height:{md:'300px'}}}>
-          <img src="https://cdn.allbirds.com/image/upload/f_auto,q_auto,w_1000/cms/MMseqjTzUEmXtlLiHGOCT/3c6d38988c647391e6a8f5e1aa166e9c/24Q4_Gifting_Site_DualPanel_GiftsUnder100_2000x2000.png" alt="" 
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnHtqgBtaZCc4zMQC6gzxEzFVTfv2K-h23D8NB2rzo1CPSWNMDNc6BnZQxypE4OKpLajY&usqp=CAU" alt="" 
           className="img cover" />
         </Box>
         <DialogTitle>

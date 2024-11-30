@@ -26,7 +26,7 @@ const ProductCard = ({sx} : {
                 <img
                     className='img'
                     loading="lazy"
-                    src="https://cdn.shopify.com/s/files/1/0156/6146/files/GFXLIFTINGESSENTIALSGOTHICBRUSHEDOVERSIZEDJOGGERGSBlackB2B3I-BB2J9878_384x.jpg?v=1730373854"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnHtqgBtaZCc4zMQC6gzxEzFVTfv2K-h23D8NB2rzo1CPSWNMDNc6BnZQxypE4OKpLajY&usqp=CAU"
                     alt=""/>
             </Box>
             <Box

@@ -14,7 +14,7 @@ export default function HomePage({ slides: staticSlides }: { slides: HeroSlide[]
       const fetchSlidesFromSanity = async () => {
         try {
           const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sanity-slides`, {
-            next: { revalidate: 1200 },
+            cache: "force-cache",  next: {  revalidate: 1200 },
           });
 
           if (!response.ok) {

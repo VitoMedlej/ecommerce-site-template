@@ -19,8 +19,8 @@ export default  function SwiperCarousel({slides: Slides} : {slides : HeroSlide[]
               width: '100%',
               height: '100vh',
               backgroundImage: {
-                xs: `url(${urlFor(slide?.image).url()})`,
-                md: `url(${urlFor(slide?.image).url()})`,
+                xs: `url(${urlFor(slide?.image).url()}?q=30)`,
+                md: `url(${urlFor(slide?.image).url()}?q=50)`,
               },
               backgroundSize: 'cover',
               backgroundPosition: 'center',

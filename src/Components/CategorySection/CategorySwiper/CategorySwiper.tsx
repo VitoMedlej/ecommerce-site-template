@@ -12,9 +12,9 @@ const Slides = [
         mainTitle: 'Main Title 0',
         subtitle: 'Subtitle 1',
         smallText: 'Small descriptive text for slide 1.',
-        imageXs: 'https://new-ella-demo.myshopify.com/cdn/shop/files/h14f2-spotlight-3_570x.jpg?v=' +
+        imageXs: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnHtqgBtaZCc4zMQC6gzxEzFVTfv2K-h23D8NB2rzo1CPSWNMDNc6BnZQxypE4OKpLajY&usqp=CAU' +
                 '1642058989',
-        imageMd: 'https://new-ella-demo.myshopify.com/cdn/shop/files/h14f2-spotlight-4_570x.jpg?v=' +
+        imageMd: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnHtqgBtaZCc4zMQC6gzxEzFVTfv2K-h23D8NB2rzo1CPSWNMDNc6BnZQxypE4OKpLajY&usqp=CAU' +
                 '1642058989'
     }, {
         mainTitle: 'Main Title 1',
