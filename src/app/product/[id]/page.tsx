@@ -4,12 +4,11 @@
 'use server';
 
 import ProductClient from '@/Components/ClientSide/ProductClient/ProductClient';
-import TrendingItems from '@/Components/ClientSide/TrendingItems/TrendingItems';
 import ProductSection from '@/Components/ProductSection/ProductSection';
-import { notFound } from 'next/navigation';
 
-const ProductPage = async ({ params } : any) => {
-    const { id } = await params
+const ProductPage = async () => {
+  // const ProductPage = async ({ params } : any) => {
+    // const { id } = await params
  
 
   // Fetch product data (replace this with your API endpoint)

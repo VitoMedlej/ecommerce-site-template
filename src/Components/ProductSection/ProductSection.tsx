@@ -4,15 +4,15 @@ import React, {useRef} from 'react'
 import Btn from '../Btn/Btn'
 import ProductSwiper from './ProductSwiper/ProductSwiper'
 import SwiperButton from './ProductSwiper/SwiperButton'
+import { SwiperRef } from 'swiper/react'
 
 const ProductSection = () => {
-    const swiperRef : any = useRef(null);
+    const swiperRef :  React.LegacyRef<SwiperRef> | undefined  = useRef(null);
 
-    const handlePrev = () => swiperRef
-        .current
+    const handlePrev = () => swiperRef?.current !== null && swiperRef?.current
         .swiper
         .slidePrev();
-    const handleNext = () => swiperRef
+    const handleNext = () => swiperRef?.current !== null && swiperRef
         .current
         .swiper
         .slideNext();

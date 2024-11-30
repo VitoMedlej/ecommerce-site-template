@@ -3,7 +3,6 @@ import {Box, SxProps, Theme, Typography} from '@mui/material'
 import React from 'react'
 import {IoStar} from "react-icons/io5";
 import {CiHeart} from "react-icons/ci";
-import Btn from '../Btn/Btn';
 import {IoEyeOutline} from "react-icons/io5";
 
 const ProductCard = ({sx} : {

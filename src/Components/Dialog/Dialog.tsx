@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Dialog,
   DialogTitle,
@@ -17,7 +17,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { useDialogContext } from "@/app/Utils/Context/Contexts";
 
 const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children: React.ReactElement<any, any> },
+  props: TransitionProps & { children: React.ReactElement },
   ref: React.Ref<unknown>
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -27,7 +27,7 @@ const EcommerceDialog = () => {
 
 
   const { isDialogOpen, setIsDialogOpen } = useDialogContext();
-  const handleOpen = () => setIsDialogOpen(true);
+  // const handleOpen = () => setIsDialogOpen(true);
   const handleClose = () => setIsDialogOpen(false);
 
   return (

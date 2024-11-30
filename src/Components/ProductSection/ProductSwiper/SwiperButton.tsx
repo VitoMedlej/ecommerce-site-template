@@ -6,7 +6,7 @@ import {IoIosArrowRoundBack} from "react-icons/io";
 
 const SwiperButton = ({direction, onClick} : {
     direction: string,
-    onClick: () => any
+    onClick: () => void;
 }) => {
     return (
         <Button

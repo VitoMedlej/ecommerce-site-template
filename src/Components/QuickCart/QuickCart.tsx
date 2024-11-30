@@ -3,10 +3,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {IoCloseOutline} from "react-icons/io5";
 import Btn from "../Btn/Btn";
@@ -59,7 +57,7 @@ export default function QuickCart() {
             <Divider/>
 
             <List>
-                {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+                {["Inbox", "Starred", "Send email", "Drafts"].map((text) => (
                     <QuickCartItem key={text}/>
                 ))}
             </List>

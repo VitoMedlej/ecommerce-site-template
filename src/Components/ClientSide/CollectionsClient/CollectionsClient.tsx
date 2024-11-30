@@ -1,5 +1,5 @@
 "use client"
-import {Box, Divider, Typography} from '@mui/material';
+import {Box, Typography, useMediaQuery} from '@mui/material';
 import React from 'react'
 import Btn from '../../Btn/Btn';
 import {CiFilter} from "react-icons/ci";
@@ -8,7 +8,8 @@ import {IoGridOutline} from "react-icons/io5";
 import FilterOptions from '../../FilterOptions/FilterOptions';
 
 const CollectionsClient = () => {
-    const isSmallScreen = window && window.innerWidth <= 900;
+    
+    const isSmallScreen = useMediaQuery("(max-width:900px)");
 
     return (
         <main>

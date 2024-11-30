@@ -15,4 +15,8 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+  cors: {
+    origin: ['https://studio.mysite.com'], // Allow only this origin
+    methods: ['GET', 'POST'], // Adjust as needed
+  },
 })

@@ -4,8 +4,7 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
-import { Box, Button, Typography } from '@mui/material';
-import Btn from '@/Components/Btn/Btn';
+import { Box } from '@mui/material';
 import { LegacyRef } from 'react';
 
 
@@ -25,7 +24,7 @@ const Slides = [
   },
   // Add more slide objects as needed
 ];
-export default ({swiperRef} : {swiperRef :  LegacyRef<SwiperRef> | undefined}) => {
+export default function ProductImageSwiper({swiperRef} : {swiperRef :  LegacyRef<SwiperRef> | undefined}) {
   return (
     <Swiper ref={swiperRef} spaceBetween={50} slidesPerView={1}>
       {Slides.map((slide, index) => (

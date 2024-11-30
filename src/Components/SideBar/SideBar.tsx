@@ -2,7 +2,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
@@ -21,7 +20,6 @@ import { useSidebarContext } from '@/app/Utils/Context/Contexts';
 export default function SideBar() {
     const { sidebarOpen, setSidebarOpen } = useSidebarContext();
 
-   
 
     const toggleDrawer = (newOpen : boolean) => () => {
         setSidebarOpen(newOpen);
@@ -63,7 +61,7 @@ export default function SideBar() {
             <Divider/>
 
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemText primary={text}/>

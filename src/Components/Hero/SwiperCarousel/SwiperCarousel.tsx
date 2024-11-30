@@ -4,12 +4,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Btn from '@/Components/Btn/Btn';
 import { HeroSlide } from '@/app/Utils/Types';
 import { urlFor } from '@/functions/sanityClient';
 
-export default ({slides: Slides} : {slides : HeroSlide[] | null }) => {
+export default  function SwiperCarousel({slides: Slides} : {slides : HeroSlide[] | null })  {
   return (
     <Swiper spaceBetween={50} slidesPerView={1}>
       {Slides && Slides?.map((slide, index) => (

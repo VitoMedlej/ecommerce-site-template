@@ -1,5 +1,5 @@
 "use client"
-import {Box} from '@mui/material';
+import {Box, SxProps, Theme} from '@mui/material';
 import React from 'react'
 
 const sm = [
@@ -14,9 +14,8 @@ const sm = [
         href: `${process.env.NEXT_PUBLIC_FB}`
     }
 ]
-const SMicons = ({sx, color} : {
-    color?: string,
-    sx?: any
+const SMicons = ({sx} : {
+    sx?: SxProps<Theme> | undefined
 }) => {
     return (
         <Box

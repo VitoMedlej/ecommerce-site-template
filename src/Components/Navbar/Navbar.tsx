@@ -1,5 +1,5 @@
 "use client"
-import {Box, Toolbar, Typography} from '@mui/material'
+import {Box, Toolbar, Typography, useMediaQuery} from '@mui/material'
 import Link from 'next/link'
 import React from 'react'
 import Btn from '../Btn/Btn'
@@ -18,12 +18,14 @@ import Announcements from './Announcements/Announcements'
 
 
 const Navbar = ({ SanityAnnouncements }: { SanityAnnouncements: { message: string }[] }) => {
-    console.log('SanityAnnouncements: ', SanityAnnouncements);
-    const isSmallScreen = window && window.innerWidth <= 900;
-    const { sidebarOpen, setSidebarOpen } = useSidebarContext();
-    const {isCartOpen, setIsCartOpen} = useCartContext();
+    
+
+
+    const isSmallScreen = useMediaQuery("(max-width:900px)"); 
+    const { setSidebarOpen } = useSidebarContext();
+    const { setIsCartOpen} = useCartContext();
     const router = useRouter();
-    const { loginWithRedirect, logout  } = useAuth0();
+    const { loginWithRedirect  } = useAuth0();
     const { isAuthenticated, isLoading } = useAuth0();
     const {  setIsDialogOpen } = useDialogContext();
 

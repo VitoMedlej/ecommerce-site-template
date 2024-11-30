@@ -3,23 +3,24 @@ import BreadCrumb from '@/Components/BreadCrumb/BreadCrumb'
 import Btn from '@/Components/Btn/Btn'
 import ColorSelector from '@/Components/ColorSelect/ColorSelect'
 import SizeFilter from '@/Components/FilterOptions/FilterForms/SizeFilter'
-import Sort from '@/Components/FilterOptions/FilterForms/Sort'
 import ProductImageSwiper from '@/Components/ProductImageSwiper/ProductImageSwiper'
 import SwiperButton from '@/Components/ProductSection/ProductSwiper/SwiperButton'
 import {Accordion, AccordionSummary, Box, Divider, Typography} from '@mui/material'
 import React, { useRef } from 'react'
 import { FaAngleDoubleDown } from 'react-icons/fa'
+import { SwiperRef } from 'swiper/react'
 
 
 
 const ProductClient = () => {
-    const swiperRef : any = useRef(null);
+    const swiperRef :  React.LegacyRef<SwiperRef> | undefined  = useRef(null);
 
-    const handlePrev = () => swiperRef
+
+    const handlePrev = () => swiperRef?.current && swiperRef
         .current
         .swiper
         .slidePrev();
-    const handleNext = () => swiperRef
+    const handleNext = () =>swiperRef?.current && swiperRef
         .current
         .swiper
         .slideNext();
@@ -100,7 +101,7 @@ const ProductClient = () => {
             }}>
                 <BreadCrumb/>
                 <Typography className='fs3 dark fw700'>
-                    Men's Runner Protect
+                    {`Men's Runner Protect`}
                 </Typography>
                 <Typography
                     sx={{

@@ -3,7 +3,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Button, TextField, Typography } from '@mui/material';
+import {  TextField } from '@mui/material';
 import Btn from '../Btn/Btn';
 
 const NewsletterSignup = () => {
@@ -15,6 +15,7 @@ const NewsletterSignup = () => {
       email: Yup.string().email('Invalid email address').required('Email is required'),
     }),
     onSubmit: async (values) => {
+      console.log('values: ', values);
       // Handle form submission here
     },
   });

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Modal, Box, TextField, Typography, Divider } from '@mui/material';
 import Btn from '../Btn/Btn';
 import { IoIosSearch } from "react-icons/io";

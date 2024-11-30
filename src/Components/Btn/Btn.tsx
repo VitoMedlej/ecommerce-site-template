@@ -1,8 +1,19 @@
 "use client"
-import {Button} from '@mui/material'
-import React from 'react'
+import {Button, SxProps, Theme} from '@mui/material'
+import React, { MouseEventHandler, ReactNode } from 'react'
 
-const Btn = ({
+type BtnProps = {
+    children: ReactNode; // For JSX content or plain text
+    className?: string; // Optional CSS class
+    disabled?: boolean; // Button disabled state
+    v2?: boolean; // Custom boolean flag
+    sx?: SxProps<Theme> | undefined; // Style object
+    small?: boolean; // Custom size flag
+    onClick?: MouseEventHandler<HTMLButtonElement>; // Event handler for clicks
+    border?: boolean; // Border toggle flag
+  };
+  
+  const Btn = ({
     children,
     className,
     disabled,
@@ -10,8 +21,8 @@ const Btn = ({
     sx,
     small,
     onClick,
-    border
-} : any) => {
+    border,
+  }: BtnProps) => {
     return (
         <Button
             disabled={disabled

@@ -2,9 +2,9 @@
 
 import * as React from 'react';
 
-interface SizeFilterProps {
-  sizes: string[];
-}
+// interface SizeFilterProps {
+//   sizes: string[];
+// }
 
 export default function SizeFilter() {
   const [selectedSize, setSelectedSize] = React.useState<string | null>(null);

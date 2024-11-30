@@ -1,18 +1,19 @@
 "use client"
 import {Grid2, Typography} from '@mui/material'
 import React, {useRef} from 'react'
-import Btn from '../Btn/Btn'
 import CategorySwiper from './CategorySwiper/CategorySwiper'
 import SwiperButton from '../ProductSection/ProductSwiper/SwiperButton'
+import { SwiperRef } from 'swiper/react'
 
 const ProductSection = () => {
-    const swiperRef : any = useRef(null);
+    const swiperRef :  React.LegacyRef<SwiperRef> | undefined  = useRef(null);
 
-    const handlePrev = () => swiperRef
+
+    const handlePrev = () =>swiperRef?.current && swiperRef
         .current
         .swiper
         .slidePrev();
-    const handleNext = () => swiperRef
+    const handleNext = () => swiperRef?.current && swiperRef
         .current
         .swiper
         .slideNext();

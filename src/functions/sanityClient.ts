@@ -1,18 +1,18 @@
 import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url'
-
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 
 export const client = createClient({
-  projectId: process.env.SANITY_PROJECT_ID || "8hww7tr9", // Default to your actual projectId
-  dataset: process.env.SANITY_DATASET || "production",    // Default to your actual dataset
-  useCdn: process.env.SANITY_USE_CDN === "true",          // Convert string to boolean
-  apiVersion: process.env.SANITY_API_VERSION || "2024-01-01", // Default API version
+  projectId: process.env.SANITY_PROJECT_ID || "8hww7tr9", 
+  dataset: process.env.SANITY_DATASET || "production",    
+  useCdn: process.env.SANITY_USE_CDN === "true",         
+  apiVersion: process.env.SANITY_API_VERSION || "2024-01-01", 
 });
 
 
   const builder = imageUrlBuilder(client)
 
-  export function urlFor(source : any) {
-    return builder.image(source)
+  export function urlFor(source: SanityImageSource) {
+    return builder.image(source);
   }

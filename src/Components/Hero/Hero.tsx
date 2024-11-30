@@ -23,9 +23,13 @@ export default function HomePage({ slides: staticSlides }: { slides: HeroSlide[]
 
           const result: HeroSlide[] = await response.json();
           setSlides(result);
-        } catch (error: any) {
-          console.error("Error fetching slides from Sanity:", error);
-          setError(error.message);
+        } catch (error )  {
+         
+  if (error instanceof Error) {
+    setError(error.message);
+  } else {
+    setError("An unknown error occurred"); 
+  }
         }
       };
 
