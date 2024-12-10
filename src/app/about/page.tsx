@@ -26,7 +26,7 @@ interface Block {
       marks: string[];
       text: string;
     }>;
-    markDefs: Array<{ _key: string; _type: string; [key: string]: any }>;
+    markDefs: Array<{ _key: string; _type: string; [key: string]: unknown }>;
     style: string; // e.g., "normal", "h1", "h2", etc.
   }
 export interface AboutPage {
@@ -76,7 +76,7 @@ const Page = async () => {
   
       <Box sx={{ textAlign: 'center', mb: 4 }}>
         <Typography >
-          "{aboutPage.brandQuote}"
+          {`"{aboutPage.brandQuote}"`}
         </Typography>
       </Box>
   

@@ -18,8 +18,8 @@ export const client = createClient({
   export function urlFor(source: SanityImageSource | null) {
     const fallbackImageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png";
   
-    if (!source || (source as any)._upload) {
-      return { url: () => fallbackImageUrl }; 
+    if (!source || (typeof source === "object" && "_upload" in source)) {
+      return { url: () => fallbackImageUrl };
     }
   
     return builder.image(source);
