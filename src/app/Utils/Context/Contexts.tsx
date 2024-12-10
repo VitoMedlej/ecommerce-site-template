@@ -61,7 +61,7 @@ type Category = {
             domain="https://dev-5-mm94s5.us.auth0.com"
             clientId="jFUqF9XypNPMTUtKnIxxVd4sCRMthVyg"
             authorizationParams={{
-            redirect_uri: 'localhost:3000/'
+            redirect_uri: 'http://localhost:3000'
             // redirect_uri: window?.location.origin
         }}>
 

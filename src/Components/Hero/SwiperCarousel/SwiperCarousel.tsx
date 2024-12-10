@@ -10,6 +10,7 @@ import { HeroSlide } from '@/app/Utils/Types';
 import { urlFor } from '@/functions/sanityClient';
 
 export default  function SwiperCarousel({slides: Slides} : {slides : HeroSlide[] | null })  {
+  console.log('slide: ', Slides)
   return (
     <Swiper spaceBetween={50} slidesPerView={1}>
       {Slides && Slides?.map((slide, index) => (
@@ -19,8 +20,8 @@ export default  function SwiperCarousel({slides: Slides} : {slides : HeroSlide[]
               width: '100%',
               height: '100vh',
               backgroundImage: {
-                xs: `url(${urlFor(slide?.image).url()}?q=30)`,
-                md: `url(${urlFor(slide?.image).url()}?q=50)`,
+                xs: `url(${urlFor(slide?.image)}?q=30)`,
+                md: `url(${urlFor(slide?.image)}?q=30)`,
               },
               backgroundSize: 'cover',
               backgroundPosition: 'center',

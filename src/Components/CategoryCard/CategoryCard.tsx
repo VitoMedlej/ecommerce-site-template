@@ -2,17 +2,21 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 import Btn from '../Btn/Btn';
+import { Card } from '@/app/Utils/Types';
+import { urlFor } from '@/functions/sanityClient';
+import { useRouter } from 'next/navigation';
 
-const CategoryCard = () => {
+const CategoryCard = ({card} : {card: Card}) => {
+  const router = useRouter();
   return (
     <Box sx={{ position: 'relative', width: { xs: '100%' } }}>
-      <Box sx={{ width: '100%',maxHeight:{xs:'350px',md:'450px'},borderRadius:'6px' }}>
+      <Box sx={{ width: '100%', height:{xs:'400px',sm:'400px',md:'460px'},borderRadius:'6px' }}>
         <img
-          className='img'
+          className='img w100 cover radius6'
           loading="lazy"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnHtqgBtaZCc4zMQC6gzxEzFVTfv2K-h23D8NB2rzo1CPSWNMDNc6BnZQxypE4OKpLajY&usqp=CAU"
+          src={`${urlFor(card?.image).url()}?q=30`}
           alt=""
-          style={{ width: '100%', height: 'auto' }}
+        
         />
       </Box>
       <Box
@@ -40,12 +44,15 @@ const CategoryCard = () => {
         }}
       >
 
-        <Typography sx={{pb:1, color: 'white', fontSize: '1.5rem', fontWeight: 'bold' }}>
-          fasf
-        </Typography>
-        <Btn v2 className='fs075 bg-white black'>
-            View All
-        </Btn>
+        {card?.title && <Typography 
+        sx={{pb:1, color: 'white', fontSize: {xs:'1.2em',md:'1.5rem'}, fontWeight: 'bold' }}>
+          {card.title}
+        </Typography>}
+        {card?.button && <Btn 
+        onClick={()=>router.push(`${card.link}`)}
+        v2 className='fs075 bg-white black'>
+           {card.button}
+        </Btn>}
       </Box>
     </Box>
   );

@@ -42,10 +42,17 @@ export async function fetchAnnouncements(revalidate?: number) {
 export default async function RootLayout({children} : {
     children: React.ReactNode
 }) {
-    const categories = await fetchCategories(1000);
-    const announcements = await fetchAnnouncements(1000);
+    const categories = await fetchCategories(2000);
+    const announcements = await fetchAnnouncements(2000);
     return (
         <html lang="en">
+            <head>
+            <link rel="preconnect" href="https://fonts.gstatic.com"  />
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;800&display=swap" as="style" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;800&display=swap" />
+
+
+            </head>
             <body>
                 <ContextWrapper SanityCategories={categories}>
                     <Navbar SanityAnnouncements={announcements}/>

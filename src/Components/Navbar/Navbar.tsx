@@ -33,7 +33,7 @@ const Navbar = ({ SanityAnnouncements }: { SanityAnnouncements: { message: strin
     const handleAccountRedirection = () => {
     
         if (isAuthenticated) {
-            router.push('/dashboard');
+            router.push('/account/dashboard');
         } else {
             loginWithRedirect();
         }

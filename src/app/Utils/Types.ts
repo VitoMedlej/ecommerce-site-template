@@ -19,4 +19,34 @@ export interface HeroSlide {
   }
   
   export type Slides = HeroSlide[];
+
+
+
+  export interface Card {
+    title: string;
+    subtitle?: string;
+    _key : string; 
+    image: {
+      asset: {
+        _ref: string;
+        _type: string;
+      };
+      hotspot?: {
+        x: number;
+        y: number;
+        height: number;
+        width: number;
+      };
+    };
+    button?: string;
+    link: string;
+  }
+  
+  export interface CategoryCardsSection {
+    _id: string;
+    _type: 'categoryCardsSection';
+    title: string;
+    cards: Card[];
+
+  }
   

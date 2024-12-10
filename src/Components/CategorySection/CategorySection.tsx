@@ -4,8 +4,9 @@ import React, {useRef} from 'react'
 import CategorySwiper from './CategorySwiper/CategorySwiper'
 import SwiperButton from '../ProductSection/ProductSwiper/SwiperButton'
 import { SwiperRef } from 'swiper/react'
+import { CategoryCardsSection } from '@/app/Utils/Types'
 
-const ProductSection = () => {
+const ProductSection = ({data} : {data:CategoryCardsSection | null}) => {
     const swiperRef :  React.LegacyRef<SwiperRef> | undefined  = useRef(null);
 
 
@@ -28,7 +29,7 @@ const ProductSection = () => {
                 px: {xs:2,md:4}
             }}>
                 <Grid2>
-                    <Typography className='fw600 fs2'>{`JOGGERS & PULLOVERS`}</Typography>
+                    <Typography className='fw600 fs2'>{`${data?.title}`}</Typography>
                 </Grid2>
                
                 <Grid2
@@ -43,7 +44,7 @@ const ProductSection = () => {
                 <Grid2 sx={{
                     width: '100%',pt:2
                 }}>
-                    <CategorySwiper swiperRef={swiperRef}/>
+                    <CategorySwiper data={data && data.cards} swiperRef={swiperRef}/>
                 </Grid2>
             </Grid2>
         </main>

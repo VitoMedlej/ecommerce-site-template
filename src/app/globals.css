@@ -143,6 +143,10 @@ body {
   border-radius: 50%;
 }
 
+.radius6 {
+  border-radius: 6px;
+}
+
 .pointer {
   cursor: pointer;
 }
