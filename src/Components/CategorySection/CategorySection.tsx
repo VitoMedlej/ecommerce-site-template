@@ -6,7 +6,7 @@ import SwiperButton from '../ProductSection/ProductSwiper/SwiperButton'
 import { SwiperRef } from 'swiper/react'
 import { CategoryCardsSection } from '@/app/Utils/Types'
 
-const ProductSection = ({data} : {data:CategoryCardsSection | null}) => {
+const CategorySection = ({data} : {data:CategoryCardsSection | null}) => {
     const swiperRef :  React.LegacyRef<SwiperRef> | undefined  = useRef(null);
 
 
@@ -51,4 +51,4 @@ const ProductSection = ({data} : {data:CategoryCardsSection | null}) => {
     )
 }
 
-export default ProductSection
+export default CategorySection

@@ -49,4 +49,14 @@ export interface HeroSlide {
     cards: Card[];
 
   }
-  
+  export type ProductData = {
+    title: string;
+    description: string;
+    price: number;
+    stock: number;
+    tags: string[];
+    category: string;
+    subcategory: string;
+    images: string[];
+    _id: string;
+  };

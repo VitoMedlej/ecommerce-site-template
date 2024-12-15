@@ -2,26 +2,62 @@ import { AboutPage } from "@/app/about/page";
 import { CategoryCardsSection, HeroSlide } from "@/app/Utils/Types";
 import { client } from "@/functions/sanityClient";
 
+
+
+export interface Category {
+  _id: string;
+  title: string;
+}
+
+
 type FetchOptions = {
-  revalidate?: number; // Revalidation interval in seconds
+  revalidate?: number;
 };
+
+
+export interface ProductsSection {
+  _type: 'productsSection';
+  _id: string;
+  title: string;
+  layout: string;
+  bannerImage: {
+    asset: {
+      _id: string;
+      url: string;
+    };
+  };
+  filterType: string;
+  category?: Category;
+  tags: string[];
+}
+
+
+export interface HomePage {
+  _id: string;
+  title: string;
+  sections: Array<CategoryCardsSection | ProductsSection>;
+}[0]
+
 
 export async function fetchSanityData<T>(
   query: string,
-  options?: FetchOptions
+  options: FetchOptions = { revalidate: 60 } 
 ): Promise<T | null> {
   try {
-    const { revalidate = 60 } = options || {}; // Default revalidation to 1 minute
-    const data = await client.fetch(query, {}, { cache: "force-cache", next: { revalidate } });
+    const data = await client.fetch(query, {}, {
+      cache: "force-cache",
+      next: { revalidate: options.revalidate },
+    });
     return data;
   } catch (error) {
     console.error("Error fetching Sanity data:", error);
-    return null; // Fallback to null if the fetch fails
+    return null;
   }
 }
 
-export const fetchAboutPage = async (revalidate?: number) : Promise<AboutPage | null> => {
-  return await fetchSanityData(
+
+export const fetchAboutPage = (revalidate?: number): Promise<AboutPage | null> =>
+  fetchSanityData(
     `*[_type == "aboutPage"][0] {
       _id,
       title,
@@ -36,24 +72,32 @@ export const fetchAboutPage = async (revalidate?: number) : Promise<AboutPage | 
     }`,
     { revalidate }
   );
-};
-// Specific data fetchers for reuse
-export const fetchCategories = async (revalidate?: number) => {
-  return await fetchSanityData(`*[_type == "category"] { title, subcategories }`, {
-    revalidate,
-  });
-};
 
-export const fetchSlides   = async (revalidate?: number) : Promise<HeroSlide[] | null> => {
-  return await fetchSanityData(
-    `*[_type == "heroSlide"] | order(_createdAt asc)`,
-    { revalidate }
-  );
-};
+export const fetchCategories = (revalidate?: number) =>
+  fetchSanityData(`*[_type == "category"] { title, subcategories }`, { revalidate });
 
-export const fetchCardSection = async (revalidate?: number): Promise<CategoryCardsSection | null> => {
-  return await fetchSanityData(
+export const fetchSlides = (revalidate?: number): Promise<HeroSlide[] | null> =>
+  fetchSanityData(`*[_type == "heroSlide"] | order(_createdAt asc)`, { revalidate });
+
+export const fetchCardSection = (revalidate?: number): Promise<CategoryCardsSection | null> =>
+  fetchSanityData(
     `*[_type == "categoryCardsSection"] | order(_createdAt asc)[0]`,
     { revalidate }
-  );
-};
+  ); 
+  export const fetchHomePageSections = (revalidate?: number): Promise<HomePage[] | null> =>
+    fetchSanityData(
+      `*[_type == "homePage" && _id == "homePage"]{
+    _id,
+    title,
+    sections[]->{
+      _id,
+      _type,
+      title,
+      ...
+    }
+  }`,
+      { revalidate }
+    );
+  
+ 
+  

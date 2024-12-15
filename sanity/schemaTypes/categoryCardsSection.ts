@@ -1,4 +1,5 @@
-import { defineType, defineField, defineArrayMember } from 'sanity';
+// categoryCardsSection.js
+import { defineField, defineType, defineArrayMember } from 'sanity';
 
 export default defineType({
   name: 'categoryCardsSection',
