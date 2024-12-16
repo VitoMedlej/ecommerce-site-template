@@ -1,0 +1,76 @@
+import { CategoryCardsSection } from "../Types";
+import { fetchHomeProducts } from "./dataFetchers";
+import { ProductsSection } from "./sanityFetcher";
+
+export interface FilterType {
+    filterBy: string;
+    value: string | null;
+}
+
+// Function to separate product and non-product sections
+const separateSections = (HomePageSections: (CategoryCardsSection | ProductsSection)[]) => {
+  return HomePageSections.reduce(
+    (acc: { productSections: ProductsSection[]; otherSections: CategoryCardsSection[] }, section) => {
+      if (section._type === "productsSection") {
+        acc.productSections.push(section);
+      } else {
+        acc.otherSections.push(section);
+      }
+      return acc;
+    },
+    { productSections: [], otherSections: [] }
+  );
+};
+
+// Function to create filter types from product sections
+const createFilterTypes = (productSections: ProductsSection[]): FilterType[] => {
+  return productSections.flatMap((section: ProductsSection) => {
+    const filters: FilterType[] = [];
+    if (section.filterType) {
+      filters.push({ filterBy: section.filterType, value: null });
+    }
+    if (section.category) {
+      filters.push({ filterBy: 'category', value: section.category.title });
+    }
+    return filters;
+  });
+};
+
+// Main function to process home sections data
+export const ProcessHomeSectionsData = async (HomePageSections: (CategoryCardsSection | ProductsSection)[] | null) => {
+  if (!HomePageSections) return null;
+
+  try {
+    const { productSections, otherSections } = separateSections(HomePageSections);
+
+    const filterTypes = createFilterTypes(productSections);
+
+    const homeProducts = await fetchHomeProducts(filterTypes);
+
+    // Map product sections data based on filterType
+    const productSectionsData = productSections.map((section) => {
+      const sectionData = homeProducts?.find((productGroup) => productGroup.Sectiontype === section.filterType);
+      const filteredProducts = sectionData ? sectionData.data : [];
+
+      return {
+        Sectiontype: section.filterType,
+        data: filteredProducts.length > 0 ? filteredProducts : null,
+        _id: section._id,
+        title: section.title,
+      };
+    });
+
+    // Map other sections (non-product sections) to include their cards
+    const otherSectionsData = otherSections.map((section) => ({
+      Sectiontype: section._type,
+      data: section.cards,
+      _id: section._id,
+      title: section.title,
+    }));
+
+    return [...productSectionsData, ...otherSectionsData];
+  } catch (e) {
+    console.error("Error processing home sections data: ", e);
+    return [];
+  }
+};

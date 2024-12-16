@@ -1,6 +1,6 @@
 import { AboutPage } from "@/app/about/page";
 import { CategoryCardsSection, HeroSlide } from "@/app/Utils/Types";
-import { client } from "@/functions/sanityClient";
+import { client } from "@/app/Utils/functions/sanityClient";
 
 
 
@@ -14,18 +14,20 @@ type FetchOptions = {
   revalidate?: number;
 };
 
+export type bannerImage = {
 
+    asset: {
+      _id: string;
+      url: string;
+    };
+ 
+}
 export interface ProductsSection {
   _type: 'productsSection';
   _id: string;
   title: string;
   layout: string;
-  bannerImage: {
-    asset: {
-      _id: string;
-      url: string;
-    };
-  };
+  bannerImage: bannerImage;
   filterType: string;
   category?: Category;
   tags: string[];
@@ -85,6 +87,7 @@ export const fetchCardSection = (revalidate?: number): Promise<CategoryCardsSect
     { revalidate }
   ); 
   export const fetchHomePageSections = (revalidate?: number): Promise<HomePage[] | null> =>
+    
     fetchSanityData(
       `*[_type == "homePage" && _id == "homePage"]{
     _id,

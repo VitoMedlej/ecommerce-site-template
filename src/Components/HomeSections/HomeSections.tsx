@@ -2,23 +2,28 @@
 'use client'
 import React from 'react'
 
-import { HomePage, ProductsSection } from '@/functions/sanityFetcher'
+import { HomePage, ProductsSection } from '@/app/Utils/functions/sanityFetcher'
 import ProductSection from '../ProductSection/ProductSection'
 import CategorySection from '../CategorySection/CategorySection'
+import { Card, HomeSectionData } from '@/app/Utils/Types'
 
-const HomeSections = ({ HomePageSections }: { HomePageSections: HomePage[] | null }) => {
+
+
+
+const HomeSections = ({ HomeSectionWithData }: { HomeSectionWithData: HomeSectionData[] | null }) => {
+  console.log('HomeSectionWithData: ', HomeSectionWithData);
+  // const req = await processProductsSection(HomePageSections)
+  // console.log('req: ', req);
+
   return (
     <>
-      { HomePageSections && HomePageSections[0]?.sections?.map((section) => {
+      { HomeSectionWithData && HomeSectionWithData?.map((section) => {
 
-        
+        if (section.Sectiontype !== "categoryCardsSection") {
 
-        if (section._type === "productsSection") {
-
-          return <ProductSection key={section._id} data={section} isHomePage={true} />
-        } else {
-          return <CategorySection key={section._id} data={section}/>
-
+          return <ProductSection key={section._id} sectionDetails={section} isHomePage={true} />
+        }  if (section.Sectiontype === "categoryCardsSection" && section.data)  {
+          return <CategorySection key={section._id} sectionTitle={section.title} data={section.data as Card[]}/>
         }
 
       })}

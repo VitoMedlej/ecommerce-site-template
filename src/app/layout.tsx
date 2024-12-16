@@ -7,7 +7,7 @@ import SideBar from "@/Components/SideBar/SideBar";
 import ContextWrapper from "./Utils/Context/Contexts";
 import QuickCart from "@/Components/QuickCart/QuickCart";
 import PerksSection from "@/Components/PerksSection/PerksSection";
-import {client} from "@/functions/sanityClient";
+import {client} from "@/app/Utils/functions/sanityClient";
 
 export const metadata : Metadata = {
     title: "Create Next App",

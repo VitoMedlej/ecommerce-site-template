@@ -7,6 +7,7 @@ import {Swiper, SwiperRef, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import ProductCard from '@/Components/ProductCard/ProductCard';
 import { LegacyRef } from 'react';
+import { ProductData } from '@/app/Utils/Types';
 
 const Slides = [
     {
@@ -43,7 +44,7 @@ const Slides = [
         imageMd: 'https://example.com/image-md-2.jpg'
     }
 ];
-export default function ProductSwiper({swiperRef} :  {swiperRef: LegacyRef<SwiperRef> | undefined}) {
+export default function ProductSwiper({products, swiperRef} :  {products : ProductData[] | null, swiperRef: LegacyRef<SwiperRef> | undefined}) {
 
     return (
         <Swiper
@@ -66,11 +67,13 @@ export default function ProductSwiper({swiperRef} :  {swiperRef: LegacyRef<Swipe
                 slidesPerView: 4.5
             }
         }}>
-            {Slides.map((slide, index) => (
-                <SwiperSlide key={index}>
-                    <ProductCard/>
-                </SwiperSlide>
-            ))}
+          {products?.map((product) => {
+
+        if (!product?._id) return;
+ return <SwiperSlide key={product._id || product._id}>
+    <ProductCard product={product}  />
+  </SwiperSlide>
+})}
         </Swiper>
     );
 };

@@ -1,3 +1,5 @@
+import { bannerImage } from "@/app/Utils/functions/sanityFetcher";
+
 // types.ts
 export interface HeroSlide {
     _createdAt: string; // ISO timestamp
@@ -57,6 +59,17 @@ export interface HeroSlide {
     tags: string[];
     category: string;
     subcategory: string;
+   
     images: string[];
     _id: string;
   };
+
+
+  export type HomeSectionData = {
+    Sectiontype: string;
+    layout ?: string;
+    bannerImage ?: bannerImage
+    data : Card[] | ProductData[] | null;
+    _id: string;
+    title: string;
+  }

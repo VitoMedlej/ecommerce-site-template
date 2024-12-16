@@ -1,4 +1,4 @@
-import { fetchAboutPage } from '@/functions/sanityFetcher';
+import { fetchAboutPage } from '@/app/Utils/functions/sanityFetcher';
 import { Container, Box, Typography, Paper } from '@mui/material';
 import React from 'react'
 

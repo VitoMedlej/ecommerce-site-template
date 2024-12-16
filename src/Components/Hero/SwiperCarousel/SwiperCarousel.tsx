@@ -7,10 +7,9 @@ import 'swiper/css';
 import { Box, Typography } from '@mui/material';
 import Btn from '@/Components/Btn/Btn';
 import { HeroSlide } from '@/app/Utils/Types';
-import { urlFor } from '@/functions/sanityClient';
+import { urlFor } from '@/app/Utils/functions/sanityClient';
 
 export default  function SwiperCarousel({slides: Slides} : {slides : HeroSlide[] | null })  {
-  console.log('slide: ', Slides)
   return (
     <Swiper spaceBetween={50} slidesPerView={1}>
       {Slides && Slides?.map((slide, index) => (
