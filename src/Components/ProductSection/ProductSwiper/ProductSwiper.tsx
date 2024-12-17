@@ -69,8 +69,8 @@ export default function ProductSwiper({products, swiperRef} :  {products : Produ
         }}>
           {products?.map((product) => {
 
-        if (!product?._id) return;
- return <SwiperSlide key={product._id || product._id}>
+        if (!product?.id) return;
+ return <SwiperSlide key={product.id }>
     <ProductCard product={product}  />
   </SwiperSlide>
 })}

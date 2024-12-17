@@ -6,6 +6,7 @@ import { CiHeart } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
 import { ProductData } from "@/app/Utils/Types";
 import { validateImageUrl } from "@/app/Utils/ImageValidator";
+import { useRouter } from "next/navigation";
 
 const ProductCard = ({
   sx,
@@ -15,7 +16,11 @@ const ProductCard = ({
   product: ProductData;
 }) => {
     const image = product?.images && product?.images?.length > 0 ? validateImageUrl(`${product?.images[0]}`) : validateImageUrl(null) 
-  return (
+    const router = useRouter();
+    const ViewProduct = () => {
+      router.push(`/product/${product?.id}`)
+    }
+    return (
     <Box
       className="relative"
       sx={{
@@ -78,7 +83,7 @@ const ProductCard = ({
         <IoStar />
         <Typography className="fs075">4.2</Typography>
       </Box>
-      <Box>
+      <Box className='pointer' onClick={()=>ViewProduct()}>
         <Typography className="fs1">{product.title}</Typography>
         <Typography className="fs075 gray">{product.category}</Typography>
         <Typography

@@ -1,6 +1,6 @@
 import { CategoryCardsSection } from "../Types";
 import { fetchHomeProducts } from "./dataFetchers";
-import { ProductsSection } from "./sanityFetcher";
+import { fetchHomePageSections, HomePage, ProductsSection } from "./sanityFetcher";
 
 export interface FilterType {
     filterBy: string;
@@ -37,15 +37,18 @@ const createFilterTypes = (productSections: ProductsSection[]): FilterType[] => 
 };
 
 // Main function to process home sections data
-export const ProcessHomeSectionsData = async (HomePageSections: (CategoryCardsSection | ProductsSection)[] | null) => {
-  if (!HomePageSections) return null;
-
+export const ProcessHomeSectionsData = async () => {
+   const SanityHomeSections : HomePage[] | null = await fetchHomePageSections(60)
+  
+    const HomePageSections = SanityHomeSections && SanityHomeSections[0].sections
   try {
+    if (!HomePageSections) return null;
     const { productSections, otherSections } = separateSections(HomePageSections);
 
     const filterTypes = createFilterTypes(productSections);
 
     const homeProducts = await fetchHomeProducts(filterTypes);
+    console.log('homeProducts: ', homeProducts);
 
     // Map product sections data based on filterType
     const productSectionsData = productSections.map((section) => {

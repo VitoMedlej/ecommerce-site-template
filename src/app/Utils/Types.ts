@@ -59,9 +59,8 @@ export interface HeroSlide {
     tags: string[];
     category: string;
     subcategory: string;
-   
     images: string[];
-    _id: string;
+    id: string;
   };
 
 

@@ -5,28 +5,30 @@
 
 import ProductClient from '@/Components/ClientSide/ProductClient/ProductClient';
 import ProductSection from '@/Components/ProductSection/ProductSection';
+import { notFound } from 'next/navigation';
 
-const ProductPage = async () => {
-  // const ProductPage = async ({ params } : any) => {
-    // const { id } = await params
+// const ProductPage = async () => {
+  const ProductPage = async ({ params } : any) => {
+    const { id } = await params
+    console.log('id: ', id);
  
 
   // Fetch product data (replace this with your API endpoint)
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/product/${id}`, {
-//     cache: 'force-cache', // Cache the response for improved performance
-//     next: {
-//       revalidate: 60, // Regenerate the page every 60 seconds
-//     },
-//   });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}`, {
+    // cache: 'force-cache', // Cache the response for improved performance
+    next: {
+      revalidate: 0, 
+        },
+  });
 
-//   if (!res.ok) return notFound();
+  if (!res.ok) return notFound();
 
-//   const product = await res.json();
+  const product = await res.json();
 
   return (
     <>
-      <ProductClient/>
-      <ProductSection/>
+      <ProductClient product={product}/>
+      {/* <ProductSection isHomePage={false} sectionDetails={null}/> */}
       {/* <h1>{product.title}</h1> */}
       {/* <p>{product.description}</p> */}
       {/* Render other product details */}

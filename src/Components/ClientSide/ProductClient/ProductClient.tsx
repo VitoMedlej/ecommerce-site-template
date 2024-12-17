@@ -1,4 +1,5 @@
 "use client"
+import { ProductData } from '@/app/Utils/Types'
 import BreadCrumb from '@/Components/BreadCrumb/BreadCrumb'
 import Btn from '@/Components/Btn/Btn'
 import ColorSelector from '@/Components/ColorSelect/ColorSelect'
@@ -12,7 +13,8 @@ import { SwiperRef } from 'swiper/react'
 
 
 
-const ProductClient = () => {
+const ProductClient = ({product} : {product:ProductData}) => {
+    console.log('product: ', product);
     const swiperRef :  React.LegacyRef<SwiperRef> | undefined  = useRef(null);
 
 

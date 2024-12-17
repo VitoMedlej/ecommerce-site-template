@@ -1,7 +1,7 @@
 'use server';
 
 import { ProductData } from "@/app/Utils/Types";
-import { FilterType } from "@/app/page";
+import { FilterType } from "./ProcessHomeSectionsData";
 
 export async function fetchExternalData<T>(
   url: string,
@@ -22,6 +22,7 @@ export async function fetchExternalData<T>(
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
     const jsonData = await response.json();
+    console.log('jsonData: ', jsonData);
     return jsonData?.responseObject;
   } catch (error) {
     console.error("Error fetching external data:", error);

@@ -15,8 +15,8 @@ const AboutSection = dynamic(() => import ('@/Components/AboutSection/AboutSecti
 export default async function Home() {
     const slides = await fetchSlides(1000);
 
-    const SanityHomeSections : HomePage[] | null = await fetchHomePageSections(1000)
-    const HomeSectionWithData : HomeSectionData[] | null = await ProcessHomeSectionsData(SanityHomeSections && SanityHomeSections[0].sections)
+   
+    const HomeSectionWithData : HomeSectionData[] | null = await ProcessHomeSectionsData()
 
     return (
         <main>
