@@ -1,6 +1,6 @@
 import Hero from "@/Components/Hero/Hero";
 import dynamic from "next/dynamic";
-import { fetchHomePageSections, fetchSlides, HomePage} from "@/app/Utils/functions/sanityFetcher";
+import { fetchSlides} from "@/app/Utils/functions/sanityFetcher";
 import { HomeSectionData} from "./Utils/Types";
 // import {fetchHomeProducts} from "@/app/Utils/functions/dataFetchers";
 import HomeSections from "@/Components/HomeSections/HomeSections";
