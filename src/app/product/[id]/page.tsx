@@ -3,9 +3,9 @@
 // Add `"use server"` to mark the server component
 'use server';
 
-import ProductClient from '@/Components/ClientSide/ProductClient/ProductClient';
+// import ProductClient from '@/Components/ClientSide/ProductClient/ProductClient';
 // import ProductSection from '@/Components/ProductSection/ProductSection';
-import { notFound } from 'next/navigation';
+// import { notFound } from 'next/navigation';
 
 const ProductPage = async () => {
   // const ProductPage = async ({ params } : unknown) => {
