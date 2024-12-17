@@ -38,7 +38,7 @@ export interface HomePage {
   _id: string;
   title: string;
   sections: Array<CategoryCardsSection | ProductsSection>;
-}[0]
+}
 
 
 export async function fetchSanityData<T>(

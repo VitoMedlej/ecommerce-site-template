@@ -2,7 +2,7 @@
 'use client'
 import React from 'react'
 
-import { HomePage, ProductsSection } from '@/app/Utils/functions/sanityFetcher'
+// import { HomePage, ProductsSection } from '@/app/Utils/functions/sanityFetcher'
 import ProductSection from '../ProductSection/ProductSection'
 import CategorySection from '../CategorySection/CategorySection'
 import { Card, HomeSectionData } from '@/app/Utils/Types'

@@ -9,41 +9,41 @@ import ProductCard from '@/Components/ProductCard/ProductCard';
 import { LegacyRef } from 'react';
 import { ProductData } from '@/app/Utils/Types';
 
-const Slides = [
-    {
-        mainTitle: 'Main Title 1',
-        subtitle: 'Subtitle 1',
-        smallText: 'Small descriptive text for slide 1.',
-        imageXs: 'https://new-ella-demo.myshopify.com/cdn/shop/files/h14f2-spotlight-3_570x.jpg?v=' +
-                '1642058989',
-        imageMd: 'https://new-ella-demo.myshopify.com/cdn/shop/files/h14f2-spotlight-4_570x.jpg?v=' +
-                '1642058989'
-    }, {
-        mainTitle: 'Main Title 2',
-        subtitle: 'Subtitle 2',
-        smallText: 'Small descriptive text for slide 2.',
-        imageXs: 'https://example.com/image-xs-2.jpg',
-        imageMd: 'https://example.com/image-md-2.jpg'
-    }, {
-        mainTitle: 'Main Title 2',
-        subtitle: 'Subtitle 2',
-        smallText: 'Small descriptive text for slide 2.',
-        imageXs: 'https://example.com/image-xs-2.jpg',
-        imageMd: 'https://example.com/image-md-2.jpg'
-    }, {
-        mainTitle: 'Main Title 2',
-        subtitle: 'Subtitle 2',
-        smallText: 'Small descriptive text for slide 2.',
-        imageXs: 'https://example.com/image-xs-2.jpg',
-        imageMd: 'https://example.com/image-md-2.jpg'
-    }, {
-        mainTitle: 'Main Title 2',
-        subtitle: 'Subtitle 2',
-        smallText: 'Small descriptive text for slide 2.',
-        imageXs: 'https://example.com/image-xs-2.jpg',
-        imageMd: 'https://example.com/image-md-2.jpg'
-    }
-];
+// const Slides = [
+//     {
+//         mainTitle: 'Main Title 1',
+//         subtitle: 'Subtitle 1',
+//         smallText: 'Small descriptive text for slide 1.',
+//         imageXs: 'https://new-ella-demo.myshopify.com/cdn/shop/files/h14f2-spotlight-3_570x.jpg?v=' +
+//                 '1642058989',
+//         imageMd: 'https://new-ella-demo.myshopify.com/cdn/shop/files/h14f2-spotlight-4_570x.jpg?v=' +
+//                 '1642058989'
+//     }, {
+//         mainTitle: 'Main Title 2',
+//         subtitle: 'Subtitle 2',
+//         smallText: 'Small descriptive text for slide 2.',
+//         imageXs: 'https://example.com/image-xs-2.jpg',
+//         imageMd: 'https://example.com/image-md-2.jpg'
+//     }, {
+//         mainTitle: 'Main Title 2',
+//         subtitle: 'Subtitle 2',
+//         smallText: 'Small descriptive text for slide 2.',
+//         imageXs: 'https://example.com/image-xs-2.jpg',
+//         imageMd: 'https://example.com/image-md-2.jpg'
+//     }, {
+//         mainTitle: 'Main Title 2',
+//         subtitle: 'Subtitle 2',
+//         smallText: 'Small descriptive text for slide 2.',
+//         imageXs: 'https://example.com/image-xs-2.jpg',
+//         imageMd: 'https://example.com/image-md-2.jpg'
+//     }, {
+//         mainTitle: 'Main Title 2',
+//         subtitle: 'Subtitle 2',
+//         smallText: 'Small descriptive text for slide 2.',
+//         imageXs: 'https://example.com/image-xs-2.jpg',
+//         imageMd: 'https://example.com/image-md-2.jpg'
+//     }
+// ];
 export default function ProductSwiper({products, swiperRef} :  {products : ProductData[] | null, swiperRef: LegacyRef<SwiperRef> | undefined}) {
 
     return (
