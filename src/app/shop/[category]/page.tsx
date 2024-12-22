@@ -1,5 +1,4 @@
 import { fetchProducts } from "@/app/Utils/functions/dataFetchers";
-import { ProductData } from "@/app/Utils/Types";
 import CollectionsClient from "@/Components/ClientSide/CollectionsClient/CollectionsClient";
 import React from "react";
 

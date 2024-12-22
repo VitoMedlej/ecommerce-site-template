@@ -15,7 +15,7 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
     console.log('products: ', data);
     
     const isSmallScreen = useMediaQuery("(max-width:900px)");
-    const { isFilterModalOpen, setFilterModalOpen } = useFilterModalContext();
+    const { setFilterModalOpen } = useFilterModalContext();
     const handleOpenFilter = () => {
         setFilterModalOpen(true);
       };

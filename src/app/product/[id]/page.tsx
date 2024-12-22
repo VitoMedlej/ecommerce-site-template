@@ -1,8 +1,9 @@
-import { fetchProductById } from "@/app/Utils/functions/dataFetchers";
-import ProductClient from "@/Components/ClientSide/ProductClient/ProductClient";
-import { notFound } from "next/navigation";
+// import { fetchProductById } from "@/app/Utils/functions/dataFetchers";
+// import ProductClient from "@/Components/ClientSide/ProductClient/ProductClient";
+// import { notFound } from "next/navigation";
 
 export const Page = async ({ params }: { params: { id: string } }) => {
+  console.log('params: ', params);
   // const { id } = await params;
 
   // const product = await fetchProductById(id);

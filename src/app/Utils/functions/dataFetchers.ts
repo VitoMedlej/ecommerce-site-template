@@ -73,7 +73,7 @@ export const fetchProducts = async (
     }
 
     return data;
-  } catch (error: any) {
+  } catch (error: unknown) {
     if (error instanceof Error) {
       console.error('Error fetching products:', error.message);
     } else {
@@ -106,7 +106,7 @@ export const fetchProductById = async (
     }
 
     return product;
-  } catch (error: any) {
+  } catch (error: unknown) {
     if (error instanceof Error) {
       console.error(`Error fetching product with ID: ${id}:`, error.message);
     } else {
