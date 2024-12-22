@@ -1,68 +1,82 @@
 "use client";
 
 import {Auth0Provider} from "@auth0/auth0-react";
-import {createContext, Dispatch, ReactNode, SetStateAction, useContext, useState} from "react";
+import {
+    createContext,
+    Dispatch,
+    ReactNode,
+    SetStateAction,
+    useContext,
+    useState
+} from "react";
 
 
-
-// Define types for the contexts
 type Category = {
     id: string;
     name: string;
-  };
-  
-  export const SidebarContext = createContext<{
+};
+
+export const SidebarContext = createContext < {
     sidebarOpen: boolean;
-    setSidebarOpen: Dispatch<SetStateAction<boolean>>;
-  }>({
+    setSidebarOpen: Dispatch < SetStateAction < boolean >>;
+} > ({
     sidebarOpen: false,
-    setSidebarOpen: () => {},
-  });
-  
-  export const CartContext = createContext<{
+    setSidebarOpen: () => {}
+});
+
+export const CartContext = createContext < {
     isCartOpen: boolean;
-    setIsCartOpen: Dispatch<SetStateAction<boolean>>;
-  }>({
+    setIsCartOpen: Dispatch < SetStateAction < boolean >>;
+} > ({
     isCartOpen: false,
-    setIsCartOpen: () => {},
-  });
-  
-  export const CategoriesContext = createContext<{
+    setIsCartOpen: () => {}
+});
+
+export const CategoriesContext = createContext < {
     categories: Category[];
-    setCategories: Dispatch<SetStateAction<Category[]>>;
-  }>({
+    setCategories: Dispatch < SetStateAction < Category[] >>;
+} > ({
     categories: [],
-    setCategories: () => {},
-  });
-  
-  export const DialogContext = createContext<{
+    setCategories: () => {}
+});
+
+export const DialogContext = createContext < {
     isDialogOpen: boolean;
-    setIsDialogOpen: Dispatch<SetStateAction<boolean>>;
-  }>({
+    setIsDialogOpen: Dispatch < SetStateAction < boolean >>;
+} > ({
     isDialogOpen: false,
-    setIsDialogOpen: () => {},
-  });
-  
-  const ContextWrapper = ({
-    children,
-    SanityCategories,
-  }: {
+    setIsDialogOpen: () => {}
+});
+
+export const FilterModalContext = createContext < {
+    isFilterModalOpen: boolean;
+    setFilterModalOpen: Dispatch < SetStateAction < boolean >>;
+} > ({
+    isFilterModalOpen: false,
+    setFilterModalOpen: () => {}
+});
+
+const ContextWrapper = ({children, SanityCategories} : {
     children: ReactNode;
     SanityCategories: Category[];
-  }) => {
-    const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
-    const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
-    const [categories, setCategories] = useState<Category[]>(SanityCategories || []);
-    const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+}) => {
+    const [sidebarOpen,
+        setSidebarOpen] = useState < boolean > (false);
+    const [isCartOpen,
+        setIsCartOpen] = useState < boolean > (false);
+    const [isFilterModalOpen,
+        setFilterModalOpen] = useState < boolean > (false);
+    const [categories,
+        setCategories] = useState < Category[] > (SanityCategories || []);
+    const [isDialogOpen,
+        setIsDialogOpen] = useState < boolean > (false);
 
-    
     return (
         <Auth0Provider
-            domain="https://dev-5-mm94s5.us.auth0.com"
-            clientId="jFUqF9XypNPMTUtKnIxxVd4sCRMthVyg"
+            domain={`${process.env.AUTH0_ISSUER_BASE_URL}`}
+            clientId={`${process.env.AUTH0_CLIENT_ID}`}
             authorizationParams={{
             redirect_uri: 'http://localhost:3000'
-            // redirect_uri: window?.location.origin
         }}>
 
             <SidebarContext.Provider
@@ -85,8 +99,14 @@ type Category = {
                             isDialogOpen,
                             setIsDialogOpen
                         }}>
-
+                            <FilterModalContext.Provider
+                                value={{
+                                isFilterModalOpen,
+                                setFilterModalOpen
+                            }}>
+                              
                             {children}
+                            </FilterModalContext.Provider>
                         </DialogContext.Provider>
                     </CartContext.Provider>
                 </CategoriesContext.Provider>
@@ -101,3 +121,4 @@ export const useSidebarContext = () => useContext(SidebarContext);
 export const useCartContext = () => useContext(CartContext);
 export const useCategoriesContext = () => useContext(CategoriesContext);
 export const useDialogContext = () => useContext(DialogContext);
+export const useFilterModalContext = () => useContext(FilterModalContext);

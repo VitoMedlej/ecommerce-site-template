@@ -38,7 +38,7 @@ const createFilterTypes = (productSections: ProductsSection[]): FilterType[] => 
 
 // Main function to process home sections data
 export const ProcessHomeSectionsData = async () => {
-   const SanityHomeSections : HomePage[] | null = await fetchHomePageSections(60)
+   const SanityHomeSections : HomePage[] | null = await fetchHomePageSections(10)
   
     const HomePageSections = SanityHomeSections && SanityHomeSections[0].sections
   try {
@@ -47,8 +47,7 @@ export const ProcessHomeSectionsData = async () => {
 
     const filterTypes = createFilterTypes(productSections);
 
-    const homeProducts = await fetchHomeProducts(filterTypes);
-    console.log('homeProducts: ', homeProducts);
+    const homeProducts = await fetchHomeProducts(filterTypes, 19);
 
     // Map product sections data based on filterType
     const productSectionsData = productSections.map((section) => {
@@ -60,6 +59,8 @@ export const ProcessHomeSectionsData = async () => {
         data: filteredProducts.length > 0 ? filteredProducts : null,
         _id: section._id,
         title: section.title,
+        layout:  section.layout,
+        bannerImage: section.bannerImage
       };
     });
 

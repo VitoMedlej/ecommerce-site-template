@@ -1,15 +1,20 @@
-import CollectionsClient from '@/Components/ClientSide/CollectionsClient/CollectionsClient'
-import React from 'react'
+import { fetchProducts } from "@/app/Utils/functions/dataFetchers";
+import { ProductData } from "@/app/Utils/Types";
+import CollectionsClient from "@/Components/ClientSide/CollectionsClient/CollectionsClient";
+import React from "react";
 
 
-const Page = async () => {
-   
+
+
+const ProductPage = async ({ params }: { params: { [key: string]: string } }) => {
+  const { category = "collections", sort = "", skip = "0", limit = "10", search  } = await params;
+  const data   = await fetchProducts(category, sort, parseInt(skip), parseInt(limit), search);
+
   return (
     <>
-        <CollectionsClient />
-        
+      <CollectionsClient data={data}  />
     </>
-  )
-}
+  );
+};
 
-export default Page
+export default ProductPage;

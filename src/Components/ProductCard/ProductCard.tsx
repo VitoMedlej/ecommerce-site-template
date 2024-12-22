@@ -30,11 +30,12 @@ const ProductCard = ({
     >
       <Box
         sx={{
+          height:{xs:"250px",md:'350px'},
           width: { xs: "100%" },
         }}
       >
         <img
-          className="img"
+          className="img cover"
           loading="lazy"
           src={image}
           alt={product.title}
@@ -84,7 +85,7 @@ const ProductCard = ({
         <Typography className="fs075">4.2</Typography>
       </Box>
       <Box className='pointer' onClick={()=>ViewProduct()}>
-        <Typography className="fs1">{product.title}</Typography>
+        <Typography sx={{fontSize:{xs:'.8em',sm:'1em'}}}>{product.title}</Typography>
         <Typography className="fs075 gray">{product.category}</Typography>
         <Typography
           className="fs1 fw600"

@@ -3,14 +3,22 @@ import {Box, Typography, useMediaQuery} from '@mui/material';
 import React from 'react'
 import Btn from '../../Btn/Btn';
 import {CiFilter} from "react-icons/ci";
-import ProductCard from '../../ProductCard/ProductCard';
+// import ProductCard from '../../ProductCard/ProductCard';
 import {IoGridOutline} from "react-icons/io5";
 import FilterOptions from '../../FilterOptions/FilterOptions';
+import { useFilterModalContext } from '@/app/Utils/Context/Contexts';
+import FilterModal from '@/Components/Modals/FilterModal';
+import { Section } from '@/app/Utils/Types';
+import ProductCard from '@/Components/ProductCard/ProductCard';
 
-const CollectionsClient = () => {
+const CollectionsClient = ({data} : {data: Section  | null}) => {
+    console.log('products: ', data);
     
     const isSmallScreen = useMediaQuery("(max-width:900px)");
-
+    const { isFilterModalOpen, setFilterModalOpen } = useFilterModalContext();
+    const handleOpenFilter = () => {
+        setFilterModalOpen(true);
+      };
     return (
         <main>
 
@@ -20,7 +28,8 @@ const CollectionsClient = () => {
                 pt: 6,
                 px: {
                     xs: 2,
-                    md: 6
+                    md: 2,
+                    lg:4
                 },
                 display: {
                     xs: 'flex'
@@ -28,10 +37,10 @@ const CollectionsClient = () => {
                 maxWidth: 'xl'
             }}>
                 <Typography className='fs3 fw600'>
-                    Joggers & Pullovers
+                   {data?.title}
                 </Typography>
                 <Typography className='fs075 fw400'>
-                    7 items found
+                    {data?.count ? `${data?.count} items found` : `Showing ${data?.products?.length} items`  } 
                 </Typography>
             </Box>
             <Box
@@ -39,7 +48,8 @@ const CollectionsClient = () => {
                 mt: 6,
                 px: {
                     xs: 1,
-                    md: 2
+                    md: 0,
+                    lg:0,
                 }
             }}
                 className="flex row wrap">
@@ -48,7 +58,7 @@ const CollectionsClient = () => {
                     sx={{
                     width: {
                         xs: '100%',
-                        md: '30%',
+                        md: '27%',
                         lg: '25%'
                     }
                 }}>
@@ -56,15 +66,16 @@ const CollectionsClient = () => {
                     {isSmallScreen && <Box sx={{
                         mb: 2
                     }}>
-                        <Btn border>
+                        <Btn onClick={handleOpenFilter} border>
                             <CiFilter/>
-                            Filter & Sort
+                            Filter & Sort1
                         </Btn>
                         <Btn
                             border
                             sx={{
+                                fontSize:'.67em',
                             px: 0,
-                            mx: 1
+                            mx: .25
                         }}>
                             <IoGridOutline fontSize={'1.7em'}/>
                         </Btn>
@@ -99,25 +110,29 @@ const CollectionsClient = () => {
                     sx={{
                     width: {
                         xs: '100%',
-                        md: '70%',
+                        md: '73%',
                         lg: '75%'
                     }
                 }}>
 
-                    {[1, 2, 3, 4].map(item => {
+                    {data?.products?.map(product => {
                         return <ProductCard
+                        product={product}
                             sx={{
                             width: {
-                                xs: '49%',
+                                xs: '48%',
                                 md: '32%'
                             },
                             my: 2
                         }}
-                            key={item}></ProductCard>
+                            key={product.id}></ProductCard>
                     })}
 
                 </Box>
             </Box>
+
+
+            <FilterModal/>
         </main>
     )
 }

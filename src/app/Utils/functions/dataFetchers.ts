@@ -1,34 +1,36 @@
 'use server';
 
-import { ProductData } from "@/app/Utils/Types";
+import { ProductData, Section } from "@/app/Utils/Types";
 import { FilterType } from "./ProcessHomeSectionsData";
+
 
 export async function fetchExternalData<T>(
   url: string,
-  body: object,
-  fetchOptions: RequestInit = { next: { revalidate: 60 } }
+  body : object | null,
+  fetchOptions: RequestInit = { next: { revalidate: 60 } },
+  method ?: 'POST' | 'GET' | 'PUT' | 'DELETE'
 ): Promise<T | null> {
   try {
     const response = await fetch(url, {
-      method: 'POST',
+      method: method ? method : 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.TKN}`,
       },
-      body: JSON.stringify(body),
+      body: method !== 'GET' ? JSON.stringify(body) : null,
       ...fetchOptions,
     });
 
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
     const jsonData = await response.json();
-    console.log('jsonData: ', jsonData);
     return jsonData?.responseObject;
   } catch (error) {
     console.error("Error fetching external data:", error);
     return null;
   }
 }
+
 
 export const fetchHomeProducts = async (
   filterTypes: FilterType[],
@@ -39,4 +41,77 @@ export const fetchHomeProducts = async (
     filterTypes,
     { next: { revalidate } }
   );
+};
+
+export const fetchProducts = async (
+  category: string,
+  sort?: string,
+  skip = 0,
+  limit = 10,
+  search?: string
+) => {
+  const params: Record<string, string> = {};
+
+  if (search && search.length > 2) params.search = search;
+  if (sort) params.sort = sort;
+  params.skip = String(skip);
+  params.limit = String(limit);
+
+  const queryString = new URLSearchParams(params).toString();
+
+  try {
+    const data = await fetchExternalData<Section>(
+      `${process.env.EXTERNAL_API_URL}/products/shop/${category}${queryString ? `?${queryString}` : ""}`,
+      null,
+      { next: { revalidate: 0 } },
+      'GET'
+    );
+
+    if (!data) {
+      console.error('No products found.');
+      return null;
+    }
+
+    return data;
+  } catch (error: any) {
+    if (error instanceof Error) {
+      console.error('Error fetching products:', error.message);
+    } else {
+      console.error('Unexpected error fetching products:', error);
+    }
+    return null;
+  }
+};
+
+
+export const fetchProductById = async (
+  id: string
+): Promise<ProductData | null> => {
+  if (!id || typeof id !== 'string' || id.trim() === '') {
+    console.error('Invalid product ID provided.');
+    return null;
+  }
+
+  try {
+    const product = await fetchExternalData<ProductData>(
+      `${process.env.EXTERNAL_API_URL}/products/${id}`,
+      null,
+      { next: { revalidate: 0 } },
+      'GET'
+    );
+
+    if (!product) {
+      console.error(`Product with ID: ${id} not found.`);
+      return null;
+    }
+
+    return product;
+  } catch (error: any) {
+    if (error instanceof Error) {
+      console.error(`Error fetching product with ID: ${id}:`, error.message);
+    } else {
+      console.error(`Unexpected error fetching product with ID: ${id}:`, error);
+    }
+    return null;
+  }
 };

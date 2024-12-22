@@ -65,6 +65,7 @@ export interface HeroSlide {
 
 
   export type HomeSectionData = {
+    redirectUrl ?: string;
     Sectiontype: string;
     layout ?: string;
     bannerImage ?: bannerImage
@@ -72,3 +73,10 @@ export interface HeroSlide {
     _id: string;
     title: string;
   }
+
+  export type Section = {
+    title: string;
+    products: ProductData[];
+    count ?: number;
+  };
+  

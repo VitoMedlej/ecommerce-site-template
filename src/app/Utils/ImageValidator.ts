@@ -4,6 +4,6 @@ export const validateImageUrl = (imageUrl: string | null): string => {
       return imageUrl;
     }
   
-    // Return default image if URL is not valid
-    return process.env.NOT_FOUND_IMAGE || '/default-image.jpg'; // fallback to a local default image if env variable is not set
+
+    return process.env.NOT_FOUND_IMAGE || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTvGPEc8bhcT2Zl66lisGIPqVJ3PhKD8Xvzw&s'; // fallback to a local default image if env variable is not set
   };

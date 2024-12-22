@@ -1,39 +1,20 @@
-// app/product/[id]/page.tsx
+import { fetchProductById } from "@/app/Utils/functions/dataFetchers";
+import ProductClient from "@/Components/ClientSide/ProductClient/ProductClient";
+import { notFound } from "next/navigation";
 
-// Add `"use server"` to mark the server component
-'use server';
+export const Page = async ({ params }: { params: { id: string } }) => {
+  // const { id } = await params;
 
-// import ProductClient from '@/Components/ClientSide/ProductClient/ProductClient';
-// import ProductSection from '@/Components/ProductSection/ProductSection';
-// import { notFound } from 'next/navigation';
+  // const product = await fetchProductById(id);
 
-const ProductPage = async () => {
-  // const ProductPage = async ({ params } : unknown) => {
-    // const { id } = await params
-    // console.log('id: ', id);
- 
-
-  // Fetch product data (replace this with your API endpoint)
-  // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}`, {
-  //   // cache: 'force-cache', // Cache the response for improved performance
-  //   next: {
-  //     revalidate: 0, 
-  //       },
-  // });
-
-  // if (!res.ok) return notFound();
-
-  // const product = await res.json();
+  // if (!product) {
+  //   console.error(`Product with ID: ${id} could not be found.`);
+  //   return notFound(); // Return a 404 if no product is found
+  // }
 
   return (
     <>
-      {/* <ProductClient product={product}/> */}
-      {/* <ProductSection isHomePage={false} sectionDetails={null}/> */}
-      {/* <h1>{product.title}</h1> */}
-      {/* <p>{product.description}</p> */}
-      {/* Render other product details */}
+      {/* <ProductClient product={product} /> */}
     </>
   );
 };
-
-export default ProductPage;

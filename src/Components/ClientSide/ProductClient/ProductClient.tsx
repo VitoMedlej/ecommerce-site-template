@@ -14,7 +14,6 @@ import { SwiperRef } from 'swiper/react'
 
 
 const ProductClient = ({product} : {product:ProductData}) => {
-    console.log('product: ', product);
     const swiperRef :  React.LegacyRef<SwiperRef> | undefined  = useRef(null);
 
 
