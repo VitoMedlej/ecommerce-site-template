@@ -10,6 +10,8 @@ import {Accordion, AccordionSummary, Box, Divider, Typography} from '@mui/materi
 import React, { useRef } from 'react'
 import { FaAngleDoubleDown } from 'react-icons/fa'
 import { SwiperRef } from 'swiper/react'
+import QtySelector from './QtySelector'
+import {CiHeart} from "react-icons/ci";
 
 
 
@@ -36,28 +38,51 @@ const ProductClient = ({product} : {product:ProductData}) => {
             },
             maxWidth: 'xl',
             mt: {
-                xs: 4,
-                md:6,
-                lg:8
+                xs: 0,
+                md:2,
+                lg:1
             },
             mb: {
                 xs: 8
             }
         }}>
+            <Box sx={{pt:{xs:2,md:2}}}>
+
+                <BreadCrumb/>
+            </Box>
+
             <Box
-                className='flex row '
+                className='flex row wrap relative'
                 sx={{
                 maxHeight: {
-                    xs: '500px'
+                    // xs: '500px'
                 },
                 width: {
                     xs: '100%',
                     md: '58%'
                 }
             }}>
+
+             
+                
+                <ProductImageSwiper Slides={product.images} swiperRef={swiperRef}/>
+                {/* <Box
+                    className='flex gap1 absolute'
+                    sx={{
+                        right:'50%',
+                        top:'100%',
+                        transform:'translateX(50%)',
+                    flex: {
+                        xs: 1
+                    },
+                    justifyContent: 'flex-end'
+                }}>
+                    <SwiperButton direction="left" onClick={handlePrev}/>
+                    <SwiperButton direction="right" onClick={handleNext}/>
+                </Box> */}
                 <Box
                     sx={{
-                    mx: 1,
+                    // mx: 1,
                     display: {
                         xs: 'none',
                         md: 'flex'
@@ -66,34 +91,24 @@ const ProductClient = ({product} : {product:ProductData}) => {
                     className=' row'>
                     <Box
                         sx={{
-                        width: {
-                            md: '80px',
+                        mt:1,
+                            width: {
+                            xs: '80px',
                             lg: '100px'
                         }
                     }}>
                         <img
                             src="https://cdn.allbirds.com/image/upload/f_auto,q_auto,b_rgb:f5f5f5,w_829/cms/7gtwyhGk96ty1kRUnkyr4I/de1c48f6e59978365155b64e0fb62217/24Q4_Protect_Site_PDP_ProtectRunner_Men_1600x1600.png"
                             alt=""
-                            className="img "/>
+                            className="img cover"/>
                     </Box>
-                </Box>
-                <ProductImageSwiper swiperRef={swiperRef}/>
-                <Box
-                    className='flex gap1'
-                    sx={{
-                    flex: {
-                        xs: 1
-                    },
-                    justifyContent: 'flex-end'
-                }}>
-                    <SwiperButton direction="left" onClick={handlePrev}/>
-                    <SwiperButton direction="right" onClick={handleNext}/>
                 </Box>
             </Box>
 
             <Box
                 sx={{
-                pl: {
+                pt:{xs:0,md:1},
+                    pl: {
                     md: 6
                 },
                 width: {
@@ -101,25 +116,29 @@ const ProductClient = ({product} : {product:ProductData}) => {
                     md: '36%'
                 }
             }}>
-                <BreadCrumb/>
-                <Typography className='fs3 dark fw700'>
+
+                <Typography sx={{pt:{xs:0,md:2}}} className='fs3 dark fw700'>
                     {`Men's Runner Protect`}
+                </Typography>
+                <Typography sx={{pb:{xs:0.25,md:2}}} className='fs1  fw400'>
+                    {`${product.category}`}
                 </Typography>
                 <Typography
                     sx={{
                     pb: 1
                 }}
-                    className='fs1 dark fw400'>
+                    className='fs1 dark fw600'>
                     $200
                 </Typography>
                 <Divider></Divider>
+
                 <Box sx={{
                     mt: 2
                 }}>
                     <Typography
-                        className='fw600'
+                                              className='fw500 gray2 fs075'
                         sx={{
-                        py: 1
+                        py: .25
                     }}>
                         Select Size:
 
@@ -130,29 +149,53 @@ const ProductClient = ({product} : {product:ProductData}) => {
                     mt: 2
                 }}>
                     <Typography
-                        className='fw600'
+                        className='fw500 gray2 fs075'
                         sx={{
-                        py: 1
+                        py: .25
                     }}>
                         Select Color:
                     </Typography>
                     <ColorSelector colors={['red', 'blue', 'green', 'yellow', 'white']}/>
                 </Box>
+                <Box >
+                    
+                </Box>
                 <Box sx={{
-                    mt: 4
+                    mt: {xs:4,lg:6}
                 }}>
+                <QtySelector/>
+                <Box sx={{
+                    mt: 2,
+                }} className="flex items-center">
 
                     <Btn
                         className='w100 white fs075'
                         v2
                         sx={{
-                        mt: 2,
                         background: 'black !Important',
                         py: 2
                     }}
                         border>
                         Add To Cart
                     </Btn>
+                        <Btn
+                                        className="flex centered pointer"
+                                        sx={{
+                                            mx:1,
+                                            border:'1px solid #00000026',
+                                        background: "#ffffff6e",
+                                        borderRadius: "50%",
+                                        minWidth : '52px',
+                                        minHeight:'52px',
+                                        width:'52px',
+                                        height: "52px",
+                                        p: 0
+                                    }}>
+                                        <CiHeart fontSize="2.05em"/>
+                                        </Btn>
+
+                                    </Box>
+
                     <Btn
                         className='w100  fs075'
                         sx={{

@@ -45,7 +45,7 @@ const BreadcrumbsComponent = () => {
   });
 
   return (
-    <Box my={2}>
+    <Box  className=''>
       <Breadcrumbs aria-label="breadcrumb">
         <Link className='fs075' component={NextLink} href="/" underline="hover" color="inherit">
           Home

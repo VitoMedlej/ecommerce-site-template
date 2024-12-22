@@ -63,6 +63,10 @@ body {
   width: 100%;
 }
 
+.vw100 {
+  width: 100vw;
+}
+
 .bg-white {
   background: white !important;
 }

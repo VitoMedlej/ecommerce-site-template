@@ -1,21 +1,23 @@
-// import { fetchProductById } from "@/app/Utils/functions/dataFetchers";
-// import ProductClient from "@/Components/ClientSide/ProductClient/ProductClient";
-// import { notFound } from "next/navigation";
+
+import { fetchProductById } from '@/app/Utils/functions/dataFetchers';
+import { ProductData } from '@/app/Utils/Types';
+import ProductClient from '@/Components/ClientSide/ProductClient/ProductClient';
+import { notFound } from 'next/navigation';
+import React from 'react'
 
 export const Page = async ({ params }: { params: { id: string } }) => {
   console.log('params: ', params);
-  // const { id } = await params;
+  const { id } = await params;
+  const product : ProductData | null = await fetchProductById(id);
 
-  // const product = await fetchProductById(id);
-
-  // if (!product) {
-  //   console.error(`Product with ID: ${id} could not be found.`);
-  //   return notFound(); // Return a 404 if no product is found
-  // }
+  if (!product) {
+    notFound();
+  }
 
   return (
-    <>
-      {/* <ProductClient product={product} /> */}
-    </>
-  );
-};
+
+      <ProductClient product={product} />
+  )
+}
+
+export default Page

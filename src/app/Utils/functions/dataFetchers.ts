@@ -87,7 +87,7 @@ export const fetchProducts = async (
 export const fetchProductById = async (
   id: string
 ): Promise<ProductData | null> => {
-  if (!id || typeof id !== 'string' || id.trim() === '') {
+  if (!id) {
     console.error('Invalid product ID provided.');
     return null;
   }
@@ -104,7 +104,8 @@ export const fetchProductById = async (
       console.error(`Product with ID: ${id} not found.`);
       return null;
     }
-
+    
+    console.log('product: ', product);
     return product;
   } catch (error: unknown) {
     if (error instanceof Error) {
