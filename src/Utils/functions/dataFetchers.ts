@@ -1,6 +1,6 @@
 'use server';
 
-import { ProductData, Section } from "@/app/Utils/Types";
+import { ProductData, Section } from "../Types";
 import { FilterType } from "./ProcessHomeSectionsData";
 
 

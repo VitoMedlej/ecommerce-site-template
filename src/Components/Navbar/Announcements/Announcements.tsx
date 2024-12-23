@@ -24,7 +24,7 @@ const Announcements = ({ SanityAnnouncements }: { SanityAnnouncements: { message
             >
                 {messages && messages?.map((message, index) => (
                     <SwiperSlide key={index}>
-                        <Typography className=" h100 fw700 fs075 flex centered">{message}</Typography>
+                        <Typography sx={{px:.25}} className="text-center h100 fw700 fs075 flex centered">{message}</Typography>
                     </SwiperSlide>
                 ))}
             </Swiper>

@@ -12,14 +12,17 @@ import { FaAngleDoubleDown } from 'react-icons/fa'
 import { SwiperRef } from 'swiper/react'
 import QtySelector from './QtySelector'
 import {CiHeart} from "react-icons/ci";
+import { BsBag } from "react-icons/bs";
+import useCart from '@/Hooks/useCart'
 
 
 
 const ProductClient = ({product} : {product:ProductData}) => {
     console.log('product: ', product);
     const swiperRef :  React.LegacyRef<SwiperRef> | undefined  = useRef(null);
-
-
+    const {addToCart, cart, isLoading } = useCart()
+    console.log('isLoading: ', isLoading);
+    console.log('cart: ', cart);
     const handlePrev = () => swiperRef?.current && swiperRef
         .current
         .swiper
@@ -28,6 +31,11 @@ const ProductClient = ({product} : {product:ProductData}) => {
         .current
         .swiper
         .slideNext();
+
+        const handleAddToCart = () => {
+            addToCart(product.id, null)
+        }
+   
     return (
         <Box
             className='flex wrap row'
@@ -46,27 +54,21 @@ const ProductClient = ({product} : {product:ProductData}) => {
                 xs: 8
             }
         }}>
-            <Box sx={{pt:{xs:2,md:2}}}>
-
-                <BreadCrumb/>
-            </Box>
+         
 
             <Box
                 className='flex row wrap relative'
                 sx={{
-                maxHeight: {
-                    // xs: '500px'
-                },
+              
                 width: {
                     xs: '100%',
                     md: '58%'
                 }
             }}>
 
-             
                 
                 <ProductImageSwiper Slides={product.images} swiperRef={swiperRef}/>
-                {/* <Box
+                <Box
                     className='flex gap1 absolute'
                     sx={{
                         right:'50%',
@@ -79,16 +81,16 @@ const ProductClient = ({product} : {product:ProductData}) => {
                 }}>
                     <SwiperButton direction="left" onClick={handlePrev}/>
                     <SwiperButton direction="right" onClick={handleNext}/>
-                </Box> */}
+                </Box>
                 <Box
                     sx={{
-                    // mx: 1,
                     display: {
                         xs: 'none',
                         md: 'flex'
                     }
                 }}
                     className=' row'>
+                        
                     <Box
                         sx={{
                         mt:1,
@@ -116,7 +118,12 @@ const ProductClient = ({product} : {product:ProductData}) => {
                     md: '36%'
                 }
             }}>
-
+   <Box sx={{ 
+                width:'100%',
+                display:{xs:'none',md:'flex'},
+                pt:{xs:2,md:2}}}>
+                <BreadCrumb/>
+            </Box>
                 <Typography sx={{pt:{xs:0,md:2}}} className='fs3 dark fw700'>
                     {`Men's Runner Protect`}
                 </Typography>
@@ -169,14 +176,22 @@ const ProductClient = ({product} : {product:ProductData}) => {
                 }} className="flex items-center">
 
                     <Btn
+                    disabled={isLoading}
+                        onClick={handleAddToCart}
                         className='w100 white fs075'
                         v2
                         sx={{
                         background: 'black !Important',
-                        py: 2
+                        py: 2,
+                        gap:.75
                     }}
                         border>
-                        Add To Cart
+{ isLoading ? 'Adding Item...' :
+<>
+<BsBag fontSize={'1.25em'} />
+                      Add To Cart
+</>
+                      }
                     </Btn>
                         <Btn
                                         className="flex centered pointer"
@@ -222,7 +237,7 @@ const ProductClient = ({product} : {product:ProductData}) => {
                     </Box>
                 </Box>
 
-                <Box className='w100 flex col' sx={{mt:2, borderTop:'1px solid #cccccc'}}>
+                <Box className='w100 flex col' sx={{mt:{xs:4,md:2}, borderTop:'1px solid #cccccc'}}>
       <Accordion 
       defaultExpanded={true}
       disableGutters sx={{  px:0, boxShadow: 'none', border: 'none' }}>
@@ -234,7 +249,7 @@ const ProductClient = ({product} : {product:ProductData}) => {
         >
           <Typography className='fw600'>Description</Typography>
         </AccordionSummary>
-                <Typography sx={{pb:1}}>
+                <Typography className='fs1' sx={{pb:1}}>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias impedit assumenda aliquid ut consectetur veritatis aspernatur repudiandae, voluptates voluptatibus, alias enim deleniti nesciunt optio recusandae!
                 </Typography>
 

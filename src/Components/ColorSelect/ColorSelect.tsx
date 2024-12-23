@@ -16,7 +16,7 @@ export default function ColorSelector({ colors }: ColorSelectorProps) {
 
   return (
     <Box style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-      {colors.map((color) => (
+      {colors && colors?.map((color) => (
         <Box
           key={color}
           onClick={() => handleColorSelect(color)}
@@ -27,6 +27,7 @@ export default function ColorSelector({ colors }: ColorSelectorProps) {
             border: selectedColor === color ? "2px solid black" : "1px solid gray",
             cursor: "pointer",
             display: "flex",
+            borderRadius:'50%',
             justifyContent: "center",
             alignItems: "center",
           }}
