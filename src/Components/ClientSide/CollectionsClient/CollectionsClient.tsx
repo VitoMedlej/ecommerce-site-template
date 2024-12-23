@@ -6,9 +6,9 @@ import {CiFilter} from "react-icons/ci";
 // import ProductCard from '../../ProductCard/ProductCard';
 import {IoGridOutline} from "react-icons/io5";
 import FilterOptions from '../../FilterOptions/FilterOptions';
-import { useFilterModalContext } from '@/app/Utils/Context/Contexts';
+import { useFilterModalContext } from '@/Utils/Context/Contexts';
 import FilterModal from '@/Components/Modals/FilterModal';
-import { Section } from '@/app/Utils/Types';
+import { Section } from '@/Utils/Types';
 import ProductCard from '@/Components/ProductCard/ProductCard';
 
 const CollectionsClient = ({data} : {data: Section  | null}) => {

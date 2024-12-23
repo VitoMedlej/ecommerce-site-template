@@ -1,5 +1,5 @@
 "use client"
-import { ProductData } from '@/app/Utils/Types'
+import { ProductData } from '@/Utils/Types'
 import BreadCrumb from '@/Components/BreadCrumb/BreadCrumb'
 import Btn from '@/Components/Btn/Btn'
 import ColorSelector from '@/Components/ColorSelect/ColorSelect'
@@ -7,22 +7,29 @@ import SizeFilter from '@/Components/FilterOptions/FilterForms/SizeFilter'
 import ProductImageSwiper from '@/Components/ProductImageSwiper/ProductImageSwiper'
 import SwiperButton from '@/Components/ProductSection/ProductSwiper/SwiperButton'
 import {Accordion, AccordionSummary, Box, Divider, Typography} from '@mui/material'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { FaAngleDoubleDown } from 'react-icons/fa'
 import { SwiperRef } from 'swiper/react'
 import QtySelector from './QtySelector'
 import {CiHeart} from "react-icons/ci";
 import { BsBag } from "react-icons/bs";
 import useCart from '@/Hooks/useCart'
+import { useCartContext, useQuickCartContext } from '@/Utils/Context/Contexts'
 
 
 
 const ProductClient = ({product} : {product:ProductData}) => {
-    console.log('product: ', product);
+    
     const swiperRef :  React.LegacyRef<SwiperRef> | undefined  = useRef(null);
-    const {addToCart, cart, isLoading } = useCart()
+    const {addToCart, isLoading } = useCart();
+    const { cart } = useCartContext();
+    
+  const [quantity, setQuantity] = useState<number>(1);
+
+        const { setIsCartOpen} = useQuickCartContext();
+    
     console.log('isLoading: ', isLoading);
-    console.log('cart: ', cart);
+   
     const handlePrev = () => swiperRef?.current && swiperRef
         .current
         .swiper
@@ -32,8 +39,18 @@ const ProductClient = ({product} : {product:ProductData}) => {
         .swiper
         .slideNext();
 
+
+    const cartProduct = {
+        id : product.id,
+        title : product.title,
+        quantity,
+        options: null,
+        image: product.images[0],
+        price: product.price,
+    }
         const handleAddToCart = () => {
-            addToCart(product.id, null)
+            addToCart(cartProduct, null)
+            setIsCartOpen(true)
         }
    
     return (
@@ -170,12 +187,13 @@ const ProductClient = ({product} : {product:ProductData}) => {
                 <Box sx={{
                     mt: {xs:4,lg:6}
                 }}>
-                <QtySelector/>
+                <QtySelector quantity={quantity} setQuantity={setQuantity} />
                 <Box sx={{
                     mt: 2,
                 }} className="flex items-center">
 
                     <Btn
+                    maxWidth
                     disabled={isLoading}
                         onClick={handleAddToCart}
                         className='w100 white fs075'
@@ -193,7 +211,8 @@ const ProductClient = ({product} : {product:ProductData}) => {
 </>
                       }
                     </Btn>
-                        <Btn
+                        <Btn 
+                        
                                         className="flex centered pointer"
                                         sx={{
                                             mx:1,
@@ -212,7 +231,8 @@ const ProductClient = ({product} : {product:ProductData}) => {
                                     </Box>
 
                     <Btn
-                        className='w100  fs075'
+                    maxWidth
+                        className='  fs075'
                         sx={{
                         mt: 1,
                         py: 1

@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { Dialog, DialogTitle, IconButton, DialogContent } from "@mui/material";
 import { MdClose as CloseIcon } from "react-icons/md";
-import { useFilterModalContext } from "@/app/Utils/Context/Contexts";
+import { useFilterModalContext } from "@/Utils/Context/Contexts";
 import FilterOptions from "../FilterOptions/FilterOptions";
 
 const FilterModal = () => {

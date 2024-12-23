@@ -14,7 +14,7 @@ import {
 import { TransitionProps } from "@mui/material/transitions";
 import Btn from "../Btn/Btn";
 import { IoCloseOutline } from "react-icons/io5";
-import { useDialogContext } from "@/app/Utils/Context/Contexts";
+import { useDialogContext } from "@/Utils/Context/Contexts";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children: React.ReactElement },

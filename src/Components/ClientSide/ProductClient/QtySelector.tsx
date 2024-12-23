@@ -5,15 +5,23 @@ import { Box, IconButton, TextField } from "@mui/material";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
 interface QtySelectorProps {
+  quantity : number;
   initialValue?: number;
   min?: number;
   max?: number;
-  onChange?: (value: number) => void;
+  setQuantity: React.Dispatch<React.SetStateAction<number>> ;
+  onChange?: (value : number) => void;
 }
 
-const QtySelector: React.FC<QtySelectorProps> = ({ initialValue = 1, min = 1, max = 15, onChange }) => {
-  const [quantity, setQuantity] = useState<number>(initialValue);
-
+const QtySelector : React.FC < QtySelectorProps > = ({
+  quantity = 1,
+  initialValue = 1,
+  min = 1,
+  max = 15,
+  setQuantity,
+  onChange
+}) => {
+  
   const handleIncrease = () => {
     if (quantity < max) {
       const newValue = quantity + 1;

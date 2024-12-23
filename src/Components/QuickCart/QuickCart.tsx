@@ -10,29 +10,34 @@ import {IoCloseOutline} from "react-icons/io5";
 import Btn from "../Btn/Btn";
 import {Typography} from "@mui/material";
 
-import {useCartContext} from "@/app/Utils/Context/Contexts";
-import QuickCartItem from "./QuickCartItem";
+import {useCartContext, useQuickCartContext} from "@/Utils/Context/Contexts";
+import QuickCartItem from "./CartItem";
+import useCart from "@/Hooks/useCart";
 
 export default function QuickCart() {
     const isMobile = useMediaQuery("(max-width:600px)");
-    const {isCartOpen, setIsCartOpen} = useCartContext();
-
+    const {isCartOpen, setIsCartOpen} = useQuickCartContext();
+    const { cart, setCart } = useCartContext();
     const toggleDrawer = (newOpen : boolean) => () => {
         setIsCartOpen(newOpen);
     };
-
+    const {addToCart, isLoading, removeFromCart } = useCart();
+   
+    const handleRemove = (id : string, options: Record<string, any> | null ) => {
+            removeFromCart(id, options);
+    }
     const DrawerList = (
         <Box
             sx={{
             width: isMobile
                 ? "100%"
-                : {md:"40vw",lg:'30vw'},
+                : {xs:'270px',sm:'350px', md:"40vw",lg:'30vw'},
             height: isMobile
                 ? "80vh"
                 : "80vh"
         }}
             role="presentation"
-            onClick={toggleDrawer(false)}>
+            >
             <Box
                 sx={{
                 px: 1,
@@ -56,11 +61,25 @@ export default function QuickCart() {
 
             <Divider/>
 
-            <List>
-                {["Inbox", "Starred", "Send email", "Drafts"].map((text) => (
-                    <QuickCartItem key={text}/>
-                ))}
+      {cart && cart?.length > 0 ?      <List>
+                {cart.map((product) => {
+                    if (!product || !product.id) return;
+                    return <QuickCartItem handleRemove={handleRemove} product={product} key={product.id}/>
+                })}
             </List>
+        
+        :
+        <Box sx={{mx:1,mt:2, py:5}} className='centered text-center '>
+        <img src="https://www.gymshark.com/images/empty-bag.svg" className='small-icon img' loading="lazy" alt="Empty Bag Icon"  />
+        <Typography className=' fs2 fw600' sx={{pt:1}} component='h3'>Your bag is empty!</Typography>
+        <Btn  sx={{mt:2,mb:1}} className='' border  maxWidth>
+                Shop Collections
+        </Btn>
+        <Btn border maxWidth>
+                Back Home
+        </Btn>
+        </Box>
+        }
 
         </Box>
     );

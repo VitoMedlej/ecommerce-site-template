@@ -1,6 +1,6 @@
 
-import { fetchProductById } from '@/app/Utils/functions/dataFetchers';
-import { ProductData } from '@/app/Utils/Types';
+import { fetchProductById } from '@/Utils/functions/dataFetchers';
+import { ProductData } from '@/Utils/Types';
 import ProductClient from '@/Components/ClientSide/ProductClient/ProductClient';
 import { notFound } from 'next/navigation';
 import React from 'react'

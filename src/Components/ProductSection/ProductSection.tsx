@@ -6,8 +6,8 @@ import Btn from '../Btn/Btn'
 import ProductSwiper from './ProductSwiper/ProductSwiper'
 import SwiperButton from './ProductSwiper/SwiperButton'
 import { SwiperRef } from 'swiper/react'
-import { urlFor } from '@/app/Utils/functions/sanityClient'
-import { HomeSectionData, ProductData } from '@/app/Utils/Types'
+import { urlFor } from '@/Utils/functions/sanityClient'
+import { HomeSectionData, ProductData } from '@/Utils/Types'
 import { useRouter } from 'next/navigation'
 
 const ProductSection = ({ sectionDetails, isHomePage }: { sectionDetails: HomeSectionData, isHomePage: boolean }) => {

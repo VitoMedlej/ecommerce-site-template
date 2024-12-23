@@ -2,8 +2,8 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 import Btn from '../Btn/Btn';
-import { Card } from '@/app/Utils/Types';
-import { urlFor } from '@/app/Utils/functions/sanityClient';
+import { Card } from '@/Utils/Types';
+import { urlFor } from '@/Utils/functions/sanityClient';
 import { useRouter } from 'next/navigation';
 
 const CategoryCard = ({card} : {card: Card}) => {

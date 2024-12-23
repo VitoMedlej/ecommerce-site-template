@@ -1,5 +1,6 @@
 "use client";
 
+import { TCartItem } from "@/Hooks/useCart";
 import {Auth0Provider} from "@auth0/auth0-react";
 import {
     createContext,
@@ -24,12 +25,20 @@ export const SidebarContext = createContext < {
     setSidebarOpen: () => {}
 });
 
-export const CartContext = createContext < {
+export const QuickCartContext = createContext < {
     isCartOpen: boolean;
     setIsCartOpen: Dispatch < SetStateAction < boolean >>;
 } > ({
     isCartOpen: false,
     setIsCartOpen: () => {}
+});
+
+export const CartContext = createContext < {
+    cart: TCartItem[] | null | [];
+    setCart: Dispatch<SetStateAction<TCartItem[] | null | []>>
+} > ({
+    cart: null,
+    setCart: () => {}
 });
 
 export const CategoriesContext = createContext < {
@@ -62,6 +71,8 @@ const ContextWrapper = ({children, SanityCategories} : {
 }) => {
     const [sidebarOpen,
         setSidebarOpen] = useState < boolean > (false);
+    const [cart, setCart] = useState<TCartItem[] | null | []>(null);
+        
     const [isCartOpen,
         setIsCartOpen] = useState < boolean > (false);
     const [isFilterModalOpen,
@@ -91,9 +102,15 @@ const ContextWrapper = ({children, SanityCategories} : {
                 }}>
                     <CartContext.Provider
                         value={{
-                        isCartOpen,
-                        setIsCartOpen
+                            cart,
+                            setCart
                     }}>
+                        <QuickCartContext.Provider 
+                        value={{
+                            isCartOpen,
+                            setIsCartOpen
+                    }}>
+
                         <DialogContext.Provider
                             value={{
                             isDialogOpen,
@@ -108,6 +125,8 @@ const ContextWrapper = ({children, SanityCategories} : {
                             {children}
                             </FilterModalContext.Provider>
                         </DialogContext.Provider>
+                        </QuickCartContext.Provider>
+
                     </CartContext.Provider>
                 </CategoriesContext.Provider>
             </SidebarContext.Provider>
@@ -119,6 +138,7 @@ export default ContextWrapper;
 
 export const useSidebarContext = () => useContext(SidebarContext);
 export const useCartContext = () => useContext(CartContext);
+export const useQuickCartContext = () => useContext(QuickCartContext);
 export const useCategoriesContext = () => useContext(CategoriesContext);
 export const useDialogContext = () => useContext(DialogContext);
 export const useFilterModalContext = () => useContext(FilterModalContext);

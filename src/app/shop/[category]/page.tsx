@@ -1,4 +1,4 @@
-import { fetchProducts } from "@/app/Utils/functions/dataFetchers";
+import { fetchProducts } from "@/Utils/functions/dataFetchers";
 import CollectionsClient from "@/Components/ClientSide/CollectionsClient/CollectionsClient";
 import React from "react";
 

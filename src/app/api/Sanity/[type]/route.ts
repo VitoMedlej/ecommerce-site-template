@@ -1,4 +1,4 @@
-import { fetchCategories, fetchAboutPage, fetchSlides, fetchCardSection } from "@/app/Utils/functions/sanityFetcher";
+import { fetchCategories, fetchAboutPage, fetchSlides, fetchCardSection } from "@/Utils/functions/sanityFetcher";
 import { NextRequest, NextResponse } from "next/server";
 
 // Map type to their corresponding fetch function

@@ -7,7 +7,7 @@ import {Swiper, SwiperRef, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import ProductCard from '@/Components/ProductCard/ProductCard';
 import { LegacyRef } from 'react';
-import { ProductData } from '@/app/Utils/Types';
+import { ProductData } from '@/Utils/Types';
 
 // const Slides = [
 //     {

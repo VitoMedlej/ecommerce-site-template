@@ -120,7 +120,7 @@ body {
 }
 
 .bg-black {
-  background: black;
+  background: black !important;
 }
 
 .absolute {
@@ -181,6 +181,11 @@ body {
 .wmax {
   width: -moz-max-content;
   width: max-content;
+}
+
+.small-icon {
+  height: 100px;
+  width: 100px;
 }
 
 .cursor {

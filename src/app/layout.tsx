@@ -4,10 +4,10 @@ import "./globals.css";
 import Footer from "@/Components/Footer/Footer";
 import Navbar from "@/Components/Navbar/Navbar";
 import SideBar from "@/Components/SideBar/SideBar";
-import ContextWrapper from "./Utils/Context/Contexts";
 import QuickCart from "@/Components/QuickCart/QuickCart";
 import PerksSection from "@/Components/PerksSection/PerksSection";
-import {client} from "@/app/Utils/functions/sanityClient";
+import {client} from "@/Utils/functions/sanityClient";
+import ContextWrapper from "@/Utils/Context/Contexts";
 
 export const metadata : Metadata = {
     title: "Create Next App",

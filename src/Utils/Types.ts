@@ -1,4 +1,4 @@
-import { bannerImage } from "@/app/Utils/functions/sanityFetcher";
+import { bannerImage } from "@/Utils/functions/sanityFetcher";
 
 // types.ts
 export interface HeroSlide {

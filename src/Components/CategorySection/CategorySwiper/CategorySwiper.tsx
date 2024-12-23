@@ -6,7 +6,7 @@ import {Swiper, SwiperRef, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import CategoryCard from '@/Components/CategoryCard/CategoryCard';
 import { LegacyRef } from 'react';
-import { Card } from '@/app/Utils/Types';
+import { Card } from '@/Utils/Types';
 
 // const Slides = [
 //     {

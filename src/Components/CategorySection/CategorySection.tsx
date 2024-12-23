@@ -4,7 +4,7 @@ import React, {useRef} from 'react'
 import CategorySwiper from './CategorySwiper/CategorySwiper'
 import SwiperButton from '../ProductSection/ProductSwiper/SwiperButton'
 import { SwiperRef } from 'swiper/react'
-import { Card } from '@/app/Utils/Types'
+import { Card } from '@/Utils/Types'
 
 const CategorySection = ({data, sectionTitle} : {data:Card[], sectionTitle: string}) => {
     const swiperRef :  React.LegacyRef<SwiperRef> | undefined  = useRef(null);

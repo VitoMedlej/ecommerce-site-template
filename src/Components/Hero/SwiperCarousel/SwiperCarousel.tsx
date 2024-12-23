@@ -6,8 +6,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Box, Typography } from '@mui/material';
 import Btn from '@/Components/Btn/Btn';
-import { HeroSlide } from '@/app/Utils/Types';
-import { urlFor } from '@/app/Utils/functions/sanityClient';
+import { HeroSlide } from '@/Utils/Types';
+import { urlFor } from '@/Utils/functions/sanityClient';
 
 export default  function SwiperCarousel({slides: Slides} : {slides : HeroSlide[] | null })  {
   return (

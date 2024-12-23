@@ -1,6 +1,6 @@
 import { AboutPage } from "@/app/about/page";
-import { CategoryCardsSection, HeroSlide } from "@/app/Utils/Types";
-import { client } from "@/app/Utils/functions/sanityClient";
+import { CategoryCardsSection, HeroSlide } from "@/Utils/Types";
+import { client } from "@/Utils/functions/sanityClient";
 
 
 

@@ -14,7 +14,7 @@ import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import {IoMdArrowDropdown} from "react-icons/io";
 import { Collapse} from '@mui/material';
 import SMicons from '../SMicons/SMicons';
-import { useSidebarContext } from '@/app/Utils/Context/Contexts';
+import { useSidebarContext } from '@/Utils/Context/Contexts';
 
 
 export default function SideBar() {

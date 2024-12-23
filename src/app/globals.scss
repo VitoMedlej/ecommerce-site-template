@@ -100,7 +100,7 @@ $color : rgb(209, 209, 209);
     object-fit: contain;
 }
 .bg-black {
-    background: black ;
+    background: black !important;
 }
 .absolute {
     position: absolute;
@@ -145,7 +145,10 @@ object-fit: contain;
 .wmax {
     width: max-content;
 }
-
+.small-icon {
+    height: 100px;
+    width: 100px;
+}
 .cursor {
     cursor: pointer;
 }

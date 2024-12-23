@@ -4,8 +4,8 @@ import React from "react";
 import {IoStar} from "react-icons/io5";
 import {CiHeart} from "react-icons/ci";
 import {IoEyeOutline} from "react-icons/io5";
-import {ProductData} from "@/app/Utils/Types";
-import {validateImageUrl} from "@/app/Utils/ImageValidator";
+import {ProductData} from "@/Utils/Types";
+import {validateImageUrl} from "@/Utils/ImageValidator";
 import {useRouter} from "next/navigation";
 
 const ProductCard = ({sx, product} : {

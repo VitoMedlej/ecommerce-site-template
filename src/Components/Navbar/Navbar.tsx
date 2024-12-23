@@ -9,7 +9,7 @@ import LanguageSelector from '../LanguageSelector/LanguageSelector'
 import {FaRegHeart} from "react-icons/fa6";
 import SearchModal from '../SearchModal/SearchModal'
 import {RiMenu3Fill} from "react-icons/ri";
-import { useCartContext, useDialogContext, useSidebarContext } from '@/app/Utils/Context/Contexts'
+import { useCartContext, useDialogContext, useQuickCartContext, useSidebarContext } from '@/Utils/Context/Contexts'
 import { FaRegUser } from "react-icons/fa";
 import { useRouter } from 'next/navigation'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -23,7 +23,7 @@ const Navbar = ({ SanityAnnouncements }: { SanityAnnouncements: { message: strin
 
     const isSmallScreen = useMediaQuery("(max-width:900px)"); 
     const { setSidebarOpen } = useSidebarContext();
-    const { setIsCartOpen} = useCartContext();
+    const { setIsCartOpen} = useQuickCartContext();
     const router = useRouter();
     const { loginWithRedirect  } = useAuth0();
     const { isAuthenticated, isLoading } = useAuth0();

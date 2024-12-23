@@ -11,6 +11,7 @@ type BtnProps = {
     small?: boolean; // Custom size flag
     onClick?: MouseEventHandler<HTMLButtonElement>; // Event handler for clicks
     border?: boolean; // Border toggle flag
+    maxWidth ?: boolean;
   };
   
   const Btn = ({
@@ -22,9 +23,11 @@ type BtnProps = {
     small,
     onClick,
     border,
+    maxWidth
   }: BtnProps) => {
     return (
         <Button
+            
             disabled={disabled
             ? disabled
             : undefined}
@@ -33,6 +36,7 @@ type BtnProps = {
             ? 'white bg-clr'
             : 'black bg-white'}`}
             sx={{
+            width : maxWidth ? '100%' : 'initial',
             borderRadius: '0px',
             fontSize: {
                 xs: small

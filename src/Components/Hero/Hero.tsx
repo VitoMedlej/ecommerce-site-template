@@ -3,7 +3,7 @@
 import { Grid2 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SwiperCarousel from "./SwiperCarousel/SwiperCarousel";
-import { HeroSlide } from "@/app/Utils/Types";
+import { HeroSlide } from "@/Utils/Types";
 
 export default function HomePage({ slides: staticSlides }: { slides: HeroSlide[] | null }) {
   const [slides, setSlides] = useState<HeroSlide[]>(staticSlides || []);
