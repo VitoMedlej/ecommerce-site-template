@@ -12,6 +12,7 @@ type BtnProps = {
     onClick?: MouseEventHandler<HTMLButtonElement>; // Event handler for clicks
     border?: boolean; // Border toggle flag
     maxWidth ?: boolean;
+    type ?: 'submit' | 'button'
   };
   
   const Btn = ({
@@ -23,11 +24,12 @@ type BtnProps = {
     small,
     onClick,
     border,
-    maxWidth
+    maxWidth,
+    type,
   }: BtnProps) => {
-    return (
-        <Button
-            
+    return (    
+        <Button 
+        type={type || 'button'}
             disabled={disabled
             ? disabled
             : undefined}

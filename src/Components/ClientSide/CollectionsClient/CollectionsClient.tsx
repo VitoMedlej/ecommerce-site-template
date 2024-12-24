@@ -23,7 +23,7 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
         <main>
 
             <Box
-                className='auto flex items-center gap3'
+                className='auto col flex gap3'
                 sx={{
                 pt: 6,
                 px: {
@@ -123,6 +123,7 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
                                 xs: '48%',
                                 md: '32%'
                             },
+                            
                             my: 2
                         }}
                             key={product.id}></ProductCard>

@@ -8,8 +8,10 @@ import {
     ReactNode,
     SetStateAction,
     useContext,
+    useEffect,
     useState
 } from "react";
+import { getLocalStorageItem } from "../Cart/localStorageUtils";
 
 
 type Category = {
@@ -81,6 +83,14 @@ const ContextWrapper = ({children, SanityCategories} : {
         setCategories] = useState < Category[] > (SanityCategories || []);
     const [isDialogOpen,
         setIsDialogOpen] = useState < boolean > (false);
+
+
+        useEffect(() => {
+          const LocalCart = getLocalStorageItem("cart"); 
+            
+          setCart(LocalCart);
+          
+        }, []);
 
     return (
         <Auth0Provider

@@ -5,18 +5,18 @@ import * as React from "react";
 
 interface ColorSelectorProps {
   colors: string[];
+  selectedOptions: { [key: string]: string | null };
+  onOptionChange: (optionName: string, value: string) => void;
 }
 
-export default function ColorSelector({ colors }: ColorSelectorProps) {
-  const [selectedColor, setSelectedColor] = React.useState<string | null>(null);
-
+export default function ColorSelector({ colors, selectedOptions, onOptionChange }: ColorSelectorProps) {
   const handleColorSelect = (color: string) => {
-    setSelectedColor(color);
+    onOptionChange("color", color);
   };
 
   return (
     <Box style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-      {colors && colors?.map((color) => (
+      {colors && colors.map((color) => (
         <Box
           key={color}
           onClick={() => handleColorSelect(color)}
@@ -24,10 +24,10 @@ export default function ColorSelector({ colors }: ColorSelectorProps) {
             width: "25px",
             height: "25px",
             backgroundColor: color,
-            border: selectedColor === color ? "2px solid black" : "1px solid gray",
+            border: selectedOptions.color === color ? "2px solid black" : "1px solid gray",
             cursor: "pointer",
             display: "flex",
-            borderRadius:'50%',
+            borderRadius: "50%",
             justifyContent: "center",
             alignItems: "center",
           }}

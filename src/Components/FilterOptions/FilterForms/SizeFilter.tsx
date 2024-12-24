@@ -1,41 +1,42 @@
 "use client";
 
+import { Box } from '@mui/material';
 import * as React from 'react';
 
-// interface SizeFilterProps {
-//   sizes: string[];
-// }
+interface SizeFilterProps {
+  sizes: string[];
+  selectedOptions: { [key: string]: string | null };
+  onOptionChange: (optionName: string, value: string) => void;
+}
 
-export default function SizeFilter() {
-  const [selectedSize, setSelectedSize] = React.useState<string | null>(null);
-
+export default function SizeFilter({ sizes, selectedOptions, onOptionChange }: SizeFilterProps) {
   const handleSizeSelect = (size: string) => {
-    setSelectedSize(size);
+    onOptionChange("size", size);
   };
 
-  const sizes = ['sm', 'xs', 'md', 'lg', 'xl']; // Example sizes
   return (
-    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-      {sizes.map((size) => (
-        <div
+    <Box sx={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+      {sizes && sizes.map((size) => (
+        <Box
           key={size}
           onClick={() => handleSizeSelect(size)}
-          style={{
-            width: '30px',
+          sx={{
+            minWidth: '30px',
             height: '30px',
-            backgroundColor: selectedSize === size ? '#000000e6' : 'white',
+            px:.5,
+            backgroundColor: selectedOptions.size === size ? '#000000e6' : 'white',
             border: '1px solid gray',
             cursor: 'pointer',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             fontSize: '12px',
-            color: selectedSize === size ? 'white' : 'black',
+            color: selectedOptions.size === size ? 'white' : 'black',
           }}
         >
           {size.toUpperCase()}
-        </div>
+        </Box>
       ))}
-    </div>
+    </Box>
   );
-};
+}

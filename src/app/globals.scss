@@ -11,7 +11,7 @@ body {
 
 }
 
-$color : rgb(209, 209, 209);
+$color : rgb(33, 111, 175);
 
 
 
@@ -110,6 +110,9 @@ $color : rgb(209, 209, 209);
 }
 .gap2 {
     gap:.5em;
+}
+.capital {
+    text-transform: capitalize;
 }
 .gap3 {
     gap: .75em;

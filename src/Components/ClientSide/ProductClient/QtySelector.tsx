@@ -5,6 +5,7 @@ import { Box, IconButton, TextField } from "@mui/material";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
 interface QtySelectorProps {
+  mini ?: boolean;
   quantity : number;
   initialValue?: number;
   min?: number;
@@ -14,6 +15,7 @@ interface QtySelectorProps {
 }
 
 const QtySelector : React.FC < QtySelectorProps > = ({
+  mini = false,
   quantity = 1,
   initialValue = 1,
   min = 1,
@@ -52,12 +54,12 @@ const QtySelector : React.FC < QtySelectorProps > = ({
     
       justifyContent="center"
       sx={{
-        border: "1px solid #ccc",
-        padding: "8px",
+        border: mini ? 'none' :  "1px solid #ccc",
+        padding: mini ? '0' : "8px",
         borderRadius: "0",
         // maxWidth: "160px",
         width:'fit-content',
-        backgroundColor: "#f9f9f9",
+        backgroundColor: mini ? 'white' : "#f9f9f9",
       }}
     >
       <IconButton

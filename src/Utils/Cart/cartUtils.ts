@@ -1,12 +1,12 @@
-import { CartItem } from "@/Hooks/useCart";
+import { TCartItem } from "@/Hooks/useCart";
 
-export const findCartItemIndex = (cart: CartItem[], id: string, options: Record<string, any> | null) => {
+export const findCartItemIndex = (cart: TCartItem[], id: string, options: Record<string, any> | null) => {
     return cart.findIndex(
       (item) => item.id === id && JSON.stringify(item.options) === JSON.stringify(options)
     );
   };
   
-  export const updateCartItemQuantity = (cart: CartItem[], index: number, quantity: number) => {
+  export const updateCartItemQuantity = (cart: TCartItem[], index: number, quantity: number) => {
     return cart.map((item, i) =>
       i === index ? { ...item, quantity: item.quantity + quantity } : item
     );

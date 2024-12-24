@@ -17,19 +17,32 @@ import useCart from '@/Hooks/useCart'
 import { useCartContext, useQuickCartContext } from '@/Utils/Context/Contexts'
 
 
+export type ProductOption = {
+    [key: string]: string | null; // e.g., { color: "red", size: "M" }
+  };
+
 
 const ProductClient = ({product} : {product:ProductData}) => {
     
     const swiperRef :  React.LegacyRef<SwiperRef> | undefined  = useRef(null);
     const {addToCart, isLoading } = useCart();
     const { cart } = useCartContext();
+    console.log('cart: ', cart);
     
-  const [quantity, setQuantity] = useState<number>(1);
+    const [quantity, setQuantity] = useState<number>(1);
+    
+    const [selectedOptions, setSelectedOptions] = useState<ProductOption>({});
 
-        const { setIsCartOpen} = useQuickCartContext();
+
+    const handleOptionChange = (optionName: string, value: string) => {
+      setSelectedOptions((prevOptions) => ({
+        ...prevOptions,
+        [optionName]: value,
+      }));
+    };
+
+    const { setIsCartOpen} = useQuickCartContext();
     
-    console.log('isLoading: ', isLoading);
-   
     const handlePrev = () => swiperRef?.current && swiperRef
         .current
         .swiper
@@ -44,12 +57,12 @@ const ProductClient = ({product} : {product:ProductData}) => {
         id : product.id,
         title : product.title,
         quantity,
-        options: null,
+        options: selectedOptions,
         image: product.images[0],
         price: product.price,
     }
         const handleAddToCart = () => {
-            addToCart(cartProduct, null)
+            addToCart(cartProduct, selectedOptions)
             setIsCartOpen(true)
         }
    
@@ -167,7 +180,11 @@ const ProductClient = ({product} : {product:ProductData}) => {
                         Select Size:
 
                     </Typography>
-                    <SizeFilter/>
+                    <SizeFilter
+                    sizes={['small','medium','large']}
+                    selectedOptions={selectedOptions}
+                    onOptionChange={handleOptionChange}
+                    />
                 </Box>
                 <Box sx={{
                     mt: 2
@@ -179,7 +196,10 @@ const ProductClient = ({product} : {product:ProductData}) => {
                     }}>
                         Select Color:
                     </Typography>
-                    <ColorSelector colors={['red', 'blue', 'green', 'yellow', 'white']}/>
+                    <ColorSelector
+                    selectedOptions={selectedOptions}
+                    onOptionChange={handleOptionChange}
+                    colors={['red', 'blue', 'green', 'yellow', 'white']}/>
                 </Box>
                 <Box >
                     

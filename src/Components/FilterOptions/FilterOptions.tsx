@@ -7,9 +7,22 @@ import { FaAngleDoubleDown } from "react-icons/fa";
 import { Box } from '@mui/material';
 import Sort from './FilterForms/Sort';
 import SizeFilter from './FilterForms/SizeFilter';
+import { useState } from 'react';
+import { ProductOption } from '../ClientSide/ProductClient/ProductClient';
 
 
 export default function AccordionExpandIcon() {
+
+  
+      const [selectedOptions, setSelectedOptions] = useState<ProductOption>({});
+  
+  
+      const handleOptionChange = (optionName: string, value: string) => {
+        setSelectedOptions((prevOptions) => ({
+          ...prevOptions,
+          [optionName]: value,
+        }));
+      };
   return (
     <Box className='w100 flex col' sx={{borderTop:'1px solid #cccccc'}}>
       <Accordion disableGutters sx={{  px:0, boxShadow: 'none', border: 'none' }}>
@@ -33,7 +46,9 @@ export default function AccordionExpandIcon() {
         >
           <Typography className='fw600'>Size</Typography>
         </AccordionSummary>
-        <SizeFilter/>
+        <SizeFilter 
+        onOptionChange={handleOptionChange}
+        selectedOptions={selectedOptions} sizes={['S','M']}/>
       </Accordion>
      
     </Box>

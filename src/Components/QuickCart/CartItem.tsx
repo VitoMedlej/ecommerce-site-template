@@ -12,7 +12,9 @@ const CartItem = ({product, handleRemove} : {
     handleRemove: (id : string, options : Record < string, any > | null) => void
 }) => {
     const {addToCart, isLoading } = useCart();
-    
+   
+    const size = product?.options?.size 
+    const color = product?.options?.color
     return (
         <ListItem
         sx={{
@@ -72,8 +74,8 @@ const CartItem = ({product, handleRemove} : {
                         xs: '.80rem'
                     }
                 }}
-                    className='fw500 gray'>
-                    Penny Brown | XS
+                    className='fw500 gray capital'>
+                {color || '' } | {size || ''}                        
                 </Typography>
                 <Typography
                     sx={{
@@ -101,7 +103,7 @@ const CartItem = ({product, handleRemove} : {
                     }}>
                         <GoTrash color="red" fontSize='1.5em'/>
                     </Btn>
-                    <QtySelector quantity={product.quantity} setQuantity={(newQty) => addToCart(product, product.options, Number(newQty || 1) )} />
+                    <QtySelector mini quantity={product.quantity} setQuantity={(newQty) => addToCart(product, product.options, Number(newQty || 1) )} />
                 </Box>
             </Box>
         </ListItem>
