@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Box, IconButton, TextField } from "@mui/material";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
@@ -24,6 +24,7 @@ const QtySelector : React.FC < QtySelectorProps > = ({
   onChange
 }) => {
   
+  console.log('initialValue: ', initialValue);
   const handleIncrease = () => {
     if (quantity < max) {
       const newValue = quantity + 1;

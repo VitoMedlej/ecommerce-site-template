@@ -1,7 +1,6 @@
-"use client"
+"use client";
 import {Box, Toolbar, Typography, useMediaQuery} from '@mui/material'
 import Link from 'next/link'
-import React from 'react'
 import Btn from '../Btn/Btn'
 import {FiShoppingBag} from "react-icons/fi";
 import CountryPicker from '../CountryPicker/CountryPicker'
@@ -9,7 +8,7 @@ import LanguageSelector from '../LanguageSelector/LanguageSelector'
 import {FaRegHeart} from "react-icons/fa6";
 import SearchModal from '../SearchModal/SearchModal'
 import {RiMenu3Fill} from "react-icons/ri";
-import { useCartContext, useDialogContext, useQuickCartContext, useSidebarContext } from '@/Utils/Context/Contexts'
+import { useDialogContext, useQuickCartContext, useSidebarContext } from '@/Utils/Context/Contexts';
 import { FaRegUser } from "react-icons/fa";
 import { useRouter } from 'next/navigation'
 import { useAuth0 } from '@auth0/auth0-react'

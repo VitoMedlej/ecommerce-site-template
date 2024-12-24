@@ -1,15 +1,13 @@
 "use client";
-
 import { useState } from "react";
-import { fetchExternalData } from "@/Utils/functions/dataFetchers";
-import { findCartItemIndex, updateCartItemQuantity } from "@/Utils/Cart/cartUtils";
-import { getLocalStorageItem, setLocalStorageItem } from "@/Utils/Cart/localStorageUtils";
+import { findCartItemIndex } from "@/Utils/Cart/cartUtils";
+import { setLocalStorageItem } from "@/Utils/Cart/localStorageUtils";
 import { useCartContext } from "@/Utils/Context/Contexts";
 
 export type TCartItem = {
     id: string;
     quantity: number;
-    options: Record<string, any> | null;
+    options: Record<string, unknown> | null;
     title: string;
     image: string;
     price: number;
@@ -24,7 +22,7 @@ const useCart = () => {
         setLocalStorageItem("cart", updatedCart);
     };
 
-    const addToCart = async (product: TCartItem, options: Record<string, any> | null, quantity = 1) => {
+    const addToCart = async (product: TCartItem, options: Record<string, unknown> | null, quantity = 1) => {
         setIsLoading(true);
         try {
             const index = findCartItemIndex(cart || [], product.id, options);
@@ -40,7 +38,7 @@ const useCart = () => {
                             : item
                     );
                     console.log('updatedCart: ', updatedCart);
-                    updatedCart && saveCart(updatedCart);
+                    if (updatedCart) saveCart(updatedCart);
                     return;
                 } else {
                     // If the product doesn't exist in the cart, add it with the selected quantity
@@ -58,7 +56,7 @@ const useCart = () => {
     };
     const removeFromCart = async (
         productId: string,
-        options: Record<string, any> | null
+        options: Record<string, unknown> | null
     ) => {
         setIsLoading(true);
         try {

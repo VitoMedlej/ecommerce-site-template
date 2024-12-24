@@ -10,7 +10,7 @@ import { Pagination } from 'swiper/modules';
 
 
 
-export default function ProductImageSwiper({Slides,swiperRef} : {Slides : string[], swiperRef :  LegacyRef<SwiperRef> | undefined}) {
+export default function ProductImageSwiper({Slides} : {Slides : string[], swiperRef ?:  LegacyRef<SwiperRef> | undefined}) {
   return (
     <Swiper
     pagination={{

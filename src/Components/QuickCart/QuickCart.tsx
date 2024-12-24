@@ -1,6 +1,4 @@
-"use client";
-
-import * as React from "react";
+"use client";;
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -9,15 +7,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import {IoCloseOutline} from "react-icons/io5";
 import Btn from "../Btn/Btn";
 import {Typography} from "@mui/material";
-
 import {useCartContext, useQuickCartContext} from "@/Utils/Context/Contexts";
 import QuickCartItem from "./CartItem";
 import useCart from "@/Hooks/useCart";
 import CartSummary from "./CartSummary";
-
-
-
-
 
 
 
@@ -41,9 +34,9 @@ export default function QuickCart() {
     const toggleDrawer = (newOpen : boolean) => () => {
         setIsCartOpen(newOpen);
     };
-    const {addToCart, isLoading, removeFromCart } = useCart();
+    const { removeFromCart } = useCart();
    
-    const handleRemove = (id : string, options: Record<string, any> | null ) => {
+    const handleRemove = (id : string, options: Record<string, unknown> | null ) => {
             removeFromCart(id, options);
     }
     const DrawerList = (

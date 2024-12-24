@@ -1,6 +1,6 @@
 import { TCartItem } from "@/Hooks/useCart";
 
-export const findCartItemIndex = (cart: TCartItem[], id: string, options: Record<string, any> | null) => {
+export const findCartItemIndex = (cart: TCartItem[], id: string, options: Record<string, unknown> | null) => {
     return cart.findIndex(
       (item) => item.id === id && JSON.stringify(item.options) === JSON.stringify(options)
     );

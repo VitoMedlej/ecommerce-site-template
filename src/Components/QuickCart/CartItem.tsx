@@ -9,7 +9,7 @@ import QtySelector from '../ClientSide/ProductClient/QtySelector';
 
 const CartItem = ({product, handleRemove} : {
     product: TCartItem,
-    handleRemove: (id : string, options : Record < string, any > | null) => void
+    handleRemove: (id : string, options : Record < string, unknown > | null) => void
 }) => {
     const {addToCart, isLoading } = useCart();
    

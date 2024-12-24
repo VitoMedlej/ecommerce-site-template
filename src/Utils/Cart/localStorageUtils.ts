@@ -1,4 +1,5 @@
-export const getLocalStorageItem = (key: string, defaultValue: any = []) => {
+
+export const getLocalStorageItem = (key: string, defaultValue = []) => {
     try {
       const item = localStorage.getItem(key);
       return item ? JSON.parse(item) : defaultValue;
@@ -8,7 +9,7 @@ export const getLocalStorageItem = (key: string, defaultValue: any = []) => {
     }
   };
   
-  export const setLocalStorageItem = (key: string, value: any) => {
+  export const setLocalStorageItem = (key: string, value: unknown) => {
     try {
       localStorage.setItem(key, JSON.stringify(value));
     } catch (e) {

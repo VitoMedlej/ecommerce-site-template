@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Box, Typography, TextField, Divider, Button } from "@mui/material";
+import { Box, Typography, TextField, Divider } from "@mui/material";
 import Btn from "../Btn/Btn";
 
 const CartSummary = () => {
