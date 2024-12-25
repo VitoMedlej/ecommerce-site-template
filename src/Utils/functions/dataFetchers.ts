@@ -6,7 +6,7 @@ import { FilterType } from "./ProcessHomeSectionsData";
 
 export async function fetchExternalData<T>(
   url: string,
-  body : object | null,
+  body ?: object | null,
   fetchOptions: RequestInit = { next: { revalidate: 60 } },
   method ?: 'POST' | 'GET' | 'PUT' | 'DELETE'
 ): Promise<T | null> {
@@ -37,7 +37,7 @@ export const fetchHomeProducts = async (
   revalidate: number | false = 60
 ): Promise<{ Sectiontype: string; data: ProductData[] }[] | null> => {
   return await fetchExternalData(
-    `${process.env.EXTERNAL_API_URL}/products/home`,
+    `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/products/home`,
     filterTypes,
     { next: { revalidate } }
   );
@@ -61,7 +61,7 @@ export const fetchProducts = async (
 
   try {
     const data = await fetchExternalData<Section>(
-      `${process.env.EXTERNAL_API_URL}/products/shop/${category}${queryString ? `?${queryString}` : ""}`,
+      `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/products/shop/${category}${queryString ? `?${queryString}` : ""}`,
       null,
       { next: { revalidate: 0 } },
       'GET'
@@ -94,7 +94,7 @@ export const fetchProductById = async (
 
   try {
     const product = await fetchExternalData<ProductData>(
-      `${process.env.EXTERNAL_API_URL}/products/${id}`,
+      `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/products/${id}`,
       null,
       { next: { revalidate: 0 } },
       'GET'

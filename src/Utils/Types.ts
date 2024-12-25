@@ -62,7 +62,12 @@ export interface HeroSlide {
     images: string[];
     id: string;
   };
-
+  export interface ProductResponse {
+    success: boolean;
+    message: string;
+    responseObject: ProductData[];
+    statusCode: number;
+  }
 
   export type HomeSectionData = {
     redirectUrl ?: string;
