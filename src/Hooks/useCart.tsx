@@ -37,7 +37,6 @@ const useCart = () => {
                             ? { ...item, quantity: item.quantity + product.quantity } // Increment quantity
                             : item
                     );
-                    console.log('updatedCart: ', updatedCart);
                     if (updatedCart) saveCart(updatedCart);
                     return;
                 } else {

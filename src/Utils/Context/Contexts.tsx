@@ -15,8 +15,8 @@ import { getLocalStorageItem } from "../Cart/localStorageUtils";
 
 
 type Category = {
-    id: string;
-    name: string;
+    title: string;
+    subcategories ?: string[] 
 };
 
 export const SidebarContext = createContext < {

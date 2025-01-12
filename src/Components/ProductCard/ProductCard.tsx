@@ -37,7 +37,7 @@ const ProductCard = ({sx, product} : {
             className='pointer' onClick={() => ViewProduct()}
                 sx={{
                 height: {
-                    xs: "200px",
+                   
                     
                     md: '350px'
                 },
@@ -45,7 +45,7 @@ const ProductCard = ({sx, product} : {
                     xs: "100%"
                 }
             }}>
-                <img className="img contain" loading="lazy" src={image} alt={product.title}/>
+                <img className="img cover" loading="lazy" src={image} alt={product.title}/>
             </Box>
             <Box
                 sx={{

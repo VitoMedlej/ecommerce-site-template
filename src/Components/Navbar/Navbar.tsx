@@ -8,7 +8,7 @@ import LanguageSelector from '../LanguageSelector/LanguageSelector'
 import {FaRegHeart} from "react-icons/fa6";
 import SearchModal from '../SearchModal/SearchModal'
 import {RiMenu3Fill} from "react-icons/ri";
-import { useDialogContext, useQuickCartContext, useSidebarContext } from '@/Utils/Context/Contexts';
+import { useCategoriesContext, useDialogContext, useQuickCartContext, useSidebarContext } from '@/Utils/Context/Contexts';
 import { FaRegUser } from "react-icons/fa";
 import { useRouter } from 'next/navigation'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -19,7 +19,7 @@ import Announcements from './Announcements/Announcements'
 const Navbar = ({ SanityAnnouncements }: { SanityAnnouncements: { message: string }[] }) => {
     
 
-
+    const {categories} = useCategoriesContext()
     const isSmallScreen = useMediaQuery("(max-width:900px)"); 
     const { setSidebarOpen } = useSidebarContext();
     const { setIsCartOpen} = useQuickCartContext();
@@ -139,16 +139,9 @@ const Navbar = ({ SanityAnnouncements }: { SanityAnnouncements: { message: strin
                     },
                     flex: 1
                 }}>
-                    {[
-                        {
-                            title: 'Porudcts',
-                            category: `fee`
-                        }, {
-                            title: 'Colls',
-                            category: `fee`
-                        }
-                    ].map(e => {
-                        return <Link key={e.title} href={`/${e.category}`} className='decor-none hover-link '>
+                    {categories && categories.map(e => {
+                        if (!e.title) return ;
+                        return <Link key={e.title} href={`/shop/${encodeURIComponent(e.title)}`} className='decor-none hover-link '>
                             <Typography className='dark fw600'>{e.title}</Typography>
                             <Box
                                 sx={{

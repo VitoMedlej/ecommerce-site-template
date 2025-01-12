@@ -43,9 +43,11 @@ const FilterModal = () => {
         </IconButton>
         Filter
       </DialogTitle>
+
       <DialogContent>
-        <FilterOptions />
+        <FilterOptions/>
       </DialogContent>
+
     </Dialog>
   );
 };

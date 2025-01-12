@@ -14,7 +14,6 @@ const SimpleModal = () => {
         setQuery] = useState('');
     const [searchResults,
         setSearchResults] = useState < ProductData[] | [] > ([]);
-    console.log('searchResults: ', searchResults);
 
     const handleOpen = () => {
         setOpen(true);
@@ -33,7 +32,6 @@ const SimpleModal = () => {
         const fetchResults = async() => {
             try {
                 const result : ProductData[] | null = await fetchExternalData(`${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/products/search?q=${encodeURIComponent(searchQuery)}`, undefined, { next: { revalidate: 2 }, cache :'force-cache' }, 'GET');
-                console.log('result: ', result);
              
                 if (result) {
                     setSearchResults(result

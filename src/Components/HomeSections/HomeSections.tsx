@@ -11,6 +11,7 @@ import { Card, HomeSectionData } from '@/Utils/Types'
 
 
 const HomeSections = ({ HomeSectionWithData }: { HomeSectionWithData: HomeSectionData[] | null }) => {
+ 
   // const req = await processProductsSection(HomePageSections)
 
   return (

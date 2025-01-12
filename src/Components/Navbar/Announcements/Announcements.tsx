@@ -7,7 +7,7 @@ import 'swiper/css';
 import { Autoplay } from 'swiper/modules';
 
 const Announcements = ({ SanityAnnouncements }: { SanityAnnouncements: { message: string }[] }) => {
-    const messages = SanityAnnouncements.map(announcement => announcement.message);
+    const messages = SanityAnnouncements && SanityAnnouncements?.length > 0 && SanityAnnouncements.map(announcement => announcement.message);
 
 
     return (

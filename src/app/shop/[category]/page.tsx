@@ -3,17 +3,43 @@ import CollectionsClient from "@/Components/ClientSide/CollectionsClient/Collect
 import React from "react";
 
 
+type CategoryParams = {
+  category: string;
+  subcategory?: string;
+  sort?: string;
+  skip?: string;
+  limit?: string;
+  search?: string;
+};
 
+const ShopPage = async ({ params }: { params: { [key: string]: string } }) => {
+  const {
+    
+    
+      category = "collections",
+      subcategory = "",
+      sort = "",
+      skip = "0",
+      limit = "10",
+      search
+  } 
+  = await params;
 
-const ProductPage = async ({ params }: { params: { [key: string]: string } }) => {
-  const { category = "collections", sort = "", skip = "0", limit = "10", search  } = await params;
-  const data = await fetchProducts(category, sort, parseInt(skip), parseInt(limit), search);
+  
+  const data = await fetchProducts(
+      category,
+      sort,
+      parseInt(skip, 10),
+      parseInt(limit, 10),
+      search,
+      subcategory
+  );
 
   return (
-    <>
-      <CollectionsClient data={data}  />
-    </>
+      <>
+          <CollectionsClient data={data} />
+      </>
   );
 };
 
-export default ProductPage;
+export default ShopPage;

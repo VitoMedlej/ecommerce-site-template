@@ -55,6 +55,7 @@ export async function fetchSanityData<T>(
     console.error("Error fetching Sanity data:", error);
     return null;
   }
+
 }
 
 
@@ -77,6 +78,7 @@ export const fetchAboutPage = (revalidate?: number): Promise<AboutPage | null> =
 
 export const fetchCategories = (revalidate?: number) =>
   fetchSanityData(`*[_type == "category"] { title, subcategories }`, { revalidate });
+
 
 export const fetchSlides = (revalidate?: number): Promise<HeroSlide[] | null> =>
   fetchSanityData(`*[_type == "heroSlide"] | order(_createdAt asc)`, { revalidate });

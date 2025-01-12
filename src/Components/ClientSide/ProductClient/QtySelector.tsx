@@ -24,7 +24,6 @@ const QtySelector : React.FC < QtySelectorProps > = ({
   onChange
 }) => {
   
-  console.log('initialValue: ', initialValue);
   const handleIncrease = () => {
     if (quantity < max) {
       const newValue = quantity + 1;

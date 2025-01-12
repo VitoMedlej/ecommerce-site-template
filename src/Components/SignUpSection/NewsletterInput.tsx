@@ -15,7 +15,6 @@ const NewsletterSignup = () => {
       email: Yup.string().email('Invalid email address').required('Email is required'),
     }),
     onSubmit: async (values) => {
-      console.log('values: ', values);
       // Handle form submission here
     },
   });

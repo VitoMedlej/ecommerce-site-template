@@ -1,10 +1,9 @@
 "use client"
-import {Box, Typography, useMediaQuery} from '@mui/material';
-import React from 'react'
+import {Box, Tooltip, Typography, useMediaQuery} from '@mui/material';
+import React, { useState } from 'react'
 import Btn from '../../Btn/Btn';
 import {CiFilter} from "react-icons/ci";
-// import ProductCard from '../../ProductCard/ProductCard';
-import {IoGridOutline} from "react-icons/io5";
+import {IoGridOutline, IoListOutline} from "react-icons/io5";
 import FilterOptions from '../../FilterOptions/FilterOptions';
 import { useFilterModalContext } from '@/Utils/Context/Contexts';
 import FilterModal from '@/Components/Modals/FilterModal';
@@ -12,8 +11,7 @@ import { Section } from '@/Utils/Types';
 import ProductCard from '@/Components/ProductCard/ProductCard';
 
 const CollectionsClient = ({data} : {data: Section  | null}) => {
-    console.log('products: ', data);
-    
+    const [isSingleRow, setIsSingleRow] = useState<boolean>(true)
     const isSmallScreen = useMediaQuery("(max-width:900px)");
     const { setFilterModalOpen } = useFilterModalContext();
     const handleOpenFilter = () => {
@@ -25,7 +23,7 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
             <Box
                 className='auto col flex gap3'
                 sx={{
-                pt: 6,
+                pt: {xs:3,md:3,lg:6},
                 px: {
                     xs: 2,
                     md: 2,
@@ -45,7 +43,7 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
             </Box>
             <Box
                 sx={{
-                mt: 6,
+                mt: {xs:3,md:6},
                 px: {
                     xs: 1,
                     md: 0,
@@ -68,17 +66,23 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
                     }}>
                         <Btn onClick={handleOpenFilter} border>
                             <CiFilter/>
-                            Filter & Sort1
+                            Filter & Sort
                         </Btn>
-                        <Btn
-                            border
-                            sx={{
-                                fontSize:'.67em',
-                            px: 0,
-                            mx: .25
-                        }}>
-                            <IoGridOutline fontSize={'1.7em'}/>
-                        </Btn>
+                        <Tooltip title={isSingleRow ? "Toggle Grid View" : "Toggle List View"} arrow>
+  <span> 
+    <Btn
+      onClick={() => setIsSingleRow(!isSingleRow)}
+      border
+      sx={{
+        fontSize: '.67em',
+        px: 0,
+        mx: .25
+      }}
+    >
+      {!isSingleRow ? <IoListOutline fontSize={'1.7em'} /> : <IoGridOutline fontSize={'1.7em'} />}
+    </Btn>
+  </span>
+</Tooltip>
                     </Box>
 }
 
@@ -120,7 +124,7 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
                         product={product}
                             sx={{
                             width: {
-                                xs: '48%',
+                                xs: isSingleRow ? '99%': '48%',
                                 md: '32%'
                             },
                             

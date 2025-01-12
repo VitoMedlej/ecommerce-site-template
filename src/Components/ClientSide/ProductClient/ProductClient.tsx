@@ -27,7 +27,6 @@ const ProductClient = ({product} : {product:ProductData}) => {
     const swiperRef :  React.LegacyRef<SwiperRef> | undefined  = useRef(null);
     const {addToCart, isLoading } = useCart();
     const { cart } = useCartContext();
-    console.log('cart: ', cart);
     
     const [quantity, setQuantity] = useState<number>(1);
     

@@ -48,7 +48,8 @@ export const fetchProducts = async (
   sort?: string,
   skip = 0,
   limit = 10,
-  search?: string
+  search?: string,
+  subcategory?: string
 ) => {
   const params: Record<string, string> = {};
 
@@ -60,26 +61,26 @@ export const fetchProducts = async (
   const queryString = new URLSearchParams(params).toString();
 
   try {
-    const data = await fetchExternalData<Section>(
-      `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/products/shop/${category}${queryString ? `?${queryString}` : ""}`,
-      null,
-      { next: { revalidate: 0 } },
-      'GET'
-    );
+      const endpoint = `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/products/shop/${category}` +
+      (subcategory ? `/${subcategory}` : "") +
+      (queryString ? `?${queryString}` : "");
+    
 
-    if (!data) {
-      console.error('No products found.');
-      return null;
-    }
+      const data = await fetchExternalData<Section>(endpoint, null, { next: { revalidate: search ? 0 : 60 } }, 'GET');
 
-    return data;
+      if (!data) {
+          console.error('No products found.');
+          return null;
+      }
+
+      return data;
   } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error('Error fetching products:', error.message);
-    } else {
-      console.error('Unexpected error fetching products:', error);
-    }
-    return null;
+      if (error instanceof Error) {
+          console.error('Error fetching products:', error.message);
+      } else {
+          console.error('Unexpected error fetching products:', error);
+      }
+      return null;
   }
 };
 
@@ -105,7 +106,6 @@ export const fetchProductById = async (
       return null;
     }
     
-    console.log('product: ', product);
     return product;
   } catch (error: unknown) {
     if (error instanceof Error) {

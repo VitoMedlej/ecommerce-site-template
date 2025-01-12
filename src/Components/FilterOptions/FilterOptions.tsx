@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import * as React from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -9,48 +10,129 @@ import Sort from './FilterForms/Sort';
 import SizeFilter from './FilterForms/SizeFilter';
 import { useState } from 'react';
 import { ProductOption } from '../ClientSide/ProductClient/ProductClient';
+import Btn from '../Btn/Btn';
+import { useRouter } from 'next/navigation';
+import { useFilterModalContext } from '@/Utils/Context/Contexts';
 
+export default function FilterOptions() {
 
-export default function AccordionExpandIcon() {
+  const [selectedOptions, setSelectedOptions] = useState<ProductOption>({});
+  const router = useRouter();
+  const { setFilterModalOpen } = useFilterModalContext();
+    
+  const handleOptionChange = (optionName: string, value: string) => {
+    setSelectedOptions((prevOptions) => ({
+      ...prevOptions,
+      [optionName]: value,
+    }));
+  };
 
-  
-      const [selectedOptions, setSelectedOptions] = useState<ProductOption>({});
-  
-  
-      const handleOptionChange = (optionName: string, value: string) => {
-        setSelectedOptions((prevOptions) => ({
-          ...prevOptions,
-          [optionName]: value,
-        }));
-      };
+  const handleFilter = (filters: { [key: string]: string | null }, router: any) => {
+    try {
+      const queryParams: URLSearchParams = new URLSearchParams();
+
+      Object.keys(filters).forEach((key) => {
+        const value = filters[key];
+        if (value) {
+          queryParams.append(key, value);
+        }
+      });
+
+      if (queryParams.toString()) {
+        setFilterModalOpen(false)
+        router.push(`?${queryParams.toString()}`);
+      } else {
+        router.push('/'); // Handle reset if no filters are selected
+      }
+    } catch (error) {
+      setFilterModalOpen(false)
+      console.error("Error updating filters:", error);
+    }
+  };
+
+  const handleReset = () => {
+    setSelectedOptions({});
+    router.push('/'); // Reset the filters and return to the default page
+  };
+
+  const isConfirmDisabled = Object.keys(selectedOptions).length === 0;
+
   return (
-    <Box className='w100 flex col' sx={{borderTop:'1px solid #cccccc'}}>
-      <Accordion disableGutters sx={{  px:0, boxShadow: 'none', border: 'none' }}>
+    <Box
+      className='w100 flex col'
+      sx={{
+        borderTop: '1px solid #cccccc'
+      }}
+    >
+      <Accordion
+        disableGutters
+        sx={{
+          px: 0,
+          boxShadow: 'none',
+          border: 'none'
+        }}
+      >
         <AccordionSummary
-         sx={{ p: 0 }}
+          sx={{
+            p: 0
+          }}
           expandIcon={<FaAngleDoubleDown />}
           aria-controls="panel1-content"
           id="panel1-header"
         >
           <Typography className='fw600'>Sort By</Typography>
         </AccordionSummary>
-        <Sort/>
+        <Sort
+          onOptionChange={handleOptionChange}
+          selectedOptions={selectedOptions}
+        />
       </Accordion>
 
-      <Accordion disableGutters sx={{  px:0, boxShadow: 'none', border: 'none' }}>
+      <Accordion
+        disableGutters
+        sx={{
+          px: 0,
+          boxShadow: 'none',
+          border: 'none'
+        }}
+      >
         <AccordionSummary
-         sx={{ p: 0 }}
+          sx={{
+            p: 0
+          }}
           expandIcon={<FaAngleDoubleDown />}
           aria-controls="panel1-content"
           id="panel1-header"
         >
           <Typography className='fw600'>Size</Typography>
         </AccordionSummary>
-        <SizeFilter 
-        onOptionChange={handleOptionChange}
-        selectedOptions={selectedOptions} sizes={['S','M']}/>
+        <SizeFilter
+          onOptionChange={handleOptionChange}
+          selectedOptions={selectedOptions}
+          sizes={['S', 'M']}
+        />
       </Accordion>
-     
+
+      <Box className='flex col' sx={{ mt: 4, gap: 1 }}>
+        <Btn
+          v2
+          sx={{}}
+          disabled={isConfirmDisabled}
+          onClick={() => handleFilter(selectedOptions, router)}
+        >
+          Confirm
+        </Btn>
+        <Btn
+          sx={{
+            display: { xs: 'flex', md: 'none' },
+            border: '1px solid',
+            color: 'red !Important',
+          }}
+          onClick={handleReset}
+        >
+          Reset all
+        </Btn>
+      </Box>
     </Box>
   );
 }

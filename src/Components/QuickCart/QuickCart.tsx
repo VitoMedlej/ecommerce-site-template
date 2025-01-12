@@ -83,7 +83,6 @@ export default function QuickCart() {
                     // Since we are able to add same products of different variants, creating a unique id
                     const options = product.options || {};
                     const uid = `${options.size || ""}-${options.color || ""}-${product.id}`;
-                    console.log('uid: ', uid);
                     return <QuickCartItem handleRemove={handleRemove} 
                     product={product}
                      key={uid}/>
