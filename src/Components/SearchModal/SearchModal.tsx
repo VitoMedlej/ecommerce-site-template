@@ -4,7 +4,7 @@ import {Modal, Box, TextField, Typography, Divider} from '@mui/material';
 import Btn from '../Btn/Btn';
 import {IoIosSearch} from "react-icons/io";
 import {fetchExternalData} from '@/Utils/functions/dataFetchers';
-import {ProductData, ProductResponse} from '@/Utils/Types';
+import {ProductData} from '@/Utils/Types';
 import ProductCard from '../ProductCard/ProductCard';
 
 const SimpleModal = () => {
@@ -22,7 +22,7 @@ const SimpleModal = () => {
       setSearchResults([])
       setQuery('')
       setOpen(false); };
-      let NoResultFound =  searchResults?.length === 0 && searchQuery?.length > 2;
+      const NoResultFound =  searchResults?.length === 0 && searchQuery?.length > 2;
     const handleSearch = useCallback(() => {
         if (searchQuery.length < 3) {
             setSearchResults([]); // Clear results if query is too short

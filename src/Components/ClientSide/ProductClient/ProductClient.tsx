@@ -14,7 +14,7 @@ import QtySelector from './QtySelector'
 import {CiHeart} from "react-icons/ci";
 import { BsBag } from "react-icons/bs";
 import useCart from '@/Hooks/useCart'
-import { useCartContext, useQuickCartContext } from '@/Utils/Context/Contexts'
+import {  useQuickCartContext } from '@/Utils/Context/Contexts'
 
 
 export type ProductOption = {
@@ -26,7 +26,7 @@ const ProductClient = ({product} : {product:ProductData}) => {
     
     const swiperRef :  React.LegacyRef<SwiperRef> | undefined  = useRef(null);
     const {addToCart, isLoading } = useCart();
-    const { cart } = useCartContext();
+    // const { cart } = useCartContext();
     
     const [quantity, setQuantity] = useState<number>(1);
     

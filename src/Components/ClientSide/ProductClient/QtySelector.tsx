@@ -23,6 +23,7 @@ const QtySelector : React.FC < QtySelectorProps > = ({
   setQuantity,
   onChange
 }) => {
+  console.log('initialValue: ', initialValue);
   
   const handleIncrease = () => {
     if (quantity < max) {

@@ -13,6 +13,7 @@ import { ProductOption } from '../ClientSide/ProductClient/ProductClient';
 import Btn from '../Btn/Btn';
 import { useRouter } from 'next/navigation';
 import { useFilterModalContext } from '@/Utils/Context/Contexts';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 export default function FilterOptions() {
 
@@ -27,7 +28,7 @@ export default function FilterOptions() {
     }));
   };
 
-  const handleFilter = (filters: { [key: string]: string | null }, router: any) => {
+  const handleFilter = (filters: { [key: string]: string | null }, router: AppRouterInstance) => {
     try {
       const queryParams: URLSearchParams = new URLSearchParams();
 

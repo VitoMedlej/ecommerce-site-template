@@ -3,14 +3,14 @@ import CollectionsClient from "@/Components/ClientSide/CollectionsClient/Collect
 import React from "react";
 
 
-type CategoryParams = {
-  category: string;
-  subcategory?: string;
-  sort?: string;
-  skip?: string;
-  limit?: string;
-  search?: string;
-};
+// type CategoryParams = {
+//   category: string;
+//   subcategory?: string;
+//   sort?: string;
+//   skip?: string;
+//   limit?: string;
+//   search?: string;
+// };
 
 const ShopPage = async ({ params }: { params: { [key: string]: string } }) => {
   const {
