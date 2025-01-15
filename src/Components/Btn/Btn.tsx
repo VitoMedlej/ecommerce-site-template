@@ -29,6 +29,7 @@ type BtnProps = {
   }: BtnProps) => {
     return (    
         <Button 
+     
         type={type || 'button'}
             disabled={disabled
             ? disabled

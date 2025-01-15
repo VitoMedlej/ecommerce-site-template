@@ -135,7 +135,7 @@ const SimpleModal = () => {
                       No results found
                       </Typography>
                       <Typography sx={{pt:.5,pb:4}} className='fs085 fw400'>
-                      {`We are sorry but we can’t find any results for “pantfasff”`}
+                      {`We are sorry but we can’t find any results for “${searchQuery}”`}
                       </Typography>
                       <Divider></Divider>
                      </Box>}

@@ -85,3 +85,14 @@ export interface HeroSlide {
     count ?: number;
   };
   
+  export interface InfoState {
+      firstName: string;
+      lastName: string;
+      city: string;
+      email: string;
+      phone: string;
+      address1: string;
+      address2?: string;
+      checkbox: boolean;
+      checkbox2: boolean;
+    }

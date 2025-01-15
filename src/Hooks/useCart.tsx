@@ -11,6 +11,7 @@ export type TCartItem = {
     title: string;
     image: string;
     price: number;
+    newPrice ?: number;
 };
 
 const useCart = () => {
