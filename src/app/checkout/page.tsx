@@ -6,11 +6,9 @@ import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useEffect, useState} from 'react';
-import useCart from '@/Hooks/useCart';
 import {useCartContext} from '@/Utils/Context/Contexts';
 import AddressForm from '@/Components/checkoutComponents/AddressForm';
 import ReviewForm from '@/Components/checkoutComponents/ReviewForm';
@@ -20,7 +18,10 @@ import Btn from '@/Components/Btn/Btn';
 
 const steps = ['Shipping address', 'Review your order'];
 
-function getStepContent(step : number, setInfo : any, handleChange : any, info : InfoState, setActiveStep : React.Dispatch < React.SetStateAction < number >>) {
+function getStepContent(step : number,
+    
+    handleChange : (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+    , info : InfoState, setActiveStep : React.Dispatch < React.SetStateAction < number >>) {
     switch (step) {
         case 0:
             return <AddressForm info={info} handleChange={handleChange}/>;
@@ -188,7 +189,7 @@ const Checkout : React.FC = () => {
                             )
                             : (
                                 <React.Fragment>
-                                    {getStepContent(activeStep, setInfo, handleChange, info, setActiveStep)}
+                                    {getStepContent(activeStep, handleChange, info, setActiveStep)}
                                     <Box
                                         sx={{
                                         display: 'flex',

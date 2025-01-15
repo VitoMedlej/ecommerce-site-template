@@ -5,8 +5,6 @@ import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import Grid from '@mui/material/Grid';
-import { Divider } from '@mui/material';
 import { InfoState } from '@/Utils/Types';
 import { useCartContext } from '@/Utils/Context/Contexts';
 import CartSummary from '../QuickCart/CartSummary';
@@ -22,14 +20,6 @@ const ReviewForm: React.FC<{ setActiveStep: React.Dispatch<React.SetStateAction<
 
   if (!cart?.length) return null;
 
-  const totalPrice = cart.reduce((sum, product) => {
-    if (product?.id && product?.price) {
-      return sum + (product.price * (product.quantity || 1));
-    }
-    return sum;
-  }, 0);
-
-  
 
   return (
     <React.Fragment>

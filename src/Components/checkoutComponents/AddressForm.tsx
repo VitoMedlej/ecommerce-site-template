@@ -3,12 +3,11 @@ import * as React from 'react';
 import {Grid, Box} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import {useState} from 'react';
 import {InfoState} from '@/Utils/Types';
 
 export default function AddressForm({info, handleChange} : {
     info: InfoState,
-    handleChange: any
+    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 }) {
 
     return (
