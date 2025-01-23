@@ -79,7 +79,7 @@ const SimpleModal = () => {
                     position: 'absolute',
                     top: '50%',
                     left: '50%',
-                    height:'90vh',
+                    height: 'auto'  ,
                     transform: 'translate(-50%, -50%)',
                     bgcolor: 'background.paper',
                     border: '2px solid #000',

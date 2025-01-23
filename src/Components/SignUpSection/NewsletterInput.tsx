@@ -5,7 +5,33 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {  TextField } from '@mui/material';
 import Btn from '../Btn/Btn';
+import { fetchExternalData } from '@/Utils/functions/dataFetchers';
 
+
+
+
+const onSubmit = async (values: { email: string }) => {
+  console.log('Form values:', values);
+
+  const emailData = { email: values.email };
+  const apiEndpoint = `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/email/save`;  
+
+  try {
+    const response = await fetchExternalData<{ success: boolean }>(
+      apiEndpoint, 
+      emailData, 
+      { method: 'POST' }  
+    );
+
+    if (response && response.success) {
+      console.log('Email saved successfully!');
+    } else {
+      console.error('Error saving email');
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+};
 const NewsletterSignup = () => {
   const formik = useFormik({
     initialValues: {
@@ -14,10 +40,7 @@ const NewsletterSignup = () => {
     validationSchema: Yup.object({
       email: Yup.string().email('Invalid email address').required('Email is required'),
     }),
-    onSubmit: async (values) => {
-      console.log('values: ', values);
-      // Handle form submission here
-    },
+    onSubmit
   });
 
   return (

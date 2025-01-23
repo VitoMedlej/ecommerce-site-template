@@ -12,7 +12,6 @@ export const Page = async ({ params }: { params: { id: string } }) => {
   if (!product) {
     notFound();
   }
-
   return (
 
       <ProductClient product={product} />

@@ -95,7 +95,7 @@ export const fetchProductById = async (
 
   try {
     const product = await fetchExternalData<ProductData>(
-      `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/products/${id}`,
+      `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/products/get-item/${id}`,
       null,
       { next: { revalidate: 0 } },
       'GET'
