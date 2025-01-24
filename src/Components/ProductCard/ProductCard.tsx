@@ -8,8 +8,9 @@ import {ProductData} from "@/Utils/Types";
 import {validateImageUrl} from "@/Utils/ImageValidator";
 import {useRouter} from "next/navigation";
 
-const ProductCard = ({sx, product} : {
+const ProductCard = ({sx, product,imgHeight} : {
     sx?: SxProps < Theme > | undefined;
+    imgHeight?: SxProps < Theme > | undefined;
     product: ProductData;
 }) => {
     const image = product
@@ -36,14 +37,15 @@ const ProductCard = ({sx, product} : {
             <Box
             className='pointer' onClick={() => ViewProduct()}
                 sx={{
-                height: {
-                   
-                    
-                    md: '350px'
+                height:   {
+                    xs:'100%',
+                    sm:'500px',
+                    // md: '350px'
                 },
                 width: {
                     xs: "100%"
-                }
+                },
+                ...imgHeight
             }}>
                 <img className="img cover" loading="lazy" src={image} alt={product.title}/>
             </Box>

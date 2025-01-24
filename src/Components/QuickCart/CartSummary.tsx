@@ -6,6 +6,7 @@ import Btn from "../Btn/Btn";
 import { useRouter } from "next/navigation";
 import calculateTotal from "@/Utils/functions/calculateTotal";
 import { useCartContext } from "@/Utils/Context/Contexts";
+import DiscountCodeForm from "../checkoutComponents/DiscountCodeForm/DiscountCodeForm";
 
 interface CartSummaryProps {
   isCheckoutPage?: boolean;
@@ -31,22 +32,11 @@ const CartSummary: React.FC<CartSummaryProps> = ({ isCheckoutPage = false }) => 
       <Typography className="fs2 fw700" sx={{ pb: 2 }}>
         Cart Summary
       </Typography>
-      <Box component="form" className="flex row" action="">
-        {!isCheckoutPage && (
-          <TextField
-            label="Discount Code"
-            variant="outlined"
-            size="small"
-            fullWidth
-            sx={{ marginBottom: "16px" }}
-          />
-        )}
-        {!isCheckoutPage && (
-          <Btn sx={{ py: 0, width: "55px", height: "40px", mx: 1 }} className="fw700" type="submit">
-            Apply
-          </Btn>
-        )}
-      </Box>
+      {!isCheckoutPage && 
+      <DiscountCodeForm 
+      total={0} 
+      cartItems={[]}/>
+      }
 
       <Divider sx={{ marginBottom: "16px" }} />
 

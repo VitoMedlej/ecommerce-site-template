@@ -12,7 +12,7 @@ const AboutSection = dynamic(() => import ('@/Components/AboutSection/AboutSecti
 
 
 export default async function Home() {
-    const slides = await fetchSlides(1000);
+    const slides = await fetchSlides(0);
    
     const HomeSectionWithData : HomeSectionData[] | null = await ProcessHomeSectionsData()
 

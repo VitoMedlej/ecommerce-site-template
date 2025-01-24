@@ -13,13 +13,11 @@ import { FaRegUser } from "react-icons/fa";
 import { useRouter } from 'next/navigation'
 import { useAuth0 } from '@auth0/auth0-react'
 import Announcements from './Announcements/Announcements'
+import DesktopLinks from './DesktopLinks';
 
 
 
 const Navbar = ({ SanityAnnouncements }: { SanityAnnouncements: { message: string }[] }) => {
-    
-
-    const {categories} = useCategoriesContext()
     const isSmallScreen = useMediaQuery("(max-width:900px)"); 
     const { setSidebarOpen } = useSidebarContext();
     const { setIsCartOpen} = useQuickCartContext();
@@ -27,7 +25,6 @@ const Navbar = ({ SanityAnnouncements }: { SanityAnnouncements: { message: strin
     const { loginWithRedirect  } = useAuth0();
     const { isAuthenticated, isLoading } = useAuth0();
     const {  setIsDialogOpen } = useDialogContext();
-
 
     const handleAccountRedirection = () => {
     
@@ -130,33 +127,9 @@ const Navbar = ({ SanityAnnouncements }: { SanityAnnouncements: { message: strin
                         alt=""
                         className="img"/>
                 </Box>}
-                {!isSmallScreen && <Box
-                    className=' row gap3 center justify-center'
-                    sx={{
-                    display: {
-                        xs: 'none',
-                        md: 'flex'
-                    },
-                    flex: 1
-                }}>
-                    {categories && categories.map(e => {
-                        if (!e.title) return ;
-                        return <Link key={e.title} href={`/shop/${encodeURIComponent(e.title)}`} className='decor-none hover-link '>
-                            <Typography className='dark fw600'>{e.title}</Typography>
-                            <Box
-                                sx={{
-                                width: '0%',
-                                height: '1.1px',
-                                background: 'black'
-                            }}></Box>
-                        </Link>
-                    })
-}
-                </Box>}
+              <DesktopLinks/>
                 <Box className='flex row'>
                     <SearchModal/>
-
-
 
                     <Btn
                         onClick={()=> setIsDialogOpen(true)}

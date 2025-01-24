@@ -121,10 +121,13 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
 
                     {data?.products?.map(product => {
                         return <ProductCard
+                        imgHeight={{height:{xs:'auto',sm:'100%'}}}
                         product={product}
                             sx={{
                             width: {
                                 xs: isSingleRow ? '99%': '48%',
+                                sm: isSingleRow ? '48%': '48%',
+                                
                                 md: '32%'
                             },
                             
