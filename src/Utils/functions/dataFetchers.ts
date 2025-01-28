@@ -37,7 +37,7 @@ export const fetchHomeProducts = async (
   revalidate: number | false = 60
 ): Promise<{ Sectiontype: string; data: ProductData[] }[] | null> => {
   return await fetchExternalData(
-    `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/products/home`,
+    `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/home`,
     filterTypes,
     { next: { revalidate } }
   );
@@ -61,7 +61,7 @@ export const fetchProducts = async (
   const queryString = new URLSearchParams(params).toString();
 
   try {
-      const endpoint = `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/products/shop/${category}` +
+      const endpoint = `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/shop/${category}` +
       (subcategory ? `/${subcategory}` : "") +
       (queryString ? `?${queryString}` : "");
     
@@ -95,7 +95,7 @@ export const fetchProductById = async (
 
   try {
     const product = await fetchExternalData<ProductData>(
-      `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/products/get-item/${id}`,
+      `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/get-item/${id}`,
       null,
       { next: { revalidate: 0 } },
       'GET'

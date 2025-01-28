@@ -60,7 +60,9 @@ const CartSummary: React.FC<CartSummaryProps> = ({ isCheckoutPage = false }) => 
       {!isCheckoutPage && (
         <Btn
           v2
-          onClick={() => router.push("/checkout")}
+          onClick={() => {
+            
+            router.push("/checkout")}}
           maxWidth
           sx={{ padding: "10px", fontSize: "16px" }}
         >

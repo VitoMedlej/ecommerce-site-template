@@ -7,6 +7,21 @@ export interface FilterType {
     value: string | null;
 }
 
+// IMPORTANT: WHAT DOES THIS FILE DO?
+// In simple terms, it gets the home page sections from the CMS, then fetches each section's data.
+
+
+// First seperates sections
+// Section that need products has sepecific "filter type" which helps us understand what products to fetch
+// For example, fetch "New Arrivals" products.
+
+
+// This makes the home page dynamic, CMS handles the sections, and we fetch the data accordingly.
+
+
+
+
+
 // Function to separate product and non-product sections
 const separateSections = (HomePageSections: (CategoryCardsSection | ProductsSection)[]) => {
   return HomePageSections.reduce(
@@ -47,7 +62,7 @@ export const ProcessHomeSectionsData = async () => {
 
     const filterTypes = createFilterTypes(productSections);
 
-    const homeProducts = await fetchHomeProducts(filterTypes, 19);
+    const homeProducts = await fetchHomeProducts(filterTypes, 0);
 
     // Map product sections data based on filterType
     const productSectionsData = productSections.map((section) => {

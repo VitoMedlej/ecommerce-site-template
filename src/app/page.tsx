@@ -17,7 +17,7 @@ export default async function Home() {
     const HomeSectionWithData : HomeSectionData[] | null = await ProcessHomeSectionsData()
 
     return (
-        <main>
+        <main> 
             <Dialog/>
             <Hero slides={slides}/>
             <HomeSections HomeSectionWithData={HomeSectionWithData}/>

@@ -23,6 +23,7 @@ export type ProductOption = {
 const ProductClient = ({product} : {
     product: ProductData
 }) => {
+    console.log('product: ', product);
 
     const swiperRef : React.LegacyRef < SwiperRef > | undefined = useRef(null);
     const {addToCart, isLoading} = useCart();
@@ -165,7 +166,7 @@ const ProductClient = ({product} : {
             <BreadCrumb/>
         </Box>
             <Typography sx={{pt:{xs:0,md:2}}} className='fs3 dark fw700'>
-                {`Men's Runner Protect`}
+                {`${product.title}`}
             </Typography>
             <Typography sx={{pb:{xs:0.25,md:2}}} className='fs1  fw400'>
                 {`${product.category}`}
@@ -175,7 +176,7 @@ const ProductClient = ({product} : {
                 pb: 1
             }}
                 className='fs1 dark fw600'>
-                $200
+                ${product.price}
             </Typography>
             <Divider></Divider>
 

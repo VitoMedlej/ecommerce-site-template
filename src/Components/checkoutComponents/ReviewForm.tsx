@@ -8,6 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { InfoState } from '@/Utils/Types';
 import { useCartContext } from '@/Utils/Context/Contexts';
 import CartSummary from '../QuickCart/CartSummary';
+import { Avatar, Box } from '@mui/material';
 
 const ReviewForm: React.FC<{ setActiveStep: React.Dispatch<React.SetStateAction<number>>, info: InfoState }> = ({ setActiveStep, info }) => {
   const { cart } = useCartContext();
@@ -26,23 +27,52 @@ const ReviewForm: React.FC<{ setActiveStep: React.Dispatch<React.SetStateAction<
       <Typography variant="h6" fontWeight={'700'} gutterBottom>
         Order summary
       </Typography>
-      <List sx={{pb:2}} disablePadding>
-        {cart.map((product) => {
-          if (!product?.id) return null;
-          const options = product.options || {};
-          const uid = `${options.size || ""}-${options.color || ""}-${product.id}`;
-          const title = `${product.quantity || '1'} x ${product.title || 'Product Name'}`
-          return (
-            <ListItem key={`${uid}`} sx={{ py: 1, px: 0 }}>
-              <ListItemText
-                primary={title}
-              />
-              <Typography variant="body2">
-                ${product.newPrice ? (product.newPrice * (product.quantity || 1)).toFixed(2) : (product.price * (product.quantity || 1)).toFixed(2)}
-              </Typography>
-            </ListItem>
-          );
-        })}
+      <List sx={{ pb: 2 }} disablePadding>
+  {cart &&
+    cart.map((product) => {
+      if (!product?.id) return null;
+      const options = product.options || {};
+      const uid = `${options.size || ""}-${options.color || ""}-${product.id}`;
+      const title = `${product.title || "Product Name"}`;
+      const quantityText = `${product.quantity || 1} x`;
+      const price = product.newPrice
+        ? (product.newPrice * (product.quantity || 1)).toFixed(2)
+        : (product.price * (product.quantity || 1)).toFixed(2);
+
+      return (
+        <ListItem key={uid} sx={{ py: 1, px: 0, display: "flex", alignItems: "center" }}>
+          <Avatar
+            src={product.image}
+            alt={product.title}
+            sx={{ width: 48, height: 48, mr: 2, borderRadius: "8px" }}
+          />
+       <ListItemText
+  primary={
+    <Typography variant="body1" sx={{ fontWeight: "bold", color: "text.primary" }}>
+      {title}
+    </Typography>
+  }
+  secondary={
+    options.size || options.color ? (
+      <Typography variant="body2" sx={{ color: "text.secondary" }}>
+        {options.size ? `Size: ${String(options.size)}` : ""}
+        {options.size && options.color ? " | " : ""}
+        {options.color ? `Color: ${String(options.color)}` : ""}
+      </Typography>
+    ) : null
+  }
+/>
+          <Box sx={{ textAlign: "right", minWidth: 80 }}>
+            <Typography variant="body2" sx={{ color: "text.secondary" }}>
+              {quantityText}
+            </Typography>
+            <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+              ${price}
+            </Typography>
+          </Box>
+        </ListItem>
+      );
+    })}
         {/* <ListItem sx={{ px: 0 }}>
           <ListItemText primary="Delivery" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>

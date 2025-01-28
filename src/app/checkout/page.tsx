@@ -15,6 +15,7 @@ import ReviewForm from '@/Components/checkoutComponents/ReviewForm';
 import calculateTotal from '@/Utils/functions/calculateTotal';
 import {InfoState} from '@/Utils/Types';
 import Btn from '@/Components/Btn/Btn';
+import { fetchExternalData } from '@/Utils/functions/dataFetchers';
 
 const steps = ['Shipping address', 'Review your order'];
 
@@ -25,7 +26,6 @@ function getStepContent(step : number,
     switch (step) {
         case 0:
             return <AddressForm info={info} handleChange={handleChange}/>;
-
         case 1:
             return <ReviewForm info={info} setActiveStep={setActiveStep}/>;
         default:
@@ -40,8 +40,7 @@ const isValidInfo = (info: InfoState): boolean => {
     return Boolean(
       info?.checkbox &&
       info?.checkbox2 &&
-      info?.firstName?.trim()?.length >= 2 &&
-      info?.lastName?.trim()?.length > 0 &&
+      info?.fullName?.trim()?.length >= 2 &&
       info?.address1?.trim()?.length > 0 &&
       info?.phone?.trim()?.length >= 6 &&
       emailRegex.test(info?.email || '')
@@ -56,12 +55,14 @@ const Checkout : React.FC = () => {
         setActiveStep] = useState < number > (0);
     const [orderNumber,
         setOrderNumber] = useState < string | null > (null);
+
+        const [isLoading,
+            setLoading] = useState(false);
     const {cart} = useCartContext();
 
     const [info,
         setInfo] = useState < InfoState > ({
-        firstName: '',
-        lastName: '',
+        fullName: '',
         city: '',
         email: '',
         phone: '',
@@ -92,42 +93,48 @@ const Checkout : React.FC = () => {
         setActiveStep((prevStep) => prevStep - 1);
     };
 
-    const saveOrder = async() => {
+    const saveOrder = async () => {
         if (!cart || !info) {
-            console.error('Missing order information or products');
-            return;
+          console.error("Missing order information or products");
+          return;
         }
-
-        const {totalPrice, deliveryCharge} = calculateTotal(cart);
+        setLoading(true)
+        const { totalPrice, deliveryCharge } = calculateTotal(cart);
         const orderTotal = Number(totalPrice + deliveryCharge).toFixed(2);
-
-        try {
-            const response = await fetch(`/api/save-order`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    order: {
-                        info,
-                        products: cart,
-                        totalPrice,
-                        orderTotal
-                    }
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error(`Failed to save order: ${response.statusText}`);
-            }
-
-            const data = await response.json();
-            setOrderNumber(data
-                ?.orderNumber || null);
-        } catch (error) {
-            console.error('Error saving order:', error);
+        const orderDetails = {
+            customerName: `${info.fullName}`  || "Guest", // Fallback for guest users
+            items: cart.map((item) => ({
+              id: item.id,
+              productName: item.title,
+              quantity: item.quantity,
+              price: item.newPrice || item.price,
+            })),
+            userId: 'guest',
+            userType: 'guest',
+            priceAfterDiscount: parseFloat(orderTotal), // Convert to expected format
+            shippingCost: calculateShipping(cart), // Ensure accurate shipping calculation
+            status: "pending", 
+            orderDate: new Date().toISOString(), // Current timestamp
+            productImage: cart[0]?.image || "", 
         }
-    };
+        console.log('orderDetails: ', orderDetails);
+        try {
+          const response  = await fetchExternalData<{
+            orderNumber: string | null;
+            success: boolean;
+          }>(`${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/order/save-order`, {orderDetails});
+        
+          if (response?.success) {
+              setOrderNumber(response?.orderNumber || null);
+        
+            }
+        setLoading(false)
+          
+        } catch (error) {
+          console.error("Error saving order:", error);
+        setLoading(false)
+        }
+      };
 
     useEffect(() => {
         if (activeStep === steps.length) {
@@ -185,6 +192,13 @@ const Checkout : React.FC = () => {
                                     <Typography variant="subtitle1">
                                         {`Your order has been recorded! Your order number is ${orderNumber}. We will message you soon, so please stay alert.`}
                                     </Typography>
+
+                                    <Btn v2 sx={{mr:1,mt:2}}>
+                                        Home
+                                    </Btn>
+                                    <Btn v2 sx={{mt:2}}>
+                                        Continue Shopping
+                                    </Btn>
                                 </React.Fragment>
                             )
                             : (
@@ -221,3 +235,7 @@ const Checkout : React.FC = () => {
 }
 
 export default Checkout;
+
+function calculateShipping(cart: unknown) {
+   return 0
+}

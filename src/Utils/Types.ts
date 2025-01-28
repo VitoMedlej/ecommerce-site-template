@@ -86,8 +86,7 @@ export interface HeroSlide {
   };
   
   export interface InfoState {
-      firstName: string;
-      lastName: string;
+      fullName: string;
       city: string;
       email: string;
       phone: string;

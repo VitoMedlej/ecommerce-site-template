@@ -16,29 +16,17 @@ export default function AddressForm({info, handleChange} : {
                 Shipping address
             </Typography>
             <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} >
 
                     <TextField
-                        value={info.firstName}
+                        value={info.fullName}
                         onChange={handleChange}
                         required
-                        id="firstName"
-                        name="firstName"
+                        id="fullName"
+                        name="fullName"
                         label="First name"
                         fullWidth
                         autoComplete="given-name"
-                        variant="outlined"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        value={info.lastName}
-                        onChange={handleChange}
-                        required
-                        id="lastName"
-                        name="lastName"
-                        label="Last name"
-                        fullWidth
-                        autoComplete="family-name"
                         variant="outlined"/>
                 </Grid>
 

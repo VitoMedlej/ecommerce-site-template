@@ -31,7 +31,7 @@ const SimpleModal = () => {
 
         const fetchResults = async() => {
             try {
-                const result : ProductData[] | null = await fetchExternalData(`${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/products/search?q=${encodeURIComponent(searchQuery)}`, undefined, { next: { revalidate: 2 }, cache :'force-cache' }, 'GET');
+                const result : ProductData[] | null = await fetchExternalData(`${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/search?q=${encodeURIComponent(searchQuery)}`, undefined, { next: { revalidate: 2 }, cache :'force-cache' }, 'GET');
              
                 if (result) {
                     setSearchResults(result
