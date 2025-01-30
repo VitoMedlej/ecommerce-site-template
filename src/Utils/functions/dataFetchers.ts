@@ -61,9 +61,10 @@ export const fetchProducts = async (
   const queryString = new URLSearchParams(params).toString();
 
   try {
-      const endpoint = `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/shop/${category}` +
-      (subcategory ? `/${subcategory}` : "") +
-      (queryString ? `?${queryString}` : "");
+
+const endpoint = `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/shop/${category}` +
+  (subcategory ? `/?subcategory=${subcategory}` : "") +
+  (queryString ? `&${queryString}` : "");
     
 
       const data = await fetchExternalData<Section>(endpoint, null, { next: { revalidate: search ? 0 : 60 } }, 'GET');
