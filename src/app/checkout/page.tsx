@@ -58,6 +58,7 @@ const Checkout : React.FC = () => {
 
         const [isLoading,
             setLoading] = useState(false);
+            console.log('isLoading: ', isLoading);
     const {cart} = useCartContext();
 
     const [info,
@@ -117,7 +118,7 @@ const Checkout : React.FC = () => {
             orderDate: new Date().toISOString(), // Current timestamp
             productImage: cart[0]?.image || "", 
         }
-        console.log('orderDetails: ', orderDetails);
+       
         try {
           const response  = await fetchExternalData<{
             orderNumber: string | null;
@@ -126,7 +127,6 @@ const Checkout : React.FC = () => {
         
           if (response?.success) {
               setOrderNumber(response?.orderNumber || null);
-        
             }
         setLoading(false)
           
@@ -237,5 +237,6 @@ const Checkout : React.FC = () => {
 export default Checkout;
 
 function calculateShipping(cart: unknown) {
+    console.log('cart: ', cart);
    return 0
 }

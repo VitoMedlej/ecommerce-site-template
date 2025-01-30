@@ -1,13 +1,14 @@
-import { useState } from 'react';
 import Btn from '@/Components/Btn/Btn';
 import { Box, TextField } from '@mui/material';
-import calculateTotal from '@/Utils/functions/calculateTotal';
-import { useCartContext } from '@/Utils/Context/Contexts';
 import usePromoLogic from '@/Hooks/usePromoLogic';
+import { TCartItem } from '@/Hooks/useCart';
 
 
 
-const DiscountCodeForm = ({ total, cartItems }: { total: number, cartItems: any[] }) => {
+const DiscountCodeForm = ({ total, cartItems }: { total: number, cartItems: TCartItem[] }) => {
+  console.log('total: ', total);
+  console.log('cartItems: ', cartItems);
+  // const DiscountCodeForm = ({ total, cartItems }: { total: number, cartItems: any[] }) => {
   const { promocode, setPromocode, err, discountedPrice, loading, handlePromoChange } = usePromoLogic();
   console.log('loading: ', loading);
   console.log('discountedPrice: ', discountedPrice);
