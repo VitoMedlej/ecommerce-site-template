@@ -62,10 +62,10 @@ export const ProcessHomeSectionsData = async () => {
 
     const filterTypes = createFilterTypes(productSections);
 
-    const homeProducts = await fetchHomeProducts(filterTypes, 0);
+    const homeProducts = await fetchHomeProducts(filterTypes, 10);
 
     // Map product sections data based on filterType
-    const productSectionsData = productSections.map((section) => {
+      const productSectionsData = productSections.map((section) => {
       const sectionData = homeProducts?.find((productGroup) => productGroup.Sectiontype === section.filterType);
       const filteredProducts = sectionData ? sectionData.data : [];
 
