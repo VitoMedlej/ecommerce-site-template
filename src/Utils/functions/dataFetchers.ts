@@ -42,7 +42,8 @@ export const fetchHomeProducts = async (
   return await fetchExternalData(
     `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/home`,
     filterTypes,
-    { next: { revalidate } }
+    { next: { revalidate } },
+   'POST',  
   );
 };
 
