@@ -39,11 +39,12 @@ export const fetchHomeProducts = async (
   filterTypes: FilterType[],
   revalidate: number | false = 60
 ): Promise<{ Sectiontype: string; data: ProductData[] }[] | null> => {
+  console.log('`${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/home`: ', `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/home`);
   return await fetchExternalData(
     `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/home`,
     filterTypes,
     { next: { revalidate } },
-   'POST',  
+    'POST',  
   );
 };
 
