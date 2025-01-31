@@ -16,6 +16,7 @@ import calculateTotal from '@/Utils/functions/calculateTotal';
 import {InfoState} from '@/Utils/Types';
 import Btn from '@/Components/Btn/Btn';
 import { fetchExternalData } from '@/Utils/functions/dataFetchers';
+import { getPrice } from '@/Utils/functions/getPrice';
 
 const steps = ['Shipping address', 'Review your order'];
 
@@ -107,8 +108,10 @@ const Checkout : React.FC = () => {
             items: cart.map((item) => ({
               id: item.id,
               productName: item.title,
-              quantity: item.quantity,
-              price: item.newPrice || item.price,
+              quantity: item.quantity || 1,
+              productImage: `${item.image}`,
+              price: getPrice(item),
+              options : item?.options,
             })),
             userId: 'guest',
             userType: 'guest',
@@ -118,7 +121,7 @@ const Checkout : React.FC = () => {
             orderDate: new Date().toISOString(), // Current timestamp
             productImage: cart[0]?.image || "", 
         }
-       
+
         try {
           const response  = await fetchExternalData<{
             orderNumber: string | null;

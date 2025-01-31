@@ -16,6 +16,7 @@ export type TCartItem = {
 
 const useCart = () => {
     const { cart, setCart } = useCartContext();
+    console.log('cart: ', cart);
     const [isLoading, setIsLoading] = useState(false);
 
     const saveCart = (updatedCart: TCartItem[]) => {

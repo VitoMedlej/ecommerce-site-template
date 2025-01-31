@@ -55,6 +55,7 @@ export interface HeroSlide {
     title: string;
     description: string;
     price: number;
+    newPrice?: number;
     stock: number;
     tags: string[];
     category: string;
