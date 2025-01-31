@@ -21,7 +21,10 @@ export async function fetchExternalData<T>(
       ...fetchOptions,
     });
 
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`API Error: ${response.status} - ${errorMessage}`);
+    }
 
     const jsonData = await response.json();
     return jsonData?.responseObject;
