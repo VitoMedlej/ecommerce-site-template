@@ -28,7 +28,7 @@ const ProductCard = ({sx, product,imgHeight} : {
     }
 
 
-    const {  product : productName, setQuickViewOpen, isQuickViewOpen, setProduct } = useQuickViewContext();
+    const { setQuickViewOpen, setProduct } = useQuickViewContext();
 
     
     return (

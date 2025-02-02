@@ -4,7 +4,6 @@ import { fetchSlides} from "@/Utils/functions/sanityFetcher";
 import HomeSections from "@/Components/HomeSections/HomeSections";
 import { ProcessHomeSectionsData } from "@/Utils/functions/ProcessHomeSectionsData";
 import { HomeSectionData } from "@/Utils/Types";
-import ProductQuickView from "@/Components/ProductCard/QuickView/ProductQuickView";
 
 const Dialog = dynamic(() => import ('@/Components/Dialog/Dialog'));
 const SignUpSection = dynamic(() => import ('@/Components/SignUpSection/SignUpSection'));
