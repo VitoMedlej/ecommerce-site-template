@@ -23,6 +23,7 @@ const Navbar = ({ SanityAnnouncements }: { SanityAnnouncements: { message: strin
     const router = useRouter();
     const { loginWithRedirect  } = useAuth0();
     const { isAuthenticated, isLoading } = useAuth0();
+    console.log('isAuthenticated: ', isAuthenticated);
     const {  setIsDialogOpen } = useDialogContext();
 
     const handleAccountRedirection = () => {

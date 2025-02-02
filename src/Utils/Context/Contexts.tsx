@@ -12,6 +12,7 @@ import {
     useState
 } from "react";
 import { getLocalStorageItem } from "../Cart/localStorageUtils";
+import { ProductData } from "../Types";
 
 
 type Category = {
@@ -67,6 +68,18 @@ export const FilterModalContext = createContext < {
     setFilterModalOpen: () => {}
 });
 
+export const ProductQuickViewContext = createContext<{
+    isQuickViewOpen: boolean;
+    setQuickViewOpen: Dispatch<SetStateAction<boolean>>;
+    product: ProductData | null;
+    setProduct: Dispatch<SetStateAction<ProductData | null>>;
+}>({
+    isQuickViewOpen: false,
+    setQuickViewOpen: () => {},
+    product: null,
+    setProduct: () => {},
+});
+
 const ContextWrapper = ({children, SanityCategories} : {
     children: ReactNode;
     SanityCategories: Category[];
@@ -83,7 +96,9 @@ const ContextWrapper = ({children, SanityCategories} : {
         setCategories] = useState < Category[] > (SanityCategories || []);
     const [isDialogOpen,
         setIsDialogOpen] = useState < boolean > (false);
-
+        const [isQuickViewOpen, setQuickViewOpen] = useState<boolean>(false);
+        const [product, setProduct] = useState<ProductData | null>(null);
+    
 
         useEffect(() => {
           const LocalCart = getLocalStorageItem("cart"); 
@@ -94,53 +109,28 @@ const ContextWrapper = ({children, SanityCategories} : {
 
     return (
         <Auth0Provider
-            domain={`${process.env.AUTH0_ISSUER_BASE_URL}`}
-            clientId={`${process.env.AUTH0_CLIENT_ID}`}
-            authorizationParams={{
-            redirect_uri: 'http://localhost:3000'
-        }}>
-
-            <SidebarContext.Provider
-                value={{
-                sidebarOpen,
-                setSidebarOpen
-            }}>
-                <CategoriesContext.Provider
-                    value={{
-                    categories,
-                    setCategories
-                }}>
-                    <CartContext.Provider
-                        value={{
-                            cart,
-                            setCart
-                    }}>
-                        <QuickCartContext.Provider 
-                        value={{
-                            isCartOpen,
-                            setIsCartOpen
-                    }}>
-
-                        <DialogContext.Provider
-                            value={{
-                            isDialogOpen,
-                            setIsDialogOpen
-                        }}>
-                            <FilterModalContext.Provider
-                                value={{
-                                isFilterModalOpen,
-                                setFilterModalOpen
-                            }}>
-                              
-                            {children}
-                            </FilterModalContext.Provider>
-                        </DialogContext.Provider>
+        domain={`${process.env.NEXT_PUBLIC_AUTH0_ISSUER_BASE_URL}`}
+        clientId={`${process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID}`}
+        authorizationParams={{
+            redirect_uri: 'http://localhost:3000',
+        }}
+    >
+        <SidebarContext.Provider value={{ sidebarOpen, setSidebarOpen }}>
+            <CategoriesContext.Provider value={{ categories, setCategories }}>
+                <ProductQuickViewContext.Provider value={{ isQuickViewOpen, setQuickViewOpen, product, setProduct }}>
+                    <CartContext.Provider value={{ cart, setCart }}>
+                        <QuickCartContext.Provider value={{ isCartOpen, setIsCartOpen }}>
+                            <DialogContext.Provider value={{ isDialogOpen, setIsDialogOpen }}>
+                                <FilterModalContext.Provider value={{ isFilterModalOpen, setFilterModalOpen }}>
+                                    {children}
+                                </FilterModalContext.Provider>
+                            </DialogContext.Provider>
                         </QuickCartContext.Provider>
-
                     </CartContext.Provider>
-                </CategoriesContext.Provider>
-            </SidebarContext.Provider>
-        </Auth0Provider>
+                </ProductQuickViewContext.Provider>
+            </CategoriesContext.Provider>
+        </SidebarContext.Provider>
+    </Auth0Provider>
     );
 };
 
@@ -152,3 +142,4 @@ export const useQuickCartContext = () => useContext(QuickCartContext);
 export const useCategoriesContext = () => useContext(CategoriesContext);
 export const useDialogContext = () => useContext(DialogContext);
 export const useFilterModalContext = () => useContext(FilterModalContext);
+export const useQuickViewContext = () => useContext(ProductQuickViewContext);

@@ -7,6 +7,7 @@ import {IoEyeOutline} from "react-icons/io5";
 import {ProductData} from "@/Utils/Types";
 import {validateImageUrl} from "@/Utils/ImageValidator";
 import {useRouter} from "next/navigation";
+import { useQuickViewContext } from "@/Utils/Context/Contexts";
 
 const ProductCard = ({sx, product,imgHeight} : {
     sx?: SxProps < Theme > | undefined;
@@ -25,6 +26,12 @@ const ProductCard = ({sx, product,imgHeight} : {
         router.push(`/product/${product
             ?.id}`)
     }
+
+
+    const {  product : productName, setQuickViewOpen, isQuickViewOpen, setProduct } = useQuickViewContext();
+    console.log('productName: ', productName);
+    console.log('isQuickViewOpen: ', isQuickViewOpen);
+    
     return (
         <Box
             className="relative"
@@ -69,6 +76,10 @@ const ProductCard = ({sx, product,imgHeight} : {
                     <CiHeart fontSize="1.05em"/>
                 </Box>
                 <Box
+            onClick={() => {
+                setProduct(product);
+                setTimeout(() => setQuickViewOpen(true), 0); // Ensures product is set before opening
+            }}
                     className="flex centered pointer"
                     sx={{
                     background: "#ffffff6e",

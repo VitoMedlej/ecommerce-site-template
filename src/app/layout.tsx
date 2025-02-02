@@ -51,7 +51,6 @@ export default async function RootLayout({children} : {
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;800&display=swap" as="style" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;800&display=swap" />
 
-
             </head>
             <body>
                 <ContextWrapper SanityCategories={categories}>

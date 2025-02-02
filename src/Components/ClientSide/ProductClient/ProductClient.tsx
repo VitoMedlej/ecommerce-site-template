@@ -17,78 +17,30 @@ import useCart from '@/Hooks/useCart'
 import {useQuickCartContext} from '@/Utils/Context/Contexts'
 import { useRouter } from 'next/navigation'
 import RecommendedProducts from '@/Components/RecommendedProducts/RecommendedProducts'
+import useProductActions from '@/Hooks/useProductActions'
 
 export type ProductOption = {
     [key : string]: string | null;
 };
 
-const ProductClient = ({product} : {
-    product: ProductData
-}) => {
-    console.log('product: ', product);
-
-    const swiperRef : React.LegacyRef < SwiperRef > | undefined = useRef(null);
-    const {addToCart, isLoading} = useCart();
-    const router = useRouter()
-    const [quantity,
-        setQuantity] = useState < number > (1);
-
-    const [selectedOptions,
-        setSelectedOptions] = useState < ProductOption > ({});
-
-    const [isEmptyOptions,
-            setisEmptyOption] = useState(false);
-
-    const handleOptionChange = (optionName : string, value : string) => {
-        setSelectedOptions((prevOptions) => ({
-            ...prevOptions,
-            [optionName]: value
-        }));
-        setisEmptyOption(false);
-    };
-
-    const {setIsCartOpen} = useQuickCartContext();
-
-    const handlePrev = () => swiperRef
-        ?.current && swiperRef
-            .current
-            .swiper
-            .slidePrev();
-    const handleNext = () => swiperRef
-        ?.current && swiperRef
-            .current
-            .swiper
-            .slideNext();
-
-    const cartProduct = {
-        id: product.id,
-        title: product.title,
-        quantity,
-        options: selectedOptions,
-        image: product.images[0],
-        price: product.price
-    }
-    const variants = product.variants && product.variants?.length > 0 ?
-    product.variants :
-    null 
-   
-    const emptyOptions = variants && Object.keys(selectedOptions).length === 0
-    const handleAddToCart = (quickBuy ?: boolean) => {
-        console.log('emptyOptions: ', emptyOptions);
-        if (emptyOptions) {
-            setisEmptyOption(true);
-            return;
-        }
-        addToCart(cartProduct, selectedOptions)
-    if (quickBuy) {
-        return router.push('/checkout')
-
-    }
-        setIsCartOpen(true)
-    
-    }
-
-
+const ProductClient = ({ product }: { product: ProductData }) => {
+    const {
+      quantity,
+      setQuantity,
+      selectedOptions,
+      setSelectedOptions,
+      variants,
+      isEmptyOptions,
+      handleOptionChange,
+      handleAddToCart,
+    } = useProductActions(product);
+  
+    const swiperRef = useRef<SwiperRef | null>(null);
+    const { setIsCartOpen } = useQuickCartContext();
+  
+    const handlePrev = () => swiperRef.current?.swiper.slidePrev();
+    const handleNext = () => swiperRef.current?.swiper.slideNext();
+    const {isLoading} = useCart();
     return (
         <Box
         className='flex wrap row'
