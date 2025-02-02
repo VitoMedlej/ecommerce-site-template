@@ -7,6 +7,22 @@ import { ProductData } from '@/Utils/Types';
 type ProductOption = { [key: string]: string };
 
 const useProductActions = (product: ProductData | null) => {
+
+
+  if (!product) {
+    return {
+        quantity: 0,
+        setQuantity: () => {},
+        selectedOptions: {},
+        variants: [],
+        isEmptyOptions: true,
+        handleOptionChange: () => {},
+        handleAddToCart: () => {},
+    };
+}
+
+
+
   const { addToCart } = useCart();
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);

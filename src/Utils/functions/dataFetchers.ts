@@ -132,19 +132,19 @@ export const fetchRecommendedProducts = async (
   try {
     const endpoint = `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/recommended?limit=${limit}`;
 
-    const recommendedProducts = await fetchExternalData<ProductData[]>(
+    const recommendedProducts = await fetchExternalData<{products:ProductData[]}>(
       endpoint,
       null,
       { next: { revalidate: 60 } },
       'GET'
     );
 
-    if (!recommendedProducts) {
+    if (!recommendedProducts || !recommendedProducts.products) {
       console.error('No recommended products found.');
       return null;
     }
 
-    return recommendedProducts;
+    return recommendedProducts.products;
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error('Error fetching recommended products:', error.message);

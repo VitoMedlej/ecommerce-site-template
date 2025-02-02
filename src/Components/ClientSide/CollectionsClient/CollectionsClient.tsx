@@ -5,10 +5,11 @@ import Btn from '../../Btn/Btn';
 import {CiFilter} from "react-icons/ci";
 import {IoGridOutline, IoListOutline} from "react-icons/io5";
 import FilterOptions from '../../FilterOptions/FilterOptions';
-import { useFilterModalContext } from '@/Utils/Context/Contexts';
+import { useFilterModalContext, useQuickViewContext } from '@/Utils/Context/Contexts';
 import FilterModal from '@/Components/Modals/FilterModal';
 import { Section } from '@/Utils/Types';
 import ProductCard from '@/Components/ProductCard/ProductCard';
+import ProductQuickView from '@/Components/ProductCard/QuickView/ProductQuickView';
 
 const CollectionsClient = ({data} : {data: Section  | null}) => {
     const [isSingleRow, setIsSingleRow] = useState<boolean>(true)
@@ -17,6 +18,9 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
     const handleOpenFilter = () => {
         setFilterModalOpen(true);
       };
+
+          const {product } = useQuickViewContext();
+      
     return (
         <main>
 
@@ -121,7 +125,7 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
 
                     {data?.products?.map(product => {
                         return <ProductCard
-                        imgHeight={{height:{xs:'auto',sm:'100%'}}}
+                        imgHeight={{height:{xs:'auto'}}}
                         product={product}
                             sx={{
                             width: {
@@ -141,6 +145,8 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
 
 
             <FilterModal/>
+          {product && <ProductQuickView/>}
+
         </main>
     )
 }

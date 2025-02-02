@@ -6,11 +6,14 @@ import React from 'react'
 import ProductSection from '../ProductSection/ProductSection'
 import CategorySection from '../CategorySection/CategorySection'
 import { Card, HomeSectionData } from '@/Utils/Types'
+import { useQuickViewContext } from '@/Utils/Context/Contexts'
+import ProductQuickView from '../ProductCard/QuickView/ProductQuickView'
 
 
 
 
 const HomeSections = ({ HomeSectionWithData }: { HomeSectionWithData: HomeSectionData[] | null }) => {
+const {product } = useQuickViewContext();
  
   // const req = await processProductsSection(HomePageSections)
 
@@ -26,6 +29,9 @@ const HomeSections = ({ HomeSectionWithData }: { HomeSectionWithData: HomeSectio
         }
 
       })}
+
+
+        {product && <ProductQuickView/>}
     </>
   )
 }

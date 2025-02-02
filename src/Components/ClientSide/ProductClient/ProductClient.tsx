@@ -17,6 +17,7 @@ import useCart from '@/Hooks/useCart'
 // import {useQuickCartContext} from '@/Utils/Context/Contexts'
 import RecommendedProducts from '@/Components/RecommendedProducts/RecommendedProducts'
 import useProductActions from '@/Hooks/useProductActions'
+import { validateImageUrl } from '@/Utils/ImageValidator'
 
 export type ProductOption = {
     [key : string]: string | null;
@@ -42,7 +43,7 @@ const ProductClient = ({ product }: { product: ProductData }) => {
     const {isLoading} = useCart();
     return (
         <Box
-        className='flex wrap row'
+        className='flex wrap row auto'
         sx={{
         px: {
             xs: 1,
@@ -63,15 +64,16 @@ const ProductClient = ({ product }: { product: ProductData }) => {
         <Box
             className='flex row wrap relative'
             sx={{
-          
             width: {
                 xs: '100%',
                 md: '58%'
             }
         }}>
 
-            
+            <Box sx={{height:{xs:'100%',md:'600px'},width:'100%'}}>
+
             <ProductImageSwiper Slides={product.images} swiperRef={swiperRef}/>
+            </Box>
             <Box
                 className=' gap1 absolute'
                 sx={{
@@ -87,7 +89,7 @@ const ProductClient = ({ product }: { product: ProductData }) => {
                 <SwiperButton direction="left" onClick={handlePrev}/>
                 <SwiperButton direction="right" onClick={handleNext}/>
             </Box>
-            <Box
+           {product.images && product.images?.length > 1 && <Box
                 sx={{
                 display: {
                     xs: 'none',
@@ -96,7 +98,9 @@ const ProductClient = ({ product }: { product: ProductData }) => {
             }}
                 className=' row'>
                     
-                <Box
+             {product.images.map(img=>{
+                  return <Box 
+                  key={img}
                     sx={{
                     mt:1,
                         width: {
@@ -105,11 +109,14 @@ const ProductClient = ({ product }: { product: ProductData }) => {
                     }
                 }}>
                     <img
-                        src="https://cdn.allbirds.com/image/upload/f_auto,q_auto,b_rgb:f5f5f5,w_829/cms/7gtwyhGk96ty1kRUnkyr4I/de1c48f6e59978365155b64e0fb62217/24Q4_Protect_Site_PDP_ProtectRunner_Men_1600x1600.png"
+                        src={validateImageUrl(`${img}`)}
                         alt=""
                         className="img cover"/>
                 </Box>
-            </Box>
+            
+        })    
+            }
+            </Box>}
         </Box>
 
         <Box

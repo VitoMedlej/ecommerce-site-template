@@ -78,7 +78,7 @@ export default function QuickCart() {
       <>
       
       <List sx={{height:'300px',overflowY:'scroll'}}>
-                {cart.filter(product => product && product.id).map((product) => {
+                {cart.filter(product => product && product.id).reverse().map((product) => {
                  
                     // Since we are able to add same products of different variants, creating a unique id
                     const options = product.options || {};

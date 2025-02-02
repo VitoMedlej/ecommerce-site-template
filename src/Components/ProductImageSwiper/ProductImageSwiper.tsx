@@ -25,7 +25,7 @@ export default function ProductImageSwiper({Slides} : {Slides : string[], swiper
       {Slides && Slides?.map((slide, index) => (
         <SwiperSlide key={index}>
          <Box sx={{
-          // height:{xs:'500px',sm:'100%'}
+          height:{xs:'100%',sm:'500px'}
           }}>
             <img src={slide} alt="" className="img cover" />
          </Box>

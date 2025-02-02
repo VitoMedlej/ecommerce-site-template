@@ -16,6 +16,7 @@ export default async function Home() {
     const slides = await fetchSlides(0);
    
     const HomeSectionWithData : HomeSectionData[] | null = await ProcessHomeSectionsData()
+   
 
     return (
         <main> 
@@ -24,7 +25,6 @@ export default async function Home() {
             <HomeSections HomeSectionWithData={HomeSectionWithData}/>
             <SignUpSection/>
             <AboutSection/>
-            <ProductQuickView/>
         </main>
     );
 }
