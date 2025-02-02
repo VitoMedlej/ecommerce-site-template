@@ -5,6 +5,15 @@ import ProductClient from '@/Components/ClientSide/ProductClient/ProductClient';
 import { notFound } from 'next/navigation';
 import React from 'react'
 
+
+
+
+
+
+
+
+
+
 export const Page = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
   const product : ProductData | null = await fetchProductById(id);

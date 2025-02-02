@@ -9,6 +9,7 @@ import QtySelector from '@/Components/ClientSide/ProductClient/QtySelector'
 import { useQuickViewContext } from '@/Utils/Context/Contexts'
 import ColorSelector from '@/Components/ColorSelect/ColorSelect'
 import SizeFilter from '@/Components/FilterOptions/FilterForms/SizeFilter'
+import { ProductData } from '@/Utils/Types'
 
 // import { ProductData } from '@/Utils/Types'
 
@@ -23,7 +24,7 @@ const ProductQuickView = () => {
         isEmptyOptions,
         handleOptionChange,
         handleAddToCart,
-    } = useProductActions(product);
+    } = useProductActions(product as ProductData);
   
 
     return (
