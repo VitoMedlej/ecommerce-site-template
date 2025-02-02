@@ -1,4 +1,3 @@
-"use client"
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuickCartContext } from '@/Utils/Context/Contexts';
@@ -7,13 +6,26 @@ import { ProductData } from '@/Utils/Types';
 
 type ProductOption = { [key: string]: string };
 
-const useProductActions = (product: ProductData) => {
+const useProductActions = (product: ProductData | null) => {
   const { addToCart } = useCart();
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
   const [selectedOptions, setSelectedOptions] = useState<ProductOption>({});
   const [isEmptyOptions, setIsEmptyOption] = useState(false);
   const { setIsCartOpen } = useQuickCartContext();
+
+  if (!product) {
+    return {
+      quantity,
+      variants: null,
+      setQuantity,
+      selectedOptions,
+      setSelectedOptions,
+      isEmptyOptions,
+      handleOptionChange: () => {},
+      handleAddToCart: () => {},
+    };
+  }
 
   const handleOptionChange = (optionName: string, value: string) => {
     setSelectedOptions((prevOptions) => ({ ...prevOptions, [optionName]: value }));

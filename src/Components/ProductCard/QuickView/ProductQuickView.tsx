@@ -9,23 +9,21 @@ import QtySelector from '@/Components/ClientSide/ProductClient/QtySelector'
 import { useQuickViewContext } from '@/Utils/Context/Contexts'
 import ColorSelector from '@/Components/ColorSelect/ColorSelect'
 import SizeFilter from '@/Components/FilterOptions/FilterForms/SizeFilter'
-import { useMemo } from 'react'
+// import { ProductData } from '@/Utils/Types'
 
 const ProductQuickView = () => {
     const { isQuickViewOpen, setQuickViewOpen, product } = useQuickViewContext();
-  const productActions = useMemo(() => product ? useProductActions(product) : null, [product]);
 
-  if (!product || !productActions) return null;
-
-  const {
-    quantity,
-    setQuantity,
-    selectedOptions,
-    variants,
-    isEmptyOptions,
-    handleOptionChange,
-    handleAddToCart,
-  } = productActions;
+    const {
+        quantity,
+        setQuantity,
+        selectedOptions,
+        variants,
+        isEmptyOptions,
+        handleOptionChange,
+        handleAddToCart,
+    } = useProductActions(product );
+  
 
     return (
         <Modal open={isQuickViewOpen} onClose={() => setQuickViewOpen(false)}>
