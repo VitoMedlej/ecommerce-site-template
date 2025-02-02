@@ -1,5 +1,4 @@
 "use client"
-import { ProductData } from '@/Utils/Types'
 import { Box, Modal, Typography, Divider, IconButton } from '@mui/material'
 import { BsBag } from 'react-icons/bs'
 import { CiHeart } from 'react-icons/ci'
@@ -10,26 +9,27 @@ import QtySelector from '@/Components/ClientSide/ProductClient/QtySelector'
 import { useQuickViewContext } from '@/Utils/Context/Contexts'
 import ColorSelector from '@/Components/ColorSelect/ColorSelect'
 import SizeFilter from '@/Components/FilterOptions/FilterForms/SizeFilter'
+import { ProductData } from '@/Utils/Types'
 
 const ProductQuickView = () => {
     const { isQuickViewOpen, setQuickViewOpen, product } = useQuickViewContext();
-    if (!product) return null;
-    
+
     const {
         quantity,
         setQuantity,
         selectedOptions,
-        setSelectedOptions,
         variants,
         isEmptyOptions,
         handleOptionChange,
         handleAddToCart,
-    } = useProductActions(product);
+    } = useProductActions(product as ProductData);
+  
 
     return (
         <Modal open={isQuickViewOpen} onClose={() => setQuickViewOpen(false)}>
-            <Box className='flex center items-center' sx={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2 }}>
-                <Box className='bg-white relative' sx={{ display: 'flex', flexDirection: 'column', width: '90%', maxWidth: 900, borderRadius: 2, p: 4, boxShadow: 3 }}>
+      
+         <Box className='flex center items-center' sx={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2 }}>
+         {product &&  <>        <Box className='bg-white relative' sx={{ display: 'flex', flexDirection: 'column', width: '90%', maxWidth: 900, borderRadius: 2, p: 4, boxShadow: 3 }}>
                     <IconButton onClick={() => setQuickViewOpen(false)} sx={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }}>×</IconButton>
                     <Box className='flex' sx={{ flexDirection: { xs: 'column', md: 'row' }, gap: 3 }}>
                         <Box sx={{ flex: 1, minWidth: 300 }}>
@@ -77,7 +77,10 @@ const ProductQuickView = () => {
                         </Box>
                     </Box>
                 </Box>
+            </>
+            }
             </Box>
+         
         </Modal>
     );
 };

@@ -18,7 +18,7 @@ const Page = () => {
 
   return (
     <div>
-      {/* <DashboardClient /> */}
+      <DashboardClient />
       <Btn onClick={() => logout()}>Logout</Btn>
     </div>
   )

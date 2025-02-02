@@ -7,15 +7,14 @@ import SizeFilter from '@/Components/FilterOptions/FilterForms/SizeFilter'
 import ProductImageSwiper from '@/Components/ProductImageSwiper/ProductImageSwiper'
 import SwiperButton from '@/Components/ProductSection/ProductSwiper/SwiperButton'
 import {Accordion, AccordionSummary, Box, Divider, Typography} from '@mui/material'
-import React, {useRef, useState} from 'react'
+import React, {useRef} from 'react'
 import {FaAngleDoubleDown} from 'react-icons/fa'
 import {SwiperRef} from 'swiper/react'
 import QtySelector from './QtySelector'
 import {CiHeart} from "react-icons/ci";
 import {BsBag} from "react-icons/bs";
 import useCart from '@/Hooks/useCart'
-import {useQuickCartContext} from '@/Utils/Context/Contexts'
-import { useRouter } from 'next/navigation'
+// import {useQuickCartContext} from '@/Utils/Context/Contexts'
 import RecommendedProducts from '@/Components/RecommendedProducts/RecommendedProducts'
 import useProductActions from '@/Hooks/useProductActions'
 
@@ -28,7 +27,7 @@ const ProductClient = ({ product }: { product: ProductData }) => {
       quantity,
       setQuantity,
       selectedOptions,
-      setSelectedOptions,
+
       variants,
       isEmptyOptions,
       handleOptionChange,
@@ -36,7 +35,7 @@ const ProductClient = ({ product }: { product: ProductData }) => {
     } = useProductActions(product);
   
     const swiperRef = useRef<SwiperRef | null>(null);
-    const { setIsCartOpen } = useQuickCartContext();
+    // const { setIsCartOpen } = useQuickCartContext();
   
     const handlePrev = () => swiperRef.current?.swiper.slidePrev();
     const handleNext = () => swiperRef.current?.swiper.slideNext();
