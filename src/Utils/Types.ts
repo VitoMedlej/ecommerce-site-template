@@ -51,6 +51,10 @@ export interface HeroSlide {
     cards: Card[];
 
   }
+  export type Variant = {
+    key: string;
+    value: string;
+  };
   export type ProductData = {
     title: string;
     description: string;
@@ -61,6 +65,7 @@ export interface HeroSlide {
     category: string;
     subcategory: string;
     images: string[];
+    variants : Variant[] 
     id: string;
   };
   export interface ProductResponse {

@@ -16,14 +16,15 @@ const ShopPage = async ({ params }: { params: { [key: string]: string } }) => {
   const {
     
     
-      category = "collections",
+      category = "collection",
       subcategory = "",
       sort = "",
       skip = "0",
       limit = "10",
       search
-  } 
-  = await params;
+    } 
+    = await params;
+    console.log('search: ', search, category);
 
   
   const data = await fetchProducts(

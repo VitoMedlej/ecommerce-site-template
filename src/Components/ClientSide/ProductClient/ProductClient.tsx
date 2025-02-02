@@ -15,6 +15,8 @@ import {CiHeart} from "react-icons/ci";
 import {BsBag} from "react-icons/bs";
 import useCart from '@/Hooks/useCart'
 import {useQuickCartContext} from '@/Utils/Context/Contexts'
+import { useRouter } from 'next/navigation'
+import RecommendedProducts from '@/Components/RecommendedProducts/RecommendedProducts'
 
 export type ProductOption = {
     [key : string]: string | null;
@@ -27,7 +29,7 @@ const ProductClient = ({product} : {
 
     const swiperRef : React.LegacyRef < SwiperRef > | undefined = useRef(null);
     const {addToCart, isLoading} = useCart();
-
+    const router = useRouter()
     const [quantity,
         setQuantity] = useState < number > (1);
 
@@ -66,14 +68,24 @@ const ProductClient = ({product} : {
         image: product.images[0],
         price: product.price
     }
-    const emptyOptions = Object.keys(selectedOptions).length === 0
-    const handleAddToCart = () => {
+    const variants = product.variants && product.variants?.length > 0 ?
+    product.variants :
+    null 
+   
+    const emptyOptions = variants && Object.keys(selectedOptions).length === 0
+    const handleAddToCart = (quickBuy ?: boolean) => {
+        console.log('emptyOptions: ', emptyOptions);
         if (emptyOptions) {
             setisEmptyOption(true);
             return;
         }
         addToCart(cartProduct, selectedOptions)
+    if (quickBuy) {
+        return router.push('/checkout')
+
+    }
         setIsCartOpen(true)
+    
     }
 
 
@@ -110,8 +122,9 @@ const ProductClient = ({product} : {
             
             <ProductImageSwiper Slides={product.images} swiperRef={swiperRef}/>
             <Box
-                className='flex gap1 absolute'
+                className=' gap1 absolute'
                 sx={{
+                    display:{xs:'none',md:'flex'},
                     right:'50%',
                     top:'100%',
                     transform:'translateX(50%)',
@@ -181,44 +194,29 @@ const ProductClient = ({product} : {
             <Divider></Divider>
 
 
-            <Box sx={{border: isEmptyOptions ? '1px solid red' : '1px solid transparent',p:isEmptyOptions ? 1 : 0}}>
-                {isEmptyOptions && <Typography sx={{color:'red',fontSize:'.8em'}}>
-                    Please select an option.
-                </Typography>}
-            <Box sx={{
-                mt: 2
-            }}>
-                <Typography
-                                          className='fw500 gray2 fs075'
-                    sx={{
-                    py: .25
-                }}>
-                    Select Size:
-
-                </Typography>
-                <SizeFilter
-                sizes={['small','medium','large']}
-                selectedOptions={selectedOptions}
-                onOptionChange={handleOptionChange}
-                />
-            </Box>
-            <Box sx={{
-                mt: 2
-            }}>
-                <Typography
-                    className='fw500 gray2 fs075'
-                    sx={{
-                    py: .25
-                }}>
-                    Select Color:
-                </Typography>
-                <ColorSelector
-                selectedOptions={selectedOptions}
-                onOptionChange={handleOptionChange}
-                colors={['red', 'blue', 'green', 'yellow', 'white']}/>
-            </Box>
-
-            </Box>
+            { variants && variants?.length > 0 && (
+  <Box sx={{ border: isEmptyOptions ? '1px solid red' : '1px solid transparent', p: isEmptyOptions ? 1 : 0 }}>
+    {isEmptyOptions && (
+      <Typography sx={{ color: 'red', fontSize: '.8em' }}>Please select an option.</Typography>
+    )}
+    {variants.map(variant => {
+      const options = variant.value?.split(",").map(s => s.trim()) || [];
+      if (!options.length) return null;
+      return (
+        <Box key={variant.key} sx={{ mt: 2 }}>
+          <Typography className='fw500 gray2 fs075' sx={{ py: .25 }}>
+            {variant.key}
+          </Typography>
+          {variant.key.toLowerCase().includes("color") ? (
+            <ColorSelector selectedOptions={selectedOptions} onOptionChange={handleOptionChange} colors={options} />
+          ) : (
+            <SizeFilter selectedOptions={selectedOptions} onOptionChange={handleOptionChange} sizes={options} name={variant.key} />
+          )}
+        </Box>
+      );
+    })}
+  </Box>
+)}
 
 
             <Box sx={{
@@ -232,7 +230,7 @@ const ProductClient = ({product} : {
                 <Btn
                 maxWidth
                 disabled={isLoading}
-                    onClick={handleAddToCart}
+                    onClick={()=>handleAddToCart()}
                     className='w100 white fs075'
                     v2
                     sx={{
@@ -268,6 +266,8 @@ const ProductClient = ({product} : {
                                 </Box>
 
                 <Btn
+                     disabled={isLoading}
+                     onClick={()=>handleAddToCart(true)}
                 maxWidth
                     className='  fs075'
                     sx={{
@@ -307,7 +307,7 @@ const ProductClient = ({product} : {
       <Typography className='fw600'>Description</Typography>
     </AccordionSummary>
             <Typography className='fs1' sx={{pb:1}}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias impedit assumenda aliquid ut consectetur veritatis aspernatur repudiandae, voluptates voluptatibus, alias enim deleniti nesciunt optio recusandae!
+               {`${product.description}`}
             </Typography>
 
   </Accordion>
@@ -323,11 +323,13 @@ const ProductClient = ({product} : {
       <Typography className='fw600'>Specifications</Typography>
     </AccordionSummary>
     <Typography>
-    To preserve the Protect’s fluorine-free water-repellent treatment, we recommend spot cleaning with warm water and gentle soap whenever possible. If they need a deep clean, follow the below steps to machine wash, but only on a limited basis.
 
+                {
+                    `${product.tags}`
+                }
                 
     </Typography>
-    <ul>
+    {/* <ul>
         <li>Remove laces and insoles.
 
 </li>
@@ -340,12 +342,16 @@ Place shoes in a delicates bag (pro tip: a pillowcase works too).
 Choose a gentle cycle with cold water & mild detergent.
 </li>
 
-    </ul>
+    </ul> */}
   </Accordion>
 
  
 </Box>
         </Box>
+
+
+
+        <RecommendedProducts/>
     </Box>
 
     )

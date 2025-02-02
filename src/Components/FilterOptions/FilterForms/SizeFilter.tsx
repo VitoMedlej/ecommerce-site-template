@@ -7,17 +7,19 @@ interface SizeFilterProps {
   sizes: string[];
   selectedOptions: { [key: string]: string | null };
   onOptionChange: (optionName: string, value: string) => void;
+  name ?: string;
 }
 
-export default function SizeFilter({ sizes, selectedOptions, onOptionChange }: SizeFilterProps) {
+export default function SizeFilter({ sizes, selectedOptions, onOptionChange, name }: SizeFilterProps) {
   const handleSizeSelect = (size: string) => {
     onOptionChange("size", size);
   };
 
   return (
     <Box sx={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-      {sizes && sizes.map((size) => (
-        <Box
+      {sizes && sizes.map((size) => {
+        if (!size) return
+        return <Box
           key={size}
           onClick={() => handleSizeSelect(size)}
           sx={{
@@ -36,7 +38,7 @@ export default function SizeFilter({ sizes, selectedOptions, onOptionChange }: S
         >
           {size.toUpperCase()}
         </Box>
-      ))}
+     })}
     </Box>
   );
 }

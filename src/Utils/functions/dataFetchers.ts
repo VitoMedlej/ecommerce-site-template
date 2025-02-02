@@ -67,10 +67,11 @@ export const fetchProducts = async (
 
   try {
 
-const endpoint = `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/shop/${category}` +
-  (subcategory ? `/?subcategory=${subcategory}` : "") +
-  (queryString ? `&${queryString}` : "");
-    
+    const endpoint = `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/shop/${category}` +
+    (subcategory ? `?subcategory=${subcategory}` : "") + 
+    (queryString ? `${subcategory ? '&' : '?'}${queryString}` : ""); 
+
+console.log('endpoint: ', endpoint);
 
       const data = await fetchExternalData<Section>(endpoint, null, { next: { revalidate: search ? 0 : 60 } }, 'GET');
 
@@ -118,6 +119,37 @@ export const fetchProductById = async (
       console.error(`Error fetching product with ID: ${id}:`, error.message);
     } else {
       console.error(`Unexpected error fetching product with ID: ${id}:`, error);
+    }
+    return null;
+  }
+};
+
+
+
+export const fetchRecommendedProducts = async (
+  limit: number = 8
+): Promise<ProductData[] | null> => {
+  try {
+    const endpoint = `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/recommended?limit=${limit}`;
+
+    const recommendedProducts = await fetchExternalData<ProductData[]>(
+      endpoint,
+      null,
+      { next: { revalidate: 60 } },
+      'GET'
+    );
+
+    if (!recommendedProducts) {
+      console.error('No recommended products found.');
+      return null;
+    }
+
+    return recommendedProducts;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Error fetching recommended products:', error.message);
+    } else {
+      console.error('Unexpected error fetching recommended products:', error);
     }
     return null;
   }

@@ -63,6 +63,7 @@ export const ProcessHomeSectionsData = async () => {
     const filterTypes = createFilterTypes(productSections);
 
     const homeProducts = await fetchHomeProducts(filterTypes, 10);
+    console.log('homeProducts: ', homeProducts);
 
     // Map product sections data based on filterType
       const productSectionsData = productSections.map((section) => {

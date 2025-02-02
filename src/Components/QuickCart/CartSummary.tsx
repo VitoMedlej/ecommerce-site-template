@@ -5,7 +5,7 @@ import { Box, Typography, Divider } from "@mui/material";
 import Btn from "../Btn/Btn";
 import { useRouter } from "next/navigation";
 import calculateTotal from "@/Utils/functions/calculateTotal";
-import { useCartContext } from "@/Utils/Context/Contexts";
+import { useCartContext, useQuickCartContext } from "@/Utils/Context/Contexts";
 import DiscountCodeForm from "../checkoutComponents/DiscountCodeForm/DiscountCodeForm";
 
 interface CartSummaryProps {
@@ -16,6 +16,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ isCheckoutPage = false }) => 
   const router = useRouter();
   const { cart } = useCartContext();
   const {totalPrice, deliveryCharge} = calculateTotal(cart || []);
+    const {setIsCartOpen} = useQuickCartContext();
 
   return (
     <Box
@@ -61,8 +62,11 @@ const CartSummary: React.FC<CartSummaryProps> = ({ isCheckoutPage = false }) => 
         <Btn
           v2
           onClick={() => {
-            
-            router.push("/checkout")}}
+      
+            router.push("/checkout")
+            setIsCartOpen(false)
+          }
+          }
           maxWidth
           sx={{ padding: "10px", fontSize: "16px" }}
         >

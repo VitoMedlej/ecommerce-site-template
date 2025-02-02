@@ -17,6 +17,7 @@ import {InfoState} from '@/Utils/Types';
 import Btn from '@/Components/Btn/Btn';
 import { fetchExternalData } from '@/Utils/functions/dataFetchers';
 import { getPrice } from '@/Utils/functions/getPrice';
+import { useRouter } from 'next/navigation';
 
 const steps = ['Shipping address', 'Review your order'];
 
@@ -56,10 +57,9 @@ const Checkout : React.FC = () => {
         setActiveStep] = useState < number > (0);
     const [orderNumber,
         setOrderNumber] = useState < string | null > (null);
-
+    const router = useRouter()
         const [isLoading,
             setLoading] = useState(false);
-            console.log('isLoading: ', isLoading);
     const {cart} = useCartContext();
 
     const [info,
@@ -144,12 +144,14 @@ const Checkout : React.FC = () => {
             saveOrder();
         }
     }, [activeStep]);
-
+    useEffect(()=>{
+        if (!cart || cart?.length === 0) {
+                router.push('/')
+        }
+    },[cart, activeStep])
     return (
         <main>
-
             <ThemeProvider theme={theme}>
-
                 <Container
                     component="main"
                     maxWidth="md"
