@@ -3,9 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import ProductSwiper from '../ProductSection/ProductSwiper/ProductSwiper';
 import { fetchRecommendedProducts } from "@/Utils/functions/dataFetchers";  // Assuming this is available
+import { ProductData } from '@/Utils/Types';
 
 const RecommendedProducts = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<ProductData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 

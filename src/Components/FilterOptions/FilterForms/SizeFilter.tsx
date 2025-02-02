@@ -11,6 +11,7 @@ interface SizeFilterProps {
 }
 
 export default function SizeFilter({ sizes, selectedOptions, onOptionChange, name }: SizeFilterProps) {
+  console.log('name: ', name);
   const handleSizeSelect = (size: string) => {
     onOptionChange("size", size);
   };

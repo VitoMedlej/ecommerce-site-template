@@ -60,6 +60,7 @@ const Checkout : React.FC = () => {
     const router = useRouter()
         const [isLoading,
             setLoading] = useState(false);
+            console.log('isLoading: ', isLoading);
     const {cart} = useCartContext();
 
     const [info,
