@@ -12,7 +12,6 @@ import ProductCard from '@/Components/ProductCard/ProductCard';
 import ProductQuickView from '@/Components/ProductCard/QuickView/ProductQuickView';
 
 const CollectionsClient = ({data} : {data: Section  | null}) => {
-    console.log('data: ', data);
     const [isSingleRow, setIsSingleRow] = useState<boolean>(true)
     const isSmallScreen = useMediaQuery("(max-width:900px)");
     const { setFilterModalOpen } = useFilterModalContext();
@@ -124,7 +123,7 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
                     }
                 }}>
 
-                    {data?.products?.map(product => {
+                    {data?.products && data?.products.map(product => {
                         return <ProductCard
                         imgHeight={{height:{xs:'auto'}}}
                         product={product}

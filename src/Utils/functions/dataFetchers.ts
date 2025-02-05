@@ -88,7 +88,7 @@ export const fetchProducts = async (
       return null;
     }
 
-    return data;
+    return {...data, products: data.products.reverse()};
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("Error fetching products:", error.message);
