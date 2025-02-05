@@ -5,7 +5,9 @@ import {notFound, redirect} from 'next/navigation';
 import React from 'react'
 import {ResolvingMetadata, Metadata} from 'next';
 
-export async function generateMetadata({params, searchParams} : any, parent : ResolvingMetadata) : Promise < Metadata > {
+export async function generateMetadata({params, searchParams} : {params: {id:string}, searchParams: unknown}, parent : ResolvingMetadata) : Promise < Metadata > {
+    console.log('parent: ', parent);
+    console.log('searchParams: ', searchParams);
     const id = await params.id;
 
     const product: ProductData | null = await fetchProductById(id, 200);
