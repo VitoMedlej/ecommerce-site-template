@@ -42,7 +42,7 @@ const RecommendedProducts = () => {
     <Typography sx={{fontWeight:700,pb:3}}>You might also like</Typography>
     <Box sx={{width:'100%',height:'100%'}}>
       
-  <ProductSwiper products={products} swiperRef={undefined} />
+  <ProductSwiper disabledQuickView products={products} swiperRef={undefined} />
     </Box>
   </Box>
   )

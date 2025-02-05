@@ -2,44 +2,35 @@ import { fetchProducts } from "@/Utils/functions/dataFetchers";
 import CollectionsClient from "@/Components/ClientSide/CollectionsClient/CollectionsClient";
 import React from "react";
 
-
-// type CategoryParams = {
-//   category: string;
-//   subcategory?: string;
-//   sort?: string;
-//   skip?: string;
-//   limit?: string;
-//   search?: string;
-// };
-
-const ShopPage = async ({ params }: { params: { [key: string]: string } }) => {
+const ShopPage = async ({ searchParams }: { searchParams: { [key: string]: string } }) => {
   const {
-    
-    
-      category = "collection",
-      subcategory = "",
-      sort = "",
-      skip = "0",
-      limit = "10",
-      search
-    } 
-    = await params;
-    console.log('search: ', search, category);
+    category = "collection",
+    subcategory = "",
+    sort = "",
+    skip = "0",
+    limit = "10",
+    search
+  } = searchParams;
 
-  
+  const filters: Record<string, string> = {
+    search: search || "",
+    sort: sort || "",
+    subcategory: subcategory || ""
+  };
+
   const data = await fetchProducts(
-      category,
-      sort,
-      parseInt(skip, 10),
-      parseInt(limit, 10),
-      search,
-      subcategory
+    category,
+    filters.sort,
+    parseInt(skip, 10),
+    parseInt(limit, 10),
+    filters.search,
+    filters.subcategory
   );
 
   return (
-      <>
-          <CollectionsClient data={data} />
-      </>
+    <>
+      <CollectionsClient data={data} />
+    </>
   );
 };
 

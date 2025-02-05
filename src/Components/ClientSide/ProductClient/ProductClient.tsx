@@ -24,6 +24,7 @@ export type ProductOption = {
 };
 
 const ProductClient = ({ product }: { product: ProductData }) => {
+    console.log('product: ', product);
     const {
       quantity,
       setQuantity,

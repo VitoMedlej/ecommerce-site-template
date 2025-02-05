@@ -18,6 +18,7 @@ import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.share
 export default function FilterOptions() {
 
   const [selectedOptions, setSelectedOptions] = useState<ProductOption>({});
+  console.log('selectedOptions: ', selectedOptions);
   const router = useRouter();
   const { setFilterModalOpen } = useFilterModalContext();
     
@@ -31,25 +32,26 @@ export default function FilterOptions() {
   const handleFilter = (filters: { [key: string]: string | null }, router: AppRouterInstance) => {
     try {
       const queryParams: URLSearchParams = new URLSearchParams();
-
+  
       Object.keys(filters).forEach((key) => {
         const value = filters[key];
         if (value) {
           queryParams.append(key, value);
         }
       });
-
+  
       if (queryParams.toString()) {
-        setFilterModalOpen(false)
+        setFilterModalOpen(false);
         router.push(`?${queryParams.toString()}`);
       } else {
-        router.push('/'); // Handle reset if no filters are selected
+        router.push('/'); // Reset filters
       }
     } catch (error) {
-      setFilterModalOpen(false)
+      setFilterModalOpen(false);
       console.error("Error updating filters:", error);
     }
   };
+  
 
   const handleReset = () => {
     setSelectedOptions({});

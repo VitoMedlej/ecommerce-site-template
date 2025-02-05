@@ -59,41 +59,50 @@ export const fetchProducts = async (
   const params: Record<string, string> = {};
 
   if (search && search.length > 2) params.search = search;
-  if (sort) params.sort = sort;
+  if (sort && sort?.length > 0) params.sort = sort;
   params.skip = String(skip);
   params.limit = String(limit);
 
   const queryString = new URLSearchParams(params).toString();
 
   try {
+    const endpoint =
+      `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/shop/${category}` +
+      (subcategory ? `?subcategory=${subcategory}` : "") +
+      (queryString ? `${subcategory ? '&' : '?'}${queryString}` : "");
 
-    const endpoint = `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/shop/${category}` +
-    (subcategory ? `?subcategory=${subcategory}` : "") + 
-    (queryString ? `${subcategory ? '&' : '?'}${queryString}` : ""); 
+    const body = { sort, size: params.size, color: params.color };
+    console.log('body: ', body);
 
-console.log('endpoint: ', endpoint);
+    console.log("endpoint: ", endpoint);
 
-      const data = await fetchExternalData<Section>(endpoint, null, { next: { revalidate: search ? 0 : 60 } }, 'GET');
+    const data = await fetchExternalData<Section>(
+      endpoint,
+      body,
+      { next: { revalidate: search ? 0 : 60 } },
+      "POST"
+    );
 
-      if (!data) {
-          console.error('No products found.');
-          return null;
-      }
-
-      return data;
-  } catch (error: unknown) {
-      if (error instanceof Error) {
-          console.error('Error fetching products:', error.message);
-      } else {
-          console.error('Unexpected error fetching products:', error);
-      }
+    if (!data) {
+      console.error("No products found.");
       return null;
+    }
+
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error fetching products:", error.message);
+    } else {
+      console.error("Unexpected error fetching products:", error);
+    }
+    return null;
   }
 };
 
 
 export const fetchProductById = async (
-  id: string
+  id: string,
+  revalidate ?: number,
 ): Promise<ProductData | null> => {
   if (!id) {
     console.error('Invalid product ID provided.');
@@ -104,7 +113,7 @@ export const fetchProductById = async (
     const product = await fetchExternalData<ProductData>(
       `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/get-item/${id}`,
       null,
-      { next: { revalidate: 0 } },
+      { next: { revalidate: revalidate ? revalidate : 0 } },
       'GET'
     );
 

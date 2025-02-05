@@ -9,10 +9,11 @@ import {validateImageUrl} from "@/Utils/ImageValidator";
 import {useRouter} from "next/navigation";
 import { useQuickViewContext } from "@/Utils/Context/Contexts";
 
-const ProductCard = ({sx, product,imgHeight} : {
+const ProductCard = ({sx, product,imgHeight,disabledQuickView} : {
     sx?: SxProps < Theme > | undefined;
     imgHeight?: SxProps < Theme > | undefined;
     product: ProductData;
+    disabledQuickView ?: boolean;
 }) => {
     const image = product
         ?.images && product
@@ -74,7 +75,7 @@ const ProductCard = ({sx, product,imgHeight} : {
                 }}>
                     <CiHeart fontSize="1.05em"/>
                 </Box>
-                <Box
+            { disabledQuickView !== true &&     <Box
             onClick={() => {
                 setProduct(product);
                 setTimeout(() => setQuickViewOpen(true), 0); // Ensures product is set before opening
@@ -88,7 +89,7 @@ const ProductCard = ({sx, product,imgHeight} : {
                     p: 0
                 }}>
                     <IoEyeOutline fontSize="1.05em"/>
-                </Box>
+                </Box>}
             </Box>
             <Box
                 className="flex center items-center gap1"

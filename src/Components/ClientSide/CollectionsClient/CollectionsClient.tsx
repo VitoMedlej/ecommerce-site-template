@@ -12,6 +12,7 @@ import ProductCard from '@/Components/ProductCard/ProductCard';
 import ProductQuickView from '@/Components/ProductCard/QuickView/ProductQuickView';
 
 const CollectionsClient = ({data} : {data: Section  | null}) => {
+    console.log('data: ', data);
     const [isSingleRow, setIsSingleRow] = useState<boolean>(true)
     const isSmallScreen = useMediaQuery("(max-width:900px)");
     const { setFilterModalOpen } = useFilterModalContext();
@@ -23,7 +24,7 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
       
     return (
         <main>
-
+         {!data || data?.products?.length == 0 ? <h1>no products</h1> : <>
             <Box
                 className='auto col flex gap3'
                 sx={{
@@ -143,9 +144,9 @@ const CollectionsClient = ({data} : {data: Section  | null}) => {
                 </Box>
             </Box>
 
-
             <FilterModal/>
           {product && <ProductQuickView/>}
+          </> } 
 
         </main>
     )

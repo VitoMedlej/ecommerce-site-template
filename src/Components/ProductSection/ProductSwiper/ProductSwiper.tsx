@@ -44,7 +44,7 @@ import { ProductData } from '@/Utils/Types';
 //         imageMd: 'https://example.com/image-md-2.jpg'
 //     }
 // ];
-export default function ProductSwiper({products, swiperRef} :  {products : ProductData[] | null, swiperRef: LegacyRef<SwiperRef> | undefined}) {
+export default function ProductSwiper({products, swiperRef,disabledQuickView } :  {disabledQuickView ?: boolean, products : ProductData[] | null, swiperRef: LegacyRef<SwiperRef> | undefined}) {
 
     return (
         <Swiper
@@ -71,7 +71,7 @@ export default function ProductSwiper({products, swiperRef} :  {products : Produ
 
         if (!product?.id) return;
  return <SwiperSlide key={product.id }>
-    <ProductCard product={product}  />
+    <ProductCard disabledQuickView={disabledQuickView} product={product}  />
   </SwiperSlide>
 })}
         </Swiper>
