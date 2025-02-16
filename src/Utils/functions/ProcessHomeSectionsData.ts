@@ -53,7 +53,7 @@ const createFilterTypes = (productSections: ProductsSection[]): FilterType[] => 
 
 // Main function to process home sections data
 export const ProcessHomeSectionsData = async () => {
-   const SanityHomeSections : HomePage[] | null = await fetchHomePageSections(10)
+   const SanityHomeSections : HomePage[] | null = await fetchHomePageSections(100)
   
     const HomePageSections = SanityHomeSections && SanityHomeSections[0].sections
   try {
@@ -62,7 +62,7 @@ export const ProcessHomeSectionsData = async () => {
 
     const filterTypes = createFilterTypes(productSections);
 
-    const homeProducts = await fetchHomeProducts(filterTypes, 10);
+    const homeProducts = await fetchHomeProducts(filterTypes, 0);
     console.log('homeProducts: ', homeProducts);
 
     // Map product sections data based on filterType

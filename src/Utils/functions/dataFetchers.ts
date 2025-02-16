@@ -1,5 +1,6 @@
 'use server';
 
+import server from "@/Services/server";
 import { ProductData, Section } from "../Types";
 import { FilterType } from "./ProcessHomeSectionsData";
 
@@ -66,8 +67,9 @@ export const fetchProducts = async (
   const queryString = new URLSearchParams(params).toString();
 
   try {
+    console.log('server: ', server);
     const endpoint =
-      `${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/products/shop/${category}` +
+      `${server}/api/products/shop/${category}` +
       (subcategory ? `?subcategory=${subcategory}` : "") +
       (queryString ? `${subcategory ? '&' : '?'}${queryString}` : "");
 
@@ -88,7 +90,8 @@ export const fetchProducts = async (
       return null;
     }
 
-    return {...data, products: data.products.reverse()};
+    return {...data, products: data.products};
+    // return {...data, products: data.products.reverse()};
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("Error fetching products:", error.message);

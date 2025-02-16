@@ -12,6 +12,7 @@ import ProductCard from '@/Components/ProductCard/ProductCard';
 import ProductQuickView from '@/Components/ProductCard/QuickView/ProductQuickView';
 
 const CollectionsClient = ({data} : {data: Section  | null}) => {
+    console.log('data 111: ', data?.products);
     const [isSingleRow, setIsSingleRow] = useState<boolean>(true)
     const isSmallScreen = useMediaQuery("(max-width:900px)");
     const { setFilterModalOpen } = useFilterModalContext();

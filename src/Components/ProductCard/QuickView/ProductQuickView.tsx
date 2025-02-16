@@ -14,7 +14,7 @@ import { ProductData } from '@/Utils/Types'
 // import { ProductData } from '@/Utils/Types'
 
 const ProductQuickView = () => {
-    const { isQuickViewOpen, setQuickViewOpen, product } = useQuickViewContext();
+    const { isQuickViewOpen, setQuickViewOpen, product, setProduct } = useQuickViewContext();
     
     const {
         quantity,
@@ -28,7 +28,11 @@ const ProductQuickView = () => {
   
 
     return (
-        <Modal open={isQuickViewOpen} onClose={() => setQuickViewOpen(false)}>
+        <Modal open={isQuickViewOpen} onClose={() => 
+          {setProduct(null);
+        setQuickViewOpen(false)
+          }}
+        >
         <Box
           className="flex center items-center"
           sx={{
@@ -141,6 +145,7 @@ const ProductQuickView = () => {
                       disabled={isEmptyOptions}
                       onClick={() => {
                         setQuickViewOpen(false);
+                        setProduct(null);
                         handleAddToCart();
                       }}
                       className="w100 white fs075 gap1"
@@ -161,6 +166,7 @@ const ProductQuickView = () => {
                     disabled={isEmptyOptions}
                     onClick={() => {
                       setQuickViewOpen(false);
+                      setProduct(null);
                       handleAddToCart(true);
                     }}
                     className="fs075"
