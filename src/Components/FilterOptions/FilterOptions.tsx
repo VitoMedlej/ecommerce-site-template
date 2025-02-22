@@ -14,6 +14,7 @@ import Btn from '../Btn/Btn';
 import { useRouter } from 'next/navigation';
 import { useFilterModalContext } from '@/Utils/Context/Contexts';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import CategoryFilter from './FilterForms/CategoryFilter';
 
 export default function FilterOptions() {
 
@@ -31,27 +32,25 @@ export default function FilterOptions() {
 
   const handleFilter = (filters: { [key: string]: string | null }, router: AppRouterInstance) => {
     try {
-      const queryParams: URLSearchParams = new URLSearchParams();
+      const queryParams = new URLSearchParams();
   
       Object.keys(filters).forEach((key) => {
-        const value = filters[key];
-        if (value) {
-          queryParams.append(key, value);
+        if (key !== "category" && filters[key]) {
+          queryParams.append(key, filters[key] as string);
         }
       });
   
-      if (queryParams.toString()) {
-        setFilterModalOpen(false);
-        router.push(`?${queryParams.toString()}`);
-      } else {
-        router.push('/'); // Reset filters
-      }
+      const category = filters.category;
+      console.log('category: ', category);
+      const basePath = category ? `/shop/${category}` : "/shop/collections";
+  
+      setFilterModalOpen(false);
+      router.push(`${basePath}?${queryParams.toString()}`);
     } catch (error) {
       setFilterModalOpen(false);
       console.error("Error updating filters:", error);
     }
   };
-  
 
   const handleReset = () => {
     setSelectedOptions({});
@@ -113,6 +112,31 @@ export default function FilterOptions() {
           onOptionChange={handleOptionChange}
           selectedOptions={selectedOptions}
           sizes={['S', 'M']}
+        />
+      </Accordion>
+
+
+      <Accordion
+        disableGutters
+        sx={{
+          px: 0,
+          boxShadow: 'none',
+          border: 'none'
+        }}
+      >
+        <AccordionSummary
+          sx={{
+            p: 0
+          }}
+          expandIcon={<FaAngleDoubleDown />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          <Typography className='fw600'>Category</Typography>
+        </AccordionSummary>
+        <CategoryFilter
+          onOptionChange={handleOptionChange}
+          selectedOptions={selectedOptions}
         />
       </Accordion>
 

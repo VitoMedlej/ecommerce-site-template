@@ -1,13 +1,9 @@
 import { AboutPage } from "@/app/about/page";
 import { CategoryCardsSection, HeroSlide } from "@/Utils/Types";
 import { client } from "@/Utils/functions/sanityClient";
+import { Category } from "../Context/Contexts";
 
 
-
-export interface Category {
-  _id: string;
-  title: string;
-}
 
 
 type FetchOptions = {

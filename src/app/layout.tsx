@@ -8,6 +8,7 @@ import QuickCart from "@/Components/QuickCart/QuickCart";
 import PerksSection from "@/Components/PerksSection/PerksSection";
 import {client} from "@/Utils/functions/sanityClient";
 import ContextWrapper from "@/Utils/Context/Contexts";
+import Script from "next/script";
 
 export const metadata : Metadata = {
     title: "Create Next App",
@@ -50,6 +51,26 @@ export default async function RootLayout({children} : {
             <link rel="preconnect" href="https://fonts.gstatic.com"  />
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;800&display=swap" as="style" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;800&display=swap" />
+
+
+
+<Script
+        id="crisp-chat"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.$crisp=[];
+            window.CRISP_WEBSITE_ID="abcabac";
+            (function(){
+              var d=document;
+              var s=d.createElement("script");
+              s.src="https://client.crisp.chat/l.js";
+              s.async=1;
+              d.getElementsByTagName("head")[0].appendChild(s);
+            })();
+          `,
+        }}
+      />
 
             </head>
             <body>

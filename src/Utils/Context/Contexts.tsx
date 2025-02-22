@@ -15,7 +15,7 @@ import { getLocalStorageItem } from "../Cart/localStorageUtils";
 import { ProductData } from "../Types";
 
 
-type Category = {
+export type Category = {
     title: string;
     subcategories ?: string[] 
 };

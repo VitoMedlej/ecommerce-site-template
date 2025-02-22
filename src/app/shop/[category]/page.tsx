@@ -2,19 +2,22 @@ import { fetchProducts } from "@/Utils/functions/dataFetchers";
 import CollectionsClient from "@/Components/ClientSide/CollectionsClient/CollectionsClient";
 import React from "react";
 
-const ShopPage = async ({ searchParams }: { searchParams: { [key: string]: string } }) => {
+const ShopPage = async ({ params, searchParams }: {   params: Promise<{ category: string }>, searchParams: { [key: string]: string } }) => {
+  const { category } = await params;
+  console.log('category: ', category);
   const {
-    category = "collection",
+
     subcategory = "",
     sort = "",
     skip = "0",
     limit = "10",
     search
-  } = searchParams;
+  } = await searchParams;
 
   const filters: Record<string, string> = {
     search: search || "",
     sort: sort || "",
+    category : category ,
     subcategory: subcategory || ""
   };
 

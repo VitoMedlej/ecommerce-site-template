@@ -86,7 +86,7 @@ export const fetchProducts = async (
     );
 
     if (!data) {
-      console.error("No products found.");
+      // console.error("No products found.");
       return null;
     }
 

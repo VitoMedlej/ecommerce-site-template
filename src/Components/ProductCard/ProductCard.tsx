@@ -8,6 +8,7 @@ import {ProductData} from "@/Utils/Types";
 import {validateImageUrl} from "@/Utils/ImageValidator";
 import {useRouter} from "next/navigation";
 import { useQuickViewContext } from "@/Utils/Context/Contexts";
+import { getPrice } from "@/Utils/functions/getPrice";
 
 const ProductCard = ({sx, product,imgHeight,disabledQuickView} : {
     sx?: SxProps < Theme > | undefined;
@@ -113,7 +114,7 @@ const ProductCard = ({sx, product,imgHeight,disabledQuickView} : {
                     sx={{
                     pt: 0.25
                 }}>
-                    ${product.price}
+                    ${getPrice(product)}
                 </Typography>
             </Box>
         </Box>
